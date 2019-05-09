@@ -1,12 +1,14 @@
-import React, {Fragment} from 'react';
+import React, {Fragment} from 'react'
 
-const layout = (props) => (
+import Toolbar from '../Navigation/Toolbar/Toolbar'
+
+const Layout = (props) => (
   <Fragment>
-    <div>Toolbar, SideDrawer, Backdrop</div>
+    <Toolbar />
     <main>
       {props.children}
     </main>
   </Fragment>
 )
 
-export default layout;
+export default Layout

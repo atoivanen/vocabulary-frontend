@@ -1,0 +1,94 @@
+{
+  "words": [
+    {
+      "id": 2624,
+      "lemma": "idéal",
+      "translation": "ihanteellinen",
+      "pos": "ADJ",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 9531,
+      "lemma": "idéaliser",
+      "translation": "ihannoida",
+      "pos": "VERB",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 9532,
+      "lemma": "idéalisme",
+      "translation": "idealismi",
+      "pos": "NOUN",
+      "gender": "f",
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 8523,
+      "lemma": "idéaliste",
+      "translation": "idealisti",
+      "pos": "NOUN",
+      "gender": "f",
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 154269,
+      "lemma": "idée",
+      "translation": "aate, ajatus, idea",
+      "pos": "NOUN",
+      "gender": "f",
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 154270,
+      "lemma": "idée fixe",
+      "translation": "pakkomielle, päähänpinttymä",
+      "pos": "NOUN",
+      "gender": "f",
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 154271,
+      "lemma": "abeille",
+      "translation": "mehiläinen",
+      "pos": "NOUN",
+      "gender": "f",
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 154272,
+      "lemma": "abominable",
+      "translation": "iljettävä",
+      "pos": "ADJ",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 154273,
+      "lemma": "abandonner",
+      "translation": "luopua",
+      "pos": "VERB",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 154274,
+      "lemma": "chaise",
+      "translation": "tuoli",
+      "pos": "NOUN",
+      "gender": "f",
+      "source_lang": "fr",
+      "target_lang": "fi"
+    }
+  ]
+}

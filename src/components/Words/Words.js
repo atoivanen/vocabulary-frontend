@@ -1,25 +1,27 @@
-import React from 'react';
+import React from 'react'
 
-import Modal from '../UI/Modal/Modal'
+import FormModal from '../UI/FormModal/FormModal'
 import Word from './Word/Word'
-import EditWord from './Word/EditWord/EditWord'
+import WordForm from './WordForm/WordForm'
 
-const words = (props) => props.words.map((word, index) =>{
+const Words = (props) => props.words.map((word, index) =>{
   return (
     <div key={word.id}>
-      <Modal
+      <FormModal
         showModal={props.showDetails[index].show}
         title={props.title}
         close={() => props.close(word.id)}
-        next={(event) => props.next(event, word.id)}>
-        <EditWord
+        next={(event) => props.next(event, word.id)} >
+        <WordForm
           key={word.id}
           lemma={word.lemma}
           translation={word.translation}
           pos={word.pos}
           gender={word.gender}
-          changed={(event) => props.changed(event, word.id)} />
-      </Modal>
+          changed={(event) => props.changed(event, word.id)}
+          saveWord={(event) => props.saveWord(event, word.id)}
+          notification={props.notification} />
+      </FormModal>
       <Word
         key={word.id}
         lemma={word.lemma}
@@ -31,4 +33,4 @@ const words = (props) => props.words.map((word, index) =>{
 })
 
 
-export default words;
+export default Words

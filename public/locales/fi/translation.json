@@ -21,5 +21,14 @@
   "PreviousButton": "Edellinen",
   "NextButton": "Seuraava",
   "EditWordModalTitle": "Muokkaa sanaa",
-  "DictionaryTitle": "Sanakirja"
+  "DictionaryTitle": "Sanakirja",
+  "VocabularyAppName": "Sanasto",
+  "NewWord": "Uusi sana",
+  "SubmitWordButton": "Tallenna",
+  "ErrorWhenSaving": "Tallennettaessa sanaa tapahtui virhe. Ole hyvä ja yritä uudestaan.",
+  "WordSavedSuccessfully": "Sana tallennettiin onnistuneesti.",
+  "WordIsMissingMessage": "Sana ei voi olla tyhjä",
+  "TranslationIsMissingMessage": "Käännös ei voi olla tyhjä",
+  "POSIsMissingMessage": "Ole hyvä ja valitse sanaluokka",
+  "GenderIsMissingMessage": "Ole hyvä ja valitse substantiivin suku"
 }

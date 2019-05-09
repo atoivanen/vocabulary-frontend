@@ -1,15 +1,21 @@
-import React from 'react';
-import {useTranslation} from 'react-i18next';
-import Form from 'react-bootstrap/Form';
+import React from 'react'
+import {useTranslation} from 'react-i18next'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
-const editWord = (props) => {
+import Notification from '../../UI/Notification/Notification'
+
+const WordForm = (props) => {
   const {t} = useTranslation()
 
   const pos = props.pos ? props.pos : ''
   const gender = props.gender ? props.gender : ''
 
   return (
-    <Form>
+    <Form onSubmit={props.saveWord}>
+      <Notification
+        message={props.notification.message}
+        messageType={props.notification.messageType} />
       <Form.Group controlId="formGroupLemma">
         <Form.Label>{t('WordLabel')}:</Form.Label>
         <Form.Control
@@ -59,8 +65,9 @@ const editWord = (props) => {
           <option value="m">{t('MasculineOption')}</option>
         </Form.Control>
       </Form.Group>
+      <Button type="submit">{t('SubmitWordButton')}</Button>
     </Form>
   )
 }
 
-export default editWord;
+export default WordForm

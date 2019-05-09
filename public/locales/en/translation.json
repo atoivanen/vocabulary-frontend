@@ -21,5 +21,14 @@
   "PreviousButton": "Previous",
   "NextButton": "Next",
   "EditWordModalTitle": "Edit Word",
-  "DictionaryTitle": "Dictionary"
+  "DictionaryTitle": "Dictionary",
+  "VocabularyAppName": "Vocabulary",
+  "NewWord": "New Word",
+  "SubmitWordButton": "Save",
+  "ErrorWhenSaving": "An error occurred when saving the word. Please, try again.",
+  "WordSavedSuccessfully": "The word was saved successfully.",
+  "WordIsMissingMessage": "Please, provide word",
+  "TranslationIsMissingMessage": "Please, provide translation",
+  "POSIsMissingMessage": "Please, provide part-of-speech",
+  "GenderIsMissingMessage": "Please, provide gender"
 }
