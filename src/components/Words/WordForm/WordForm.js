@@ -1,12 +1,11 @@
 import React from 'react'
-import {useTranslation} from 'react-i18next'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import { useTranslation } from 'react-i18next'
+import { Form, Button } from 'react-bootstrap'
 
 import Notification from '../../UI/Notification/Notification'
 
 const WordForm = (props) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   const pos = props.pos ? props.pos : ''
   const gender = props.gender ? props.gender : ''

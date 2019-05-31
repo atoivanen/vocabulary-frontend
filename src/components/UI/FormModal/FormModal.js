@@ -1,6 +1,5 @@
 import React, {Fragment} from 'react'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
+import { Modal, Button } from 'react-bootstrap'
 
 import Backdrop from '../Backdrop/Backdrop'
 

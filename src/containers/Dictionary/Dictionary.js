@@ -1,6 +1,6 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import Button from 'react-bootstrap/Button'
+import { Button } from 'react-bootstrap'
 
 import Words from '../../components/Words/Words'
 import Notification from '../../components/UI/Notification/Notification'
@@ -13,7 +13,7 @@ const Dictionary = () => {
   const [ formNotification, setFormNotification ] = useState({})
   const [ isNew, setIsNew ] = useState(false)
   const { t } = useTranslation()
-  
+
   const modalTitle = t('EditWordModalTitle')
   const pageTitle = t('DictionaryTitle')
   const errorMessage = t('ErrorWhenSaving')
@@ -160,7 +160,7 @@ const Dictionary = () => {
   }
 
   return (
-    <Fragment>
+    <div className="container">
       <Notification
         message={notification.message}
         messageType={notification.messageType} />
@@ -176,12 +176,11 @@ const Dictionary = () => {
         title={modalTitle}
         notification={formNotification} />
       <Button
-        variant="dark"
         as="input"
         type="button"
         value={t('NewWord')}
         onClick={createWordHandler} />
-    </Fragment>
+    </div>
   )
 
 }
