@@ -1,202 +1,139 @@
 {
   "words": [
     {
-        "id": 68514,
-        "lemma": "cacahuète",
-        "translation": "maapähkinä",
-        "pos": "NOUN",
-        "gender": "f",
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 68514,
+      "lemma": "cacahuète",
+      "translation": "maapähkinä",
+      "pos": "NOUN",
+      "gender": "f",
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
-        "id": 68515,
-        "lemma": "cacao",
-        "translation": "kaakao, kaakao",
-        "pos": "NOUN",
-        "gender": "m",
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 68515,
+      "lemma": "cacao",
+      "translation": "kaakao, kaakao",
+      "pos": "NOUN",
+      "gender": "m",
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
-        "id": 68516,
-        "lemma": "cacatoès",
-        "translation": "kakadu",
-        "pos": "NOUN",
-        "gender": "m",
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 68516,
+      "lemma": "cacatoès",
+      "translation": "kakadu",
+      "pos": "NOUN",
+      "gender": "m",
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
-        "id": 68517,
-        "lemma": "cacatoès aux yeux bleus",
-        "translation": "sinisilmäkakadu",
-        "pos": "NOUN",
-        "gender": "m",
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 262881,
+      "lemma": "braconnier",
+      "translation": "salametsästäjä",
+      "pos": "ADV",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
-        "id": 68518,
-        "lemma": "cacatoès banksien",
-        "translation": "punapyrstökakadu",
-        "pos": "NOUN",
-        "gender": "m",
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 262882,
+      "lemma": "braderie",
+      "translation": "alennusmyynti",
+      "pos": "NOUN",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
-        "id": 68519,
-        "lemma": "cacatoès blanc",
-        "translation": "valkokakadu",
-        "pos": "NOUN",
-        "gender": "m",
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 68316,
+      "lemma": "bradyon",
+      "translation": "tardioni",
+      "pos": "NOUN",
+      "gender": "m",
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
-        "id": 68520,
-        "lemma": "cacatoès corella",
-        "translation": "lähdekakadu",
-        "pos": "NOUN",
-        "gender": "m",
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 68317,
+      "lemma": "braguette",
+      "translation": "sepalus",
+      "pos": "NOUN",
+      "gender": "f",
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
-        "id": 68521,
-        "lemma": "cacatoès de Baudin",
-        "translation": "pitkänokkakakadu",
-        "pos": "NOUN",
-        "gender": "m",
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 11788,
+      "lemma": "brahmane",
+      "translation": "bramiini",
+      "pos": "NOUN",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
-        "id": 68522,
-        "lemma": "cacatoès de Ducorps",
-        "translation": "salomoninkakadu",
-        "pos": "NOUN",
-        "gender": "m",
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 262883,
+      "lemma": "brahmanique",
+      "translation": "brahminical",
+      "pos": "ADJ",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
-        "id": 68523,
-        "lemma": "cacatoès de Goffin",
-        "translation": "tanimbarinkakadu",
-        "pos": "NOUN",
-        "gender": "m",
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 262884,
+      "lemma": "brai",
+      "translation": "piki",
+      "pos": "ADJ",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
-        "id": 262881,
-        "lemma": "braconnier",
-        "translation": "salametsästäjä",
-        "pos": "ADV",
-        "gender": null,
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 262885,
+      "lemma": "braillard",
+      "translation": "bawler",
+      "pos": "NOUN",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
-        "id": 262882,
-        "lemma": "braderie",
-        "translation": "alennusmyynti",
-        "pos": "NOUN",
-        "gender": null,
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 262886,
+      "lemma": "braille",
+      "translation": "sokeainkirjoitus",
+      "pos": "NOUN",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
-        "id": 68316,
-        "lemma": "bradyon",
-        "translation": "tardioni",
-        "pos": "NOUN",
-        "gender": "m",
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 68318,
+      "lemma": "brailler",
+      "translation": "kirkua, vollottaa",
+      "pos": "VERB",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
-        "id": 68317,
-        "lemma": "braguette",
-        "translation": "sepalus",
-        "pos": "NOUN",
-        "gender": "f",
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 68319,
+      "lemma": "braise",
+      "translation": "kekäle, hiilos",
+      "pos": "NOUN",
+      "gender": "f",
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
-        "id": 11788,
-        "lemma": "brahmane",
-        "translation": "bramiini",
-        "pos": "NOUN",
-        "gender": null,
-        "source_lang": "fr",
-        "target_lang": "fi"
-    },
-    {
-        "id": 262883,
-        "lemma": "brahmanique",
-        "translation": "brahminical",
-        "pos": "ADJ",
-        "gender": null,
-        "source_lang": "fr",
-        "target_lang": "fi"
-    },
-    {
-        "id": 262884,
-        "lemma": "brai",
-        "translation": "piki",
-        "pos": "ADJ",
-        "gender": null,
-        "source_lang": "fr",
-        "target_lang": "fi"
-    },
-    {
-        "id": 262885,
-        "lemma": "braillard",
-        "translation": "bawler",
-        "pos": "NOUN",
-        "gender": null,
-        "source_lang": "fr",
-        "target_lang": "fi"
-    },
-    {
-        "id": 262886,
-        "lemma": "braille",
-        "translation": "sokeainkirjoitus",
-        "pos": "NOUN",
-        "gender": null,
-        "source_lang": "fr",
-        "target_lang": "fi"
-    },
-    {
-        "id": 68318,
-        "lemma": "brailler",
-        "translation": "kirkua, vollottaa",
-        "pos": "VERB",
-        "gender": null,
-        "source_lang": "fr",
-        "target_lang": "fi"
-    },
-    {
-        "id": 68319,
-        "lemma": "braise",
-        "translation": "kekäle, hiilos",
-        "pos": "NOUN",
-        "gender": "f",
-        "source_lang": "fr",
-        "target_lang": "fi"
-    },
-    {
-        "id": 262887,
-        "lemma": "bramer",
-        "translation": "laajennuksentekokone",
-        "pos": "VERB",
-        "gender": null,
-        "source_lang": "fr",
-        "target_lang": "fi"
+      "id": 262887,
+      "lemma": "bramer",
+      "translation": "laajennuksentekokone",
+      "pos": "VERB",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
     },
     {
       "id": 2624,
@@ -285,6 +222,92 @@
       "translation": "tuoli",
       "pos": "NOUN",
       "gender": "f",
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 262888,
+      "lemma": "soleil",
+      "translation": "aurinko",
+      "pos": "NOUN",
+      "gender": "m",
+      "source_lang": "fr",
+      "target_lang": "fi",
+      "visible": true
+    },
+    {
+      "id": 262889,
+      "lemma": "hiver",
+      "translation": "talvi",
+      "pos": "NOUN",
+      "gender": "m",
+      "source_lang": "fr",
+      "target_lang": "fi",
+      "visible": true
+    },
+    {
+      "id": 262890,
+      "lemma": "joli",
+      "translation": "sievä",
+      "pos": "ADJ",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi",
+      "visible": true
+    },
+    {
+      "id": 262891,
+      "lemma": "ajouter",
+      "translation": "lisätä",
+      "pos": "VERB",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi",
+      "visible": true
+    },
+    {
+      "id": 262892,
+      "lemma": "jeter",
+      "translation": "heittää",
+      "pos": "VERB",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi",
+      "visible": true
+    },
+    {
+      "id": 262893,
+      "lemma": "table",
+      "translation": "pöytä",
+      "pos": "NOUN",
+      "gender": "f",
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 262894,
+      "lemma": "sous",
+      "translation": "alla",
+      "pos": "ADP",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 262895,
+      "lemma": "sur",
+      "translation": "päällä",
+      "pos": "ADP",
+      "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 262896,
+      "lemma": "irritant",
+      "translation": "ärsyttävä",
+      "pos": "ADJ",
+      "gender": null,
       "source_lang": "fr",
       "target_lang": "fi"
     }

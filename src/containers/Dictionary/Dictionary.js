@@ -4,14 +4,20 @@ import { Button } from 'react-bootstrap'
 
 import Words from '../../components/Words/Words'
 import Notification from '../../components/UI/Notification/Notification'
+import FormModal from '../../components/UI/FormModal/FormModal'
+import WordForm from '../../components/Words/WordForm/WordForm'
+import Search from '../../components/Search/Search'
+
 import wordService from '../../services/words'
 
 const Dictionary = () => {
   const [ words, setWords ] = useState([])
-  const [ showDetails, setShowDetails ] = useState([])
   const [ notification, setNotification ] = useState({})
   const [ formNotification, setFormNotification ] = useState({})
+  const [ word, setWord ] = useState(null)
+  const [ modal, setModal ] = useState(false)
   const [ isNew, setIsNew ] = useState(false)
+  const [ newFilter, setNewFilter ] = useState('')
   const { t } = useTranslation()
 
   const modalTitle = t('EditWordModalTitle')
@@ -22,15 +28,15 @@ const Dictionary = () => {
   const missingTranslation = t('TranslationIsMissingMessage')
   const missingPOS = t('POSIsMissingMessage')
   const missingGender = t('GenderIsMissingMessage')
+  const confirmNotSaving = t('ConfirmNotSavingMessage')
+
+  const source_lang = 'fr'
+  const target_lang = 'fi'
 
   useEffect(() => {
     wordService
       .getAll()
       .then(initialWords => {
-        const initialShowDetails = initialWords.map(
-          word => ({ id:word.id, show:false })
-        )
-        setShowDetails(initialShowDetails)
         setWords(initialWords)
       })
   }, [])
@@ -66,52 +72,58 @@ const Dictionary = () => {
     return true
   }
 
-  const showModalHandler = id => {
-     const showEl = showDetails.find(n => n.id === id)
-     const changedShowEl = { ...showEl, show: true }
-     setShowDetails(showDetails.map(
-       show => show.id !== id ? show : changedShowEl)
-     )
+  const openModalHandler = word => {
+    setWord(word)
+    setModal(true)
   }
 
-  const closeModalHandler = id => {
-    const showEl = showDetails.find(n => n.id === id)
-    const changedShowEl = { ...showEl, show: false }
-    setShowDetails(showDetails.map(show =>
-      show.id !== id ? show : changedShowEl))
+  const closeModalHandler = () => {
     if (isNew) {
-      const updatedWords = [...words]
-      updatedWords.pop()
-      const updatedShowDetails = [...showDetails]
-      updatedShowDetails.pop()
-      setWords(updatedWords)
-      setShowDetails(updatedShowDetails)
-      setIsNew(false)
+      const close = window.confirm(confirmNotSaving)
+      if (close) {
+        setWord(null)
+        setIsNew(false)
+        setModal(false)
+      }
+    } else {
+      setWord(null)
+      setModal(false)
     }
   }
 
-  const valueChangedHandler = (event, id) => {
-    const changedWord = {...words.find(word => word.id === id)}
-    const property = event.target.name
-    changedWord[property] = event.target.value
-    setWords(words.map(word => word.id !== id ? word : changedWord))
-  }
-
-  const showNextHandler = (event, id) => {
-    const updatedShowDetails = [...showDetails]
-    const i = updatedShowDetails.findIndex((el) => el.id === id)
+  const showNextHandler = (event) => {
+    const i = words.findIndex(w => w.id === word.id)
     const name = event.target.name
+    let newIndex
 
-    if (name === 'next') {
-     const nextIndex = i === updatedShowDetails.length - 1 ? 0 : i + 1
-     updatedShowDetails[nextIndex].show = true
-    } else if (name === 'previous') {
-     const previousIndex = i === 0 ? updatedShowDetails.length - 1 : i - 1
-     updatedShowDetails[previousIndex].show = true
+    if (isNew) {
+      const close = window.confirm(confirmNotSaving)
+      if (close) {
+        if (name === 'next') {
+          newIndex = 0   
+         } else if (name === 'previous') {
+          newIndex = words.length - 1
+         }
+        setWord(null)
+        setIsNew(false)
+        openModalHandler(words[newIndex])
+      }
+    } else {
+      if (name === 'next') {
+        newIndex = i === words.length - 1 ? 0 : i + 1   
+       } else if (name === 'previous') {
+        newIndex = i === 0 ? words.length - 1 : i - 1
+       }
+      setWord(null)
+      openModalHandler(words[newIndex])
     }
+  }
 
-    updatedShowDetails[i].show = false
-    setShowDetails(updatedShowDetails)
+  const valueChangedHandler = (event) => {
+    const updatedWord = { ...word }
+    const property = event.target.name
+    updatedWord[property] = event.target.value
+    setWord(updatedWord)
   }
 
   const createWordHandler = () => {
@@ -122,59 +134,77 @@ const Dictionary = () => {
       translation: '',
       pos: 'ADJ',
       gender: null,
-      source_lang: 'fr',
-      target_lang: 'fi'
+      source_lang,
+      target_lang
     }
-    setWords(words.concat(initialWord))
+    setWord(initialWord)
     setIsNew(true)
-    setShowDetails(showDetails.concat({ id: id, show: true }))
+    setModal(true)
   }
 
-  const saveWordHandler = (event, id) => {
+  const saveWordHandler = async (event) => {
     event.preventDefault()
-    const savedWord = {...words.find(word => word.id === id)}
-    if (validate(savedWord)) {
+    if (validate(word)) {
       if (!isNew) {
-        wordService
-          .update(id, savedWord)
-          .then(returnedWord => {
-            displayMessage(successMessage, 'success')
-            closeModalHandler(savedWord.id)
-          })
-          .catch(error => {
-            displayMessage(errorMessage, 'danger')
-          })
+        try {
+          const returnedWord = await wordService.update(word.id, word)
+          setWord(null)
+          setModal(false)
+          setWords(words.map(w => w.id !== returnedWord.id ? w : returnedWord ))
+          displayMessage(successMessage, 'success')
+        } catch(error) {
+          console.log(error)
+          displayMessage(errorMessage, 'danger')
+        }
       } else {
-        wordService
-          .create(savedWord)
-          .then(returnedWord => {
-            displayMessage(successMessage, 'success')
-            closeModalHandler(savedWord.id)
-            setIsNew(false)
-          })
-          .catch(error => {
-            displayMessage(errorMessage, 'danger')
-          })
+        try {
+          const returnedWord = await wordService.create(word)
+          setIsNew(false)
+          setWord(null)
+          setModal(false)
+          setWords(words.concat(returnedWord))
+          displayMessage(successMessage, 'success')
+        } catch(error) {
+          console.log(error)
+          displayMessage(errorMessage, 'danger')
+        }
       }
     }
   }
 
+  const filterHandler = (event) => {
+    setNewFilter(event.target.value)
+  }
+
+  const filteredWords = words.filter(word =>
+    word.lemma.toUpperCase().includes(newFilter.toUpperCase())
+    || word.translation.toUpperCase().includes(newFilter.toUpperCase())
+  )
+
   return (
-    <div className="container">
+    <div>
       <Notification
         message={notification.message}
         messageType={notification.messageType} />
       <h1>{pageTitle}</h1>
+      <Search
+        value={newFilter}
+        changed={filterHandler}
+      />
       <Words
-        words={words}
-        showDetails={showDetails}
-        changed={valueChangedHandler}
-        close={closeModalHandler}
-        show={showModalHandler}
-        next={showNextHandler}
-        saveWord={saveWordHandler}
+        words={filteredWords}
+        show={openModalHandler} />
+      <FormModal
+        showModal={modal}
         title={modalTitle}
-        notification={formNotification} />
+        close={closeModalHandler}
+        next={(event) => showNextHandler(event)} >
+        <WordForm
+          word={word}
+          changed={(event) => valueChangedHandler(event)}
+          saveWord={(event) => saveWordHandler(event)}
+          notification={formNotification} />
+      </FormModal>
       <Button
         as="input"
         type="button"

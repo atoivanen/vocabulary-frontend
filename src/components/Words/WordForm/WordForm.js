@@ -4,32 +4,36 @@ import { Form, Button } from 'react-bootstrap'
 
 import Notification from '../../UI/Notification/Notification'
 
-const WordForm = (props) => {
+const WordForm = ({ word, changed, saveWord, notification }) => {
   const { t } = useTranslation()
 
-  const pos = props.pos ? props.pos : ''
-  const gender = props.gender ? props.gender : ''
+  if (!word) {
+    return null
+  }
+
+  const pos = word.pos ? word.pos : ''
+  const gender = word.gender ? word.gender : ''
 
   return (
-    <Form onSubmit={props.saveWord}>
+    <Form onSubmit={saveWord}>
       <Notification
-        message={props.notification.message}
-        messageType={props.notification.messageType} />
+        message={notification.message}
+        messageType={notification.messageType} />
       <Form.Group controlId="formGroupLemma">
         <Form.Label>{t('WordLabel')}:</Form.Label>
         <Form.Control
           type="text"
           name="lemma"
-          value={props.lemma}
-          onChange={props.changed} />
+          value={word.lemma}
+          onChange={changed} />
       </Form.Group>
       <Form.Group controlId="formGroupTranslation">
         <Form.Label>{t('TranslationLabel')}:</Form.Label>
         <Form.Control
           type="text"
           name="translation"
-          value={props.translation}
-          onChange={props.changed} />
+          value={word.translation}
+          onChange={changed} />
       </Form.Group>
       <Form.Group controlId="formGroupPOS">
         <Form.Label>{t('POSLabel')}:</Form.Label>
@@ -37,7 +41,7 @@ const WordForm = (props) => {
           as="select"
           name="pos"
           value={pos}
-          onChange={props.changed}>
+          onChange={changed}>
           <option value="ADJ">{t('AdjectiveOption')}</option>
           <option value="ADP">{t('AdpositionOption')}</option>
           <option value="ADV">{t('AdverbOption')}</option>
@@ -58,7 +62,7 @@ const WordForm = (props) => {
           as="select"
           name="gender"
           value={gender}
-          onChange={props.changed}>
+          onChange={changed}>
           <option value=""></option>
           <option value="f">{t('FeminineOption')}</option>
           <option value="m">{t('MasculineOption')}</option>
