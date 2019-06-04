@@ -1,15 +1,20 @@
-import React, {Fragment} from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { Modal, Button } from 'react-bootstrap'
 
 import Backdrop from '../Backdrop/Backdrop'
 
 const FormModal = (props) => {
+  const { t } = useTranslation()
+  const modalTitle = t('EditWordModalTitle')
+
   return (
-    <Fragment>
-      <Backdrop show={props.showModal} clicked={props.close} />
-      <Modal show={props.showModal} onHide={props.close}>
+    <div>
+      <Backdrop show={props.modal} clicked={props.close} />
+      <Modal show={props.modal} onHide={props.close}>
         <Modal.Header closeButton>
-          <Modal.Title>{props.title}</Modal.Title>
+          <Modal.Title>{modalTitle}</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -21,18 +26,26 @@ const FormModal = (props) => {
             as="input"
             name="previous"
             size="sm"
-            onClick={props.next}
+            onClick={props.showNext}
             value="<" />
           <Button
             as="input"
             name="next"
             size="sm"
-            onClick={props.next}
+            onClick={props.showNext}
             value=">" />
         </Modal.Footer>
       </Modal>
-    </Fragment>
+    </div>
   )
 }
 
-export default FormModal
+const mapStateToProps = (state) => {
+  return {
+    modal: state.modal
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(FormModal)

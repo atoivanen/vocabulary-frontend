@@ -1,5 +1,6 @@
-# työaikakirjanpito
+# tyÃ¶aikakirjanpito
 
-| päivä | aika | mitä tein  |
+| pÃ¤ivÃ¤ | aika | mitÃ¤ tein  |
 | :----:|:-----| :-----|
-| 31.5. | 6    | refaktorointia, lisätty sanojen aakkosellinen järjestäminen ja filtteröinti |
+| 31.5. | 6    | refaktorointia, lisÃ¤tty sanojen aakkosellinen jÃ¤rjestÃ¤minen ja filtterÃ¶inti |
+| 3.6.  | 4    | tilan tallentaminen reduxilla |

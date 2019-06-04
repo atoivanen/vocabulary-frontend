@@ -3,32 +3,18 @@ import { Table } from 'react-bootstrap'
 
 import Word from './Word/Word'
 
-const Words = ({ words, show }) => {
-  const alphabeticalSort = (a, b) => {
-    const wordA = a.lemma.toUpperCase()
-    const wordB = b.lemma.toUpperCase()
-    if (wordA < wordB) {
-      return -1
-    }
-    if (wordA > wordB) {
-      return 1
-    }
-    return 0
-  }
-
+const Words = (props) => {
   return (
     <div>
       <Table borderless hover size="sm">
         <tbody>
-          {words
-            .sort((a, b) => alphabeticalSort(a, b))
-            .map((word) =>
+          {props.words.map((word) =>
+            <tr key={word.id} onClick={() => props.showDetails(word)}>
               <Word
-                key={word.id}
                 lemma={word.lemma}
                 gender={word.gender}
-                translation={word.translation}
-                show={() => show(word)} />
+                translation={word.translation} />
+            </tr>
           )}
         </tbody>
       </Table>

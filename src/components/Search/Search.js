@@ -1,20 +1,38 @@
 import React from 'react'
-import { Form } from 'react-bootstrap'
+import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import { Form } from 'react-bootstrap'
 
-const Search = ({ changed, value }) => {
+import { newSearch } from '../../reducers/searchReducer'
+
+const Search = (props) => {
   const { t } = useTranslation()
   const searchPlaceholder = t('SearchPlaceholder')
 
+  const searchWord = (event) => {
+    props.newSearch(event.target.value)
+  }
+
   return (
-    <Form>
-      <Form.Control 
-        type="text"
-        placeholder={searchPlaceholder}
-        value={value}
-        onChange={changed} />
-    </Form>
+    <Form.Control
+      type="text"
+      placeholder={searchPlaceholder}
+      value={props.search}
+      onChange={searchWord} />
   )
 }
 
-export default Search
+const mapStateToProps = (state) => {
+  return {
+    search: state.search,
+  }
+}
+
+const mapDispatchToProps = {
+  newSearch,
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Search)

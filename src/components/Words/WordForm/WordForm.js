@@ -1,39 +1,133 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Form, Button } from 'react-bootstrap'
 
 import Notification from '../../UI/Notification/Notification'
 
-const WordForm = ({ word, changed, saveWord, notification }) => {
-  const { t } = useTranslation()
+import { updateWords, addWord } from '../../../reducers/wordsReducer'
+import { setWord, resetWord} from '../../../reducers/wordReducer'
+import { displayNotification } from '../../../reducers/notificationReducer'
+import { openModal, closeModal } from '../../../reducers/modalReducer'
+import { isNotNew } from '../../../reducers/newReducer'
 
-  if (!word) {
+import wordService from '../../../services/words'
+
+const WordForm = (props) => {
+  const { t } = useTranslation()
+  const missingWord = t('WordIsMissingMessage')
+  const missingTranslation = t('TranslationIsMissingMessage')
+  const missingPOS = t('POSIsMissingMessage')
+  const missingGender = t('GenderIsMissingMessage')
+  const errorMessage = t('ErrorWhenSaving')
+  const successMessage = t('WordSavedSuccessfully')
+
+  if (!props.word) {
     return null
   }
 
-  const pos = word.pos ? word.pos : ''
-  const gender = word.gender ? word.gender : ''
+  const validate = () => {
+    if (!props.word.lemma) {
+      props.displayNotification({
+        message: missingWord,
+        messageType: 'danger'
+      })
+      return false
+    } else if (!props.word.translation) {
+      props.displayNotification({
+        message: missingTranslation,
+        messageType: 'danger'
+      })
+      return false
+    } else if (!props.word.pos) {
+      props.displayNotification({
+        message: missingPOS,
+        messageType: 'danger'
+      })
+      return false
+    } else if (props.word.pos === 'NOUN' && !props.word.gender) {
+      props.displayNotification({
+        message: missingGender,
+        messageType: 'danger'
+      })
+      return false
+    }
+    return true
+  }
+
+  const saveWord = async (event) => {
+    event.preventDefault()
+    if (validate(props.word)) {
+      if (!props.new) {
+        try {
+          const returnedWord = await wordService.update(
+            props.word.id,
+            props.word
+          )
+          props.resetWord()
+          props.closeModal()
+          props.updateWords(returnedWord)
+          props.displayNotification({
+            message: successMessage,
+            messageType: 'success'
+          })
+        } catch(error) {
+          console.log(error)
+          props.displayNotification({
+            message: errorMessage,
+            messageType: 'danger'
+          })
+        }
+      } else {
+        try {
+          const returnedWord = await wordService.create(props.word)
+          props.isNotNew()
+          props.resetWord()
+          props.closeModal()
+          props.addWord(returnedWord)
+          displayNotification({
+            message: successMessage,
+            messageType: 'success'
+          })
+        } catch(error) {
+          console.log(error)
+          displayNotification({
+            message: errorMessage,
+            messageType: 'danger'
+          })
+        }
+      }
+    }
+  }
+
+  const changeValue = (event) => {
+    const updatedWord = { ...props.word }
+    const property = event.target.name
+    updatedWord[property] = event.target.value
+    props.setWord(updatedWord)
+  }
+
+  const pos = props.word.pos ? props.word.pos : ''
+  const gender = props.word.gender ? props.word.gender : ''
 
   return (
     <Form onSubmit={saveWord}>
-      <Notification
-        message={notification.message}
-        messageType={notification.messageType} />
+      <Notification />
       <Form.Group controlId="formGroupLemma">
         <Form.Label>{t('WordLabel')}:</Form.Label>
         <Form.Control
           type="text"
           name="lemma"
-          value={word.lemma}
-          onChange={changed} />
+          value={props.word.lemma}
+          onChange={(event) => changeValue(event)} />
       </Form.Group>
       <Form.Group controlId="formGroupTranslation">
         <Form.Label>{t('TranslationLabel')}:</Form.Label>
         <Form.Control
           type="text"
           name="translation"
-          value={word.translation}
-          onChange={changed} />
+          value={props.word.translation}
+          onChange={(event) => changeValue(event)} />
       </Form.Group>
       <Form.Group controlId="formGroupPOS">
         <Form.Label>{t('POSLabel')}:</Form.Label>
@@ -41,7 +135,7 @@ const WordForm = ({ word, changed, saveWord, notification }) => {
           as="select"
           name="pos"
           value={pos}
-          onChange={changed}>
+          onChange={(event) => changeValue(event)}>
           <option value="ADJ">{t('AdjectiveOption')}</option>
           <option value="ADP">{t('AdpositionOption')}</option>
           <option value="ADV">{t('AdverbOption')}</option>
@@ -62,7 +156,7 @@ const WordForm = ({ word, changed, saveWord, notification }) => {
           as="select"
           name="gender"
           value={gender}
-          onChange={changed}>
+          onChange={(event) => changeValue(event)}>
           <option value=""></option>
           <option value="f">{t('FeminineOption')}</option>
           <option value="m">{t('MasculineOption')}</option>
@@ -73,4 +167,25 @@ const WordForm = ({ word, changed, saveWord, notification }) => {
   )
 }
 
-export default WordForm
+const mapStateToProps = (state) => {
+  return {
+    word: state.word,
+    new: state.new
+  }
+}
+
+const mapDispatchToProps = {
+  updateWords,
+  addWord,
+  setWord,
+  resetWord,
+  displayNotification,
+  openModal,
+  closeModal,
+  isNotNew
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WordForm)

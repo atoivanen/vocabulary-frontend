@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 const Word = (props) => (
-    <tr onClick={props.show}>
-      <td><b>{props.lemma}</b> <i>{props.gender}</i></td>
-      <td>{props.translation}</td>
-    </tr>
-  )
+  <Fragment>
+    <td><b>{props.lemma}</b> <i>{props.gender}</i></td>
+    <td>{props.translation}</td>
+  </Fragment>
+)
 
 export default Word

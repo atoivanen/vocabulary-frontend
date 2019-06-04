@@ -46,96 +46,6 @@
       "target_lang": "fi"
     },
     {
-      "id": 68316,
-      "lemma": "bradyon",
-      "translation": "tardioni",
-      "pos": "NOUN",
-      "gender": "m",
-      "source_lang": "fr",
-      "target_lang": "fi"
-    },
-    {
-      "id": 68317,
-      "lemma": "braguette",
-      "translation": "sepalus",
-      "pos": "NOUN",
-      "gender": "f",
-      "source_lang": "fr",
-      "target_lang": "fi"
-    },
-    {
-      "id": 11788,
-      "lemma": "brahmane",
-      "translation": "bramiini",
-      "pos": "NOUN",
-      "gender": null,
-      "source_lang": "fr",
-      "target_lang": "fi"
-    },
-    {
-      "id": 262883,
-      "lemma": "brahmanique",
-      "translation": "brahminical",
-      "pos": "ADJ",
-      "gender": null,
-      "source_lang": "fr",
-      "target_lang": "fi"
-    },
-    {
-      "id": 262884,
-      "lemma": "brai",
-      "translation": "piki",
-      "pos": "ADJ",
-      "gender": null,
-      "source_lang": "fr",
-      "target_lang": "fi"
-    },
-    {
-      "id": 262885,
-      "lemma": "braillard",
-      "translation": "bawler",
-      "pos": "NOUN",
-      "gender": null,
-      "source_lang": "fr",
-      "target_lang": "fi"
-    },
-    {
-      "id": 262886,
-      "lemma": "braille",
-      "translation": "sokeainkirjoitus",
-      "pos": "NOUN",
-      "gender": null,
-      "source_lang": "fr",
-      "target_lang": "fi"
-    },
-    {
-      "id": 68318,
-      "lemma": "brailler",
-      "translation": "kirkua, vollottaa",
-      "pos": "VERB",
-      "gender": null,
-      "source_lang": "fr",
-      "target_lang": "fi"
-    },
-    {
-      "id": 68319,
-      "lemma": "braise",
-      "translation": "kekäle, hiilos",
-      "pos": "NOUN",
-      "gender": "f",
-      "source_lang": "fr",
-      "target_lang": "fi"
-    },
-    {
-      "id": 262887,
-      "lemma": "bramer",
-      "translation": "laajennuksentekokone",
-      "pos": "VERB",
-      "gender": null,
-      "source_lang": "fr",
-      "target_lang": "fi"
-    },
-    {
       "id": 2624,
       "lemma": "idéal",
       "translation": "ihanteellinen",
@@ -308,6 +218,51 @@
       "translation": "ärsyttävä",
       "pos": "ADJ",
       "gender": null,
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 262897,
+      "lemma": "ordinateur",
+      "translation": "tietokone",
+      "pos": "NOUN",
+      "gender": "m",
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 262898,
+      "lemma": "main",
+      "translation": "käsi",
+      "pos": "NOUN",
+      "gender": "f",
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 360941,
+      "lemma": "peut-être",
+      "translation": "ehkä",
+      "pos": "ADV",
+      "gender": "",
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 351166,
+      "lemma": "être",
+      "translation": "olla",
+      "pos": "VERB",
+      "gender": "",
+      "source_lang": "fr",
+      "target_lang": "fi"
+    },
+    {
+      "id": 77567,
+      "lemma": "été",
+      "translation": "kesä",
+      "pos": "NOUN",
+      "gender": "m",
       "source_lang": "fr",
       "target_lang": "fi"
     }

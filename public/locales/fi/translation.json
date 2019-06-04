@@ -29,8 +29,8 @@
   "WordSavedSuccessfully": "Sana tallennettiin onnistuneesti.",
   "WordIsMissingMessage": "Sana ei voi olla tyhjä",
   "TranslationIsMissingMessage": "Käännös ei voi olla tyhjä",
-  "POSIsMissingMessage": "Ole hyvä ja valitse sanaluokka",
-  "GenderIsMissingMessage": "Ole hyvä ja valitse substantiivin suku",
-  "ConfirmNotSavingMessage": "Sinulla on tallentamattomia muutoksia. Oletko varma, että haluat sulkea ikkunan?",
+  "POSIsMissingMessage": "Valitse sanaluokka",
+  "GenderIsMissingMessage": "Valitse substantiivin suku",
+  "ConfirmNotSavingMessage": "Sinulla voi olla tallentamattomia muutoksia. Oletko varma, että haluat poistua näkymästä?",
   "SearchPlaceholder": "Etsi..."
 }
