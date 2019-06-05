@@ -23,6 +23,9 @@
   "EditWordModalTitle": "Muokkaa sanaa",
   "DictionaryTitle": "Sanakirja",
   "VocabularyAppName": "Sanasto",
+  "ChaptersLink": "Lukemisto",
+  "DictionaryLink": "Sanakirja",
+  "LoginLink": "Kirjaudu sisään",
   "NewWord": "Lisää sana",
   "SubmitWordButton": "Tallenna",
   "ErrorWhenSaving": "Tallennettaessa sanaa tapahtui virhe. Ole hyvä ja yritä uudestaan.",
@@ -32,5 +35,8 @@
   "POSIsMissingMessage": "Valitse sanaluokka",
   "GenderIsMissingMessage": "Valitse substantiivin suku",
   "ConfirmNotSavingMessage": "Sinulla voi olla tallentamattomia muutoksia. Oletko varma, että haluat poistua näkymästä?",
-  "SearchPlaceholder": "Etsi..."
+  "SearchPlaceholder": "Etsi...",
+  "ChaptersPageTitle": "Lukemisto",
+  "VocabularyTitle": "Sanasto",
+  "LearnedLabel": "Opittu"
 }

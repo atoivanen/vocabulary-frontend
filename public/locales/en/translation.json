@@ -23,6 +23,9 @@
   "EditWordModalTitle": "Edit Word",
   "DictionaryTitle": "Dictionary",
   "VocabularyAppName": "Vocabulary",
+  "ChaptersLink": "Chapters",
+  "DictionaryLink": "Dictionary",
+  "LoginLink": "Login",
   "NewWord": "Add Word",
   "SubmitWordButton": "Save",
   "ErrorWhenSaving": "An error occurred when saving the word. Please, try again.",
@@ -32,5 +35,8 @@
   "POSIsMissingMessage": "Please, provide part-of-speech",
   "GenderIsMissingMessage": "Please, provide gender",
   "ConfirmNotSavingMessage": "You may have unsaved changes. Are you sure you want to exit the view?",
-  "SearchPlaceholder": "Search..."
+  "SearchPlaceholder": "Search...",
+  "ChaptersPageTitle": "Chapters",
+  "VocabularyTitle": "Vocabulary",
+  "LearnedLabel": "Learned",
 }

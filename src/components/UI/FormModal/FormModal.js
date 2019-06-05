@@ -1,20 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { useTranslation } from 'react-i18next'
 import { Modal, Button } from 'react-bootstrap'
 
 import Backdrop from '../Backdrop/Backdrop'
 
 const FormModal = (props) => {
-  const { t } = useTranslation()
-  const modalTitle = t('EditWordModalTitle')
 
   return (
     <div>
       <Backdrop show={props.modal} clicked={props.close} />
       <Modal show={props.modal} onHide={props.close}>
         <Modal.Header closeButton>
-          <Modal.Title>{modalTitle}</Modal.Title>
+          {props.title
+            ? <Modal.Title>{props.title}</Modal.Title>
+            : null
+          }
         </Modal.Header>
 
         <Modal.Body>

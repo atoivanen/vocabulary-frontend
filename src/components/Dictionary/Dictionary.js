@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Button } from 'react-bootstrap'
+import { Col, Button } from 'react-bootstrap'
 
-import Words from '../../components/Words/Words'
-import Notification from '../../components/UI/Notification/Notification'
-import FormModal from '../../components/UI/FormModal/FormModal'
-import WordForm from '../../components/Words/WordForm/WordForm'
-import Search from '../../components/Search/Search'
+import Words from '../Words/Words'
+import Notification from '../UI/Notification/Notification'
+import FormModal from '../UI/FormModal/FormModal'
+import WordForm from '../Words/WordForm/WordForm'
+import Search from '../Search/Search'
 
 import { initializeWords } from '../../reducers/wordsReducer'
 import { createWord, setWord, resetWord } from '../../reducers/wordReducer'
@@ -15,11 +15,14 @@ import { displayNotification } from '../../reducers/notificationReducer'
 import { openModal, closeModal } from '../../reducers/modalReducer'
 import { isNew, isNotNew } from '../../reducers/newReducer'
 
+import { wordsToShow } from '../../helpers/helpers'
+
 const Dictionary = (props) => {
   const { t } = useTranslation()
   const pageTitle = t('DictionaryTitle')
   const confirmNotSaving = t('ConfirmNotSavingMessage')
   const newWordButtonText = t('NewWord')
+  const modalTitle = t('EditWordModalTitle')
 
   useEffect(() => {
     props.initializeWords()
@@ -78,74 +81,37 @@ const Dictionary = (props) => {
     }
   }
 
+  const l = 8
+  const s = 12
+
   return (
-    <div>
-      <Notification />
-      <h1>{pageTitle}</h1>
-      <Search />
-      <Words
-        words={props.visibleWords}
-        showDetails={showDetailsHandler}/>
-      <FormModal
-        close={closeDetailsHandler}
-        showNext={showNextHandler}>
-        <WordForm />
-      </FormModal>
-      <Button
-        as="input"
-        type="button"
-        value={newWordButtonText}
-        onClick={createWordHandler} />
-    </div>
+    <Fragment>
+      <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
+        <Notification />
+        <h1>{pageTitle}</h1>
+        <Search />
+        <Button
+          as="input"
+          type="button"
+          value={newWordButtonText}
+          onClick={createWordHandler} />
+        <Words
+          words={props.visibleWords}
+          showDetails={showDetailsHandler}/>
+        <FormModal
+          close={closeDetailsHandler}
+          showNext={showNextHandler}
+          title={modalTitle}>
+          <WordForm />
+        </FormModal>
+      </Col>
+    </Fragment>
   )
-}
-
-const makeComparable = (word) => {
-  const regexA = /[âàá]/g
-  const regexE = /[êèéë]/g
-  const regexI = /[îï]/g
-  const regexO = /ô/g
-  const regexU = /[ûùü]/g
-  const regexC = /ç/g
-  return word
-    .toLowerCase()
-    .replace(regexA, 'a')
-    .replace(regexE, 'e')
-    .replace(regexI, 'i')
-    .replace(regexO, 'o')
-    .replace(regexU, 'u')
-    .replace(regexC, 'c')
-}
-
-const alphabeticalSort = (a, b) => {
-  const wordA = makeComparable(a.lemma)
-  const wordB = makeComparable(b.lemma)
-  if (wordA < wordB) {
-    return -1
-  }
-  if (wordA > wordB) {
-    return 1
-  }
-  return 0
-}
-
-const wordsToShow = ({ words, search }) => {
-  const filteredWords = words.filter(word => {
-    const comparableLemma = makeComparable(word.lemma)
-    const comparableTranslation = makeComparable(word.translation)
-    const comparableSearch = makeComparable(search)
-    return (comparableLemma.startsWith(comparableSearch)
-      || comparableTranslation.startsWith(comparableSearch))
-  })
-
-  const sortedWords = filteredWords.sort((a, b) => alphabeticalSort(a, b))
-
-  return sortedWords
 }
 
 const mapStateToProps = (state) => {
   return {
-    visibleWords: wordsToShow(state),
+    visibleWords: wordsToShow(state.words, state.search),
     search: state.search,
     word: state.word,
     new: state.new

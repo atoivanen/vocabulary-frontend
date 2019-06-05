@@ -8,13 +8,16 @@ import notificationReducer from './reducers/notificationReducer'
 import modalReducer from './reducers/modalReducer'
 import newReducer from './reducers/newReducer'
 
+import chaptersReducer from './reducers/chaptersReducer'
+
 const reducer = combineReducers({
   words: wordsReducer,
   word: wordReducer,
   search: searchReducer,
   notification: notificationReducer,
   modal: modalReducer,
-  new: newReducer
+  new: newReducer,
+  chapters: chaptersReducer
 })
 
 const store = createStore(reducer, applyMiddleware(thunk))
