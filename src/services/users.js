@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:8000/api/words'
+const baseUrl = 'http://localhost:8000/api/users'
 
 const getFirstPage = async () => {
   const response = await axios.get(baseUrl)
@@ -25,7 +25,7 @@ const getAll = async (pageUrl=baseUrl) => {
 }
 
 const create = async (newObject) => {
-  const response = await axios.post(baseUrl, newObject)
+  const response = await axios.post(`${baseUrl}/`, newObject)
   return response.data
 }
 

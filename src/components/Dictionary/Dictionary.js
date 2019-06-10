@@ -9,9 +9,8 @@ import FormModal from '../UI/FormModal/FormModal'
 import WordForm from '../Words/WordForm/WordForm'
 import Search from '../Search/Search'
 
-import { initializeWords } from '../../reducers/wordsReducer'
+import { initializeWords, initializeFirstPage } from '../../reducers/wordsReducer'
 import { createWord, setWord, resetWord } from '../../reducers/wordReducer'
-import { displayNotification } from '../../reducers/notificationReducer'
 import { openModal, closeModal } from '../../reducers/modalReducer'
 import { isNew, isNotNew } from '../../reducers/newReducer'
 
@@ -19,14 +18,14 @@ import { wordsToShow } from '../../helpers/helpers'
 
 const Dictionary = (props) => {
   const { t } = useTranslation()
-  const pageTitle = t('DictionaryTitle')
-  const confirmNotSaving = t('ConfirmNotSavingMessage')
-  const newWordButtonText = t('NewWord')
-  const modalTitle = t('EditWordModalTitle')
 
   useEffect(() => {
-    props.initializeWords()
+    props.initializeFirstPage()
   }, [])
+
+  // useEffect(() => {
+  //   props.initializeWords()
+  // }, [])
 
   const createWordHandler = () => {
     props.createWord()
@@ -41,7 +40,7 @@ const Dictionary = (props) => {
 
   const closeDetailsHandler = () => {
     if (props.new) {
-      const close = window.confirm(confirmNotSaving)
+      const close = window.confirm(t('ConfirmNotSavingMessage'))
       if (close) {
         props.resetWord()
         props.isNotNew()
@@ -59,7 +58,7 @@ const Dictionary = (props) => {
     let newIndex
 
     if (props.new) {
-      const close = window.confirm(confirmNotSaving)
+      const close = window.confirm(t('ConfirmNotSavingMessage'))
       if (close) {
         if (name === 'next') {
           newIndex = 0
@@ -88,12 +87,12 @@ const Dictionary = (props) => {
     <Fragment>
       <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
         <Notification />
-        <h1>{pageTitle}</h1>
+        <h1>{t('DictionaryTitle')}</h1>
         <Search />
         <Button
           as="input"
           type="button"
-          value={newWordButtonText}
+          value={t('NewWord')}
           onClick={createWordHandler} />
         <Words
           words={props.visibleWords}
@@ -101,7 +100,7 @@ const Dictionary = (props) => {
         <FormModal
           close={closeDetailsHandler}
           showNext={showNextHandler}
-          title={modalTitle}>
+          title={t('EditWordModalTitle')}>
           <WordForm />
         </FormModal>
       </Col>
@@ -120,10 +119,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   initializeWords,
+  initializeFirstPage,
   createWord,
   setWord,
   resetWord,
-  displayNotification,
   openModal,
   closeModal,
   isNew,

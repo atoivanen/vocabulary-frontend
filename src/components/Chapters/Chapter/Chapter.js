@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { useEffect, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Col } from 'react-bootstrap'
@@ -9,6 +9,7 @@ import WordDetails from '../../Words/WordDetails/WordDetails'
 import Notification from '../../UI/Notification/Notification'
 import Search from '../../Search/Search'
 
+import { initializeChapter } from '../../../reducers/chapterReducer'
 import { setWord, resetWord } from '../../../reducers/wordReducer'
 import { displayNotification } from '../../../reducers/notificationReducer'
 import { openModal, closeModal } from '../../../reducers/modalReducer'
@@ -18,6 +19,10 @@ import { vocabularyWordsToShow } from '../../../helpers/helpers'
 const Chapter = (props) => {
   const { t } = useTranslation()
   const vocabularyTitle = t('VocabularyTitle')
+
+  useEffect(() => {
+    props.initializeChapter(props.id)
+  }, [])
 
   const chapter = props.chapter
 
@@ -78,12 +83,14 @@ const Chapter = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    chapter: state.chapter,
     search: state.search,
     word: state.word
   }
 }
 
 const mapDispatchToProps = {
+  initializeChapter,
   setWord,
   resetWord,
   displayNotification,

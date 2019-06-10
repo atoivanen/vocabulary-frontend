@@ -29,6 +29,16 @@ export const updateWords = (content) => {
   }
 }
 
+export const initializeFirstPage = () => {
+  return async dispatch => {
+    const words = await wordService.getFirstPage()
+    dispatch({
+      type: 'INIT_WORDS',
+      data: words
+    })
+  }
+}
+
 export const initializeWords = () => {
   return async dispatch => {
     const words = await wordService.getAll()
@@ -38,5 +48,6 @@ export const initializeWords = () => {
     })
   }
 }
+
 
 export default wordsReducer

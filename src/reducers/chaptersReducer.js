@@ -6,6 +6,8 @@ const chaptersReducer = (state = [], action) => {
       return [...state, action.data]
     case 'INIT_CHAPTERS':
       return action.data
+    case 'RESET_CHAPTERS':
+      return []
     default:
       return state
   }
@@ -15,6 +17,12 @@ export const addChapter = (content) => {
   return {
     type: 'NEW_CHAPTER',
     data: content
+  }
+}
+
+export const resetChapters = () => {
+  return {
+    type: 'RESET_CHAPTERS'
   }
 }
 

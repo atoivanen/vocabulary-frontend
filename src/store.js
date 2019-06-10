@@ -7,8 +7,9 @@ import searchReducer from './reducers/searchReducer'
 import notificationReducer from './reducers/notificationReducer'
 import modalReducer from './reducers/modalReducer'
 import newReducer from './reducers/newReducer'
-
+import userReducer from './reducers/userReducer'
 import chaptersReducer from './reducers/chaptersReducer'
+import chapterReducer from './reducers/chapterReducer'
 
 const reducer = combineReducers({
   words: wordsReducer,
@@ -17,7 +18,9 @@ const reducer = combineReducers({
   notification: notificationReducer,
   modal: modalReducer,
   new: newReducer,
-  chapters: chaptersReducer
+  chapters: chaptersReducer,
+  chapter: chapterReducer,
+  user: userReducer
 })
 
 const store = createStore(reducer, applyMiddleware(thunk))

@@ -15,12 +15,6 @@ import wordService from '../../../services/words'
 
 const WordForm = (props) => {
   const { t } = useTranslation()
-  const missingWord = t('WordIsMissingMessage')
-  const missingTranslation = t('TranslationIsMissingMessage')
-  const missingPOS = t('POSIsMissingMessage')
-  const missingGender = t('GenderIsMissingMessage')
-  const errorMessage = t('ErrorWhenSaving')
-  const successMessage = t('WordSavedSuccessfully')
 
   if (!props.word) {
     return null
@@ -29,25 +23,28 @@ const WordForm = (props) => {
   const validate = () => {
     if (!props.word.lemma) {
       props.displayNotification({
-        message: missingWord,
+        message: t('WordIsMissingMessage'),
         messageType: 'danger'
       })
       return false
-    } else if (!props.word.translation) {
+    }
+    if (!props.word.translation) {
       props.displayNotification({
-        message: missingTranslation,
+        message: t('TranslationIsMissingMessage'),
         messageType: 'danger'
       })
       return false
-    } else if (!props.word.pos) {
+    }
+    if (!props.word.pos) {
       props.displayNotification({
-        message: missingPOS,
+        message: t('POSIsMissingMessage'),
         messageType: 'danger'
       })
       return false
-    } else if (props.word.pos === 'NOUN' && !props.word.gender) {
+    }
+    if (props.word.pos === 'NOUN' && !props.word.gender) {
       props.displayNotification({
-        message: missingGender,
+        message: t('GenderIsMissingMessage'),
         messageType: 'danger'
       })
       return false
@@ -68,13 +65,13 @@ const WordForm = (props) => {
           props.closeModal()
           props.updateWords(returnedWord)
           props.displayNotification({
-            message: successMessage,
+            message: t('WordSavedSuccessfully'),
             messageType: 'success'
           })
         } catch(error) {
           console.log(error)
           props.displayNotification({
-            message: errorMessage,
+            message: t('ErrorWhenSaving'),
             messageType: 'danger'
           })
         }
@@ -86,13 +83,13 @@ const WordForm = (props) => {
           props.closeModal()
           props.addWord(returnedWord)
           displayNotification({
-            message: successMessage,
+            message: t('WordSavedSuccessfully'),
             messageType: 'success'
           })
         } catch(error) {
           console.log(error)
           displayNotification({
-            message: errorMessage,
+            message: t('ErrorWhenSaving'),
             messageType: 'danger'
           })
         }

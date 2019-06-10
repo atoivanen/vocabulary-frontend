@@ -7,7 +7,6 @@ import { newSearch } from '../../reducers/searchReducer'
 
 const Search = (props) => {
   const { t } = useTranslation()
-  const searchPlaceholder = t('SearchPlaceholder')
 
   const searchWord = (event) => {
     props.newSearch(event.target.value)
@@ -16,7 +15,7 @@ const Search = (props) => {
   return (
     <Form.Control
       type="text"
-      placeholder={searchPlaceholder}
+      placeholder={t('SearchPlaceholder')}
       value={props.search}
       onChange={searchWord} />
   )

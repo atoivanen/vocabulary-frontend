@@ -44,6 +44,7 @@ const Chapters = (props) => {
 const mapStateToProps = (state) => {
   return {
     chapters: state.chapters,
+    user: state.user
   }
 }
 
