@@ -74,12 +74,14 @@ const WordDetails = (props) => {
         <Form.Control readOnly value={pos} />
       </Form.Group>
       {displayGender}
-      <Form.Check
-        disabled
-        defaultChecked={props.word.learned}
-        type="checkbox"
-        label={t('LearnedLabel')}
-      />
+      <label>
+        <input
+          type="checkbox"
+          checked={props.word.learned ? props.word.learned : false}
+          readOnly
+          id="learned"/>
+        {t('LearnedLabel')}
+      </label>
     </Form>
   )
 }

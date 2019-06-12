@@ -9,7 +9,10 @@ import FormModal from '../UI/FormModal/FormModal'
 import WordForm from '../Words/WordForm/WordForm'
 import Search from '../Search/Search'
 
-import { initializeWords, initializeFirstPage } from '../../reducers/wordsReducer'
+import {
+  initializeWords,
+  initializeFirstPage
+} from '../../reducers/dictionaryReducer'
 import { createWord, setWord, resetWord } from '../../reducers/wordReducer'
 import { openModal, closeModal } from '../../reducers/modalReducer'
 import { isNew, isNotNew } from '../../reducers/newReducer'
@@ -110,7 +113,7 @@ const Dictionary = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    visibleWords: wordsToShow(state.words, state.search),
+    visibleWords: wordsToShow(state.dictionary, state.search),
     search: state.search,
     word: state.word,
     new: state.new

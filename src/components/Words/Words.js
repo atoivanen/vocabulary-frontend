@@ -9,12 +9,11 @@ const Words = (props) => {
       <Table borderless hover size="sm">
         <tbody>
           {props.words.map((word) =>
-            <tr
-              style={ ({ cursor: 'pointer' }) }
-              key={word.id}
-              onClick={() => props.showDetails(word)}>
+            <tr key={word.id} >
               <Word
-                word={word} />
+                word={word}
+                selectable={props.selectable}
+                showDetails={props.showDetails} />
             </tr>
           )}
         </tbody>

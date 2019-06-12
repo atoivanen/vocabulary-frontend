@@ -56,5 +56,12 @@
   "RegisterErrorMessage": "Error when registering, please try again",
   "UsernameExists": "Username exists. Please provide another username.",
   "UsernameMissingMessage": "Please, provide username",
-  "PasswordMissingMessage": "Please, provide password"
+  "PasswordMissingMessage": "Please, provide password",
+  "CheckButton": "Check",
+  "PracticeAllWordsButton": "Practice",
+  "TranslationPlaceholder": "Translation",
+  "NextButton": "Next",
+  "MyVocabularyLink": "My Vocabulary",
+  "MyVocabularyTitle": "My Vocabulary",
+  "NumberOfWordsLearned": "You know {{count}} words!"
 }

@@ -5,7 +5,7 @@ import { Form, Button } from 'react-bootstrap'
 
 import Notification from '../../UI/Notification/Notification'
 
-import { updateWords, addWord } from '../../../reducers/wordsReducer'
+import { updateWords, addWord } from '../../../reducers/dictionaryReducer'
 import { setWord, resetWord} from '../../../reducers/wordReducer'
 import { displayNotification } from '../../../reducers/notificationReducer'
 import { openModal, closeModal } from '../../../reducers/modalReducer'

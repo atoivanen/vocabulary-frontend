@@ -56,5 +56,12 @@
   "RegisterErrorMessage": "Rekisteröitymisessä tapahtui virhe. Yritä uudestaan.",
   "UsernameExists": "Käyttäjätunnus on jo olemassa. Syötä toinen käyttäjätunnus.",
   "UsernameMissingMessage": "Käyttäjätunnus ei voi olla tyhjä",
-  "PasswordMissingMessage": "Salasana ei voi olla tyhjä"
+  "PasswordMissingMessage": "Salasana ei voi olla tyhjä",
+  "CheckButton": "Tarkasta",
+  "PracticeAllWordsButton": "Harjoittele",
+  "TranslationPlaceholder": "Käännös",
+  "NextButton": "Seuraava",
+  "MyVocabularyLink": "Oma sanasto",
+  "MyVocabularyTitle": "Oma sanasto",
+  "NumberOfWordsLearned": "Osaat {{count}} sanaa!"
 }

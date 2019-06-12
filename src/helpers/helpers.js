@@ -56,3 +56,16 @@ export const vocabularyWordsToShow = (words, search) => {
 
   return sortedWords
 }
+
+export const getConfig = () => {
+  const loggedUserJSON = window.localStorage.getItem('loggedVocabularyUser')
+  if (loggedUserJSON) {
+    const user = JSON.parse(loggedUserJSON)
+    const token = `Token ${user.token}`
+    const config = {
+      headers: { Authorization: token },
+    }
+    return config
+  }
+  return null
+}

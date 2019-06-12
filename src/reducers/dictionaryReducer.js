@@ -1,6 +1,6 @@
 import wordService from '../services/words'
 
-const wordsReducer = (state = [], action) => {
+const dictionaryReducer = (state = [], action) => {
   switch (action.type) {
     case 'NEW_WORD':
       return [...state, action.data]
@@ -50,4 +50,4 @@ export const initializeWords = () => {
 }
 
 
-export default wordsReducer
+export default dictionaryReducer

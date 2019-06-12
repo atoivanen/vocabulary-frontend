@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import Layout from './components/Layout/Layout'
 import Dictionary from './components/Dictionary/Dictionary'
+import MyVocabulary from './components/MyVocabulary/MyVocabulary'
 import Chapters from './components/Chapters/Chapters'
 import Chapter from './components/Chapters/Chapter/Chapter'
 import Login from './components/Authentication/Login/Login'
@@ -12,8 +13,6 @@ import Register from './components/Authentication/Register/Register'
 
 import { setUser } from './reducers/userReducer'
 
-import chapterService from './services/chapters'
-
 const App = (props) => {
 
   useEffect(() => {
@@ -21,7 +20,6 @@ const App = (props) => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       props.setUser(user)
-      chapterService.setToken(user.token)
     }
   }, [])
 
@@ -37,6 +35,7 @@ const App = (props) => {
                 <Chapter id={match.params.id} />
               } />
             <Route path="/dictionary" component={Dictionary} />
+            <Route path="/myvocabulary" component={MyVocabulary} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
             <Route path="/register" component={Register} />

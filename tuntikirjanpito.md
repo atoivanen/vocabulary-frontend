@@ -9,3 +9,5 @@
 | 6.6.  | 7    | Autentikointi |
 | 7.6.  | 6    | Muutoksia APIin, kirjautuminen |
 | 10.6. | 7    | Uuden käyttäjän rekisteröinti ja opiskelin Django Rest-Framework-tutoriaalia |
+| 11.6. | 7    | LearningForm-komponentti, sanaston harjoittelutoiminnallisuus |
+| 12.6. | 7    | MyVocabulary-komponentti |

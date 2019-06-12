@@ -27,9 +27,13 @@ export const resetChapter = () => {
 export const initializeChapter = (id) => {
   return async dispatch => {
     const chapter = await chapterService.getOne(id)
+    const initialChapter = {
+      words: chapter.words.forEach(w => w.learned = false),
+      ...chapter
+    }
     dispatch({
       type: 'SET_CHAPTER',
-      data: chapter
+      data: initialChapter
     })
   }
 }

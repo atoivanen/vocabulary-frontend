@@ -1,12 +1,32 @@
 import React, { Fragment } from 'react'
+import { Image } from 'react-bootstrap'
 
-const Word = ({ word }) => {
+import checkmark from '../../../images/checkmark-16.gif'
+
+const Word = ({ word, selectable, showDetails }) => {
   const token = word.token ? `(${word.token})` : null
+  const cursorStyle = { cursor: 'pointer' }
   return (
     <Fragment>
-      <td>
-        <b>{word.lemma}</b> {token} <i>{word.gender}</i></td>
-      <td>{word.translation}</td>
+      {selectable
+        ? (
+          <td>
+            <input
+              type="checkbox" />
+          </td>
+        )
+        : null
+      }
+      <td
+        style={cursorStyle}
+        onClick={() => showDetails(word)}>
+        <b>{word.lemma}</b> {token} <i>{word.gender}</i>
+      </td>
+      <td
+        style={cursorStyle}
+        onClick={() => showDetails(word)}>
+        {word.translation} {word.learned ? <Image src={checkmark} /> : null}
+      </td>
     </Fragment>
   )
 }

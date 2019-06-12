@@ -21,6 +21,14 @@ const Toolbar = (props) => {
             <LinkContainer to="/dictionary">
               <Nav.Link>{t('DictionaryLink')}</Nav.Link>
             </LinkContainer>
+            { props.user.username
+              ? (
+                <LinkContainer to="/myvocabulary">
+                  <Nav.Link>{t('MyVocabularyLink')}</Nav.Link>
+                </LinkContainer>
+              )
+              : null
+            }
           </Nav>
           { props.user.username
             ? (

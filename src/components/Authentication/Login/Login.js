@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next'
 import Notification from '../../UI/Notification/Notification'
 
 import loginService from '../../../services/login'
-import chapterService from '../../../services/chapters'
 
 import { setUser } from '../../../reducers/userReducer'
 import { displayNotification } from '../../../reducers/notificationReducer'
@@ -24,11 +23,10 @@ const Login = (props) => {
       const token = await loginService.login({
         username, password
       })
-      const user = { username: username, token: token.token}
+      const user = { username: username, token: token.token, id: token.id}
       window.localStorage.setItem(
         'loggedVocabularyUser', JSON.stringify(user)
       )
-      chapterService.setToken(user.token)
       props.setUser(user)
       setUsername('')
       setPassword('')
