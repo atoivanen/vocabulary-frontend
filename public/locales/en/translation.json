@@ -59,9 +59,17 @@
   "PasswordMissingMessage": "Please, provide password",
   "CheckButton": "Check",
   "PracticeAllWordsButton": "Practice",
+  "PracticeWordsButton": "Practice Selected",
   "TranslationPlaceholder": "Translation",
   "NextButton": "Next",
   "MyVocabularyLink": "My Vocabulary",
   "MyVocabularyTitle": "My Vocabulary",
-  "NumberOfWordsLearned": "You know {{count}} words!"
+  "NumberOfWordsLearned": "You know {{count}} words!",
+  "NoWordsInVocabulary": "Your vocabulary is empty",
+  "SelectWordsToShow": "Select",
+  "SelectAll": "All",
+  "SelectNothing": "Nothing",
+  "SelectLearned": "Learned",
+  "SelectNotLearned": "Not-Learned",
+  "RemoveSelectedWordsButton": "Remove selected"
 }

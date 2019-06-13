@@ -59,9 +59,17 @@
   "PasswordMissingMessage": "Salasana ei voi olla tyhjä",
   "CheckButton": "Tarkasta",
   "PracticeAllWordsButton": "Harjoittele",
+  "PracticeWordsButton": "Harjoittele valittuja",
   "TranslationPlaceholder": "Käännös",
   "NextButton": "Seuraava",
   "MyVocabularyLink": "Oma sanasto",
   "MyVocabularyTitle": "Oma sanasto",
-  "NumberOfWordsLearned": "Osaat {{count}} sanaa!"
+  "NumberOfWordsLearned": "Osaat {{count}} sanaa!",
+  "NoWordsInVocabulary": "Sanastosi on tyhjä",
+  "SelectWordsToShow": "Valitse",
+  "SelectAll": "Kaikki",
+  "SelectNothing": "Ei mitään",
+  "SelectLearned": "Opitut",
+  "SelectNotLearned": "Ei-opitut",
+  "RemoveSelectedWordsButton": "Poista valitut"
 }

@@ -3,29 +3,33 @@ import { Image } from 'react-bootstrap'
 
 import checkmark from '../../../images/checkmark-16.gif'
 
-const Word = ({ word, selectable, showDetails }) => {
-  const token = word.token ? `(${word.token})` : null
+const Word = (props) => {
+  const token = props.word.token ? `(${props.word.token})` : null
   const cursorStyle = { cursor: 'pointer' }
   return (
     <Fragment>
-      {selectable
+      {props.selectable
         ? (
           <td>
             <input
-              type="checkbox" />
+              type="checkbox"
+              name={props.word.id}
+              checked={props.word.selected}
+              onChange={props.toggleChecked}/>
           </td>
         )
         : null
       }
       <td
         style={cursorStyle}
-        onClick={() => showDetails(word)}>
-        <b>{word.lemma}</b> {token} <i>{word.gender}</i>
+        onClick={() => props.showDetails(props.word)}>
+        <b>{props.word.lemma}</b> {token} <i>{props.word.gender}</i>
       </td>
       <td
         style={cursorStyle}
-        onClick={() => showDetails(word)}>
-        {word.translation} {word.learned ? <Image src={checkmark} /> : null}
+        onClick={() => props.showDetails(props.word)}>
+        {props.word.translation}
+        {props.word.learned ? <Image src={checkmark} /> : null}
       </td>
     </Fragment>
   )

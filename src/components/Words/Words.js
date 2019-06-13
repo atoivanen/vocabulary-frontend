@@ -13,7 +13,8 @@ const Words = (props) => {
               <Word
                 word={word}
                 selectable={props.selectable}
-                showDetails={props.showDetails} />
+                showDetails={props.showDetails}
+                toggleChecked={props.toggleChecked} />
             </tr>
           )}
         </tbody>
