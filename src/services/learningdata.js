@@ -22,4 +22,12 @@ const remove = async (id) => {
   return response.data
 }
 
-export default { create, update, remove }
+const removeMany = async (ids) => {
+  const config = getConfig()
+  let promises = []
+  ids.forEach(id => {promises.push(axios.delete(`${baseUrl}/${id}`, config))})
+  const responses = await Promise.all(promises)
+  return responses.map(response => response.data)
+}
+
+export default { create, update, remove, removeMany }

@@ -1,10 +1,9 @@
 import React, { useEffect, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Col, Button } from 'react-bootstrap'
+import { Col, Row, Button } from 'react-bootstrap'
 
 import Words from '../Words/Words'
-import Notification from '../UI/Notification/Notification'
 import FormModal from '../UI/FormModal/FormModal'
 import WordForm from '../Words/WordForm/WordForm'
 import Search from '../Search/Search'
@@ -88,25 +87,26 @@ const Dictionary = (props) => {
 
   return (
     <Fragment>
-      <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
-        <Notification />
-        <h1>{t('DictionaryTitle')}</h1>
-        <Search />
-        <Button
-          as="input"
-          type="button"
-          value={t('NewWord')}
-          onClick={createWordHandler} />
-        <Words
-          words={props.visibleWords}
-          showDetails={showDetailsHandler}/>
-        <FormModal
-          close={closeDetailsHandler}
-          showNext={showNextHandler}
-          title={t('EditWordModalTitle')}>
-          <WordForm />
-        </FormModal>
-      </Col>
+      <Row>
+        <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
+          <h1>{t('DictionaryTitle')}</h1>
+          <Search />
+          <Button
+            as="input"
+            type="button"
+            value={t('NewWord')}
+            onClick={createWordHandler} />
+          <Words
+            words={props.visibleWords}
+            showDetails={showDetailsHandler}/>
+          <FormModal
+            close={closeDetailsHandler}
+            showNext={showNextHandler}
+            title={t('EditWordModalTitle')}>
+            <WordForm />
+          </FormModal>
+        </Col>
+      </Row>
     </Fragment>
   )
 }

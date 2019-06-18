@@ -2,14 +2,11 @@ import React from 'react'
 import { Form, Modal, Button, ButtonToolbar, Image, Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
-import Backdrop from '../../UI/Backdrop/Backdrop'
-
 const LearningForm = (props) => {
   const { t } = useTranslation()
 
   return (
     <div>
-      <Backdrop show={props.practicing} clicked={props.stopPracticing} />
       <Modal show={props.practicing} onHide={props.stopPracticing}>
         <Modal.Header closeButton />
         <Modal.Body>

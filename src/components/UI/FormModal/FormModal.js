@@ -2,13 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Modal, Button } from 'react-bootstrap'
 
-import Backdrop from '../Backdrop/Backdrop'
-
 const FormModal = (props) => {
 
   return (
     <div>
-      <Backdrop show={props.modal} clicked={props.close} />
       <Modal show={props.modal} onHide={props.close}>
         <Modal.Header closeButton>
           {props.title

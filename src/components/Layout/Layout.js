@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Row } from 'react-bootstrap'
 
 import Toolbar from '../Navigation/Toolbar/Toolbar'
+import Notification from '../UI/Notification/Notification'
 
 const Layout = (props) => {
   return (
@@ -9,8 +10,9 @@ const Layout = (props) => {
       <Toolbar />
       <Container>
         <Row>
-          {props.children}
+          <Notification />
         </Row>
+        {props.children}
       </Container>
     </div>
   )

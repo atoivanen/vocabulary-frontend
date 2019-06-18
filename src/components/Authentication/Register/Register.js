@@ -1,10 +1,8 @@
 import React, { useState, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { Form, Button, Col } from 'react-bootstrap'
+import { Form, Button, Col, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-
-import Notification from '../../UI/Notification/Notification'
 
 import { displayNotification } from '../../../reducers/notificationReducer'
 
@@ -76,33 +74,34 @@ const Register = (props) => {
 
   return (
     <Fragment>
-      <Col />
-      <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
-        <h2>{t('RegisterTitle')}</h2>
-        <Notification />
-        <Form onSubmit={registerHandler}>
-            <Form.Control
-              type="text"
-              value={username}
-              placeholder={t('Username')}
-              name="Username"
-              onChange={({ target }) => setUsername(target.value)} />
-            <Form.Control
-              type="password"
-              value={password1}
-              placeholder={t('Password')}
-              name="Password1"
-              onChange={({ target }) => setPassword1(target.value)} />
-            <Form.Control
-              type="password"
-              value={password2}
-              placeholder={t('PasswordAgain')}
-              name="Password2"
-              onChange={({ target }) => setPassword2(target.value)} />
-            <Button type="submit">{t('RegisterButton')}</Button>
-        </Form>
-      </Col>
-      <Col />
+      <Row>
+        <Col />
+        <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
+          <h2>{t('RegisterTitle')}</h2>
+          <Form onSubmit={registerHandler}>
+              <Form.Control
+                type="text"
+                value={username}
+                placeholder={t('Username')}
+                name="Username"
+                onChange={({ target }) => setUsername(target.value)} />
+              <Form.Control
+                type="password"
+                value={password1}
+                placeholder={t('Password')}
+                name="Password1"
+                onChange={({ target }) => setPassword1(target.value)} />
+              <Form.Control
+                type="password"
+                value={password2}
+                placeholder={t('PasswordAgain')}
+                name="Password2"
+                onChange={({ target }) => setPassword2(target.value)} />
+              <Button type="submit">{t('RegisterButton')}</Button>
+          </Form>
+        </Col>
+        <Col />
+      </Row>
     </Fragment>
   )
 }

@@ -1,10 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { useTranslation, Trans } from 'react-i18next'
-import { Col, Button, ButtonToolbar } from 'react-bootstrap'
+import { Col, Row, Button, ButtonToolbar } from 'react-bootstrap'
 
 import Words from '../Words/Words'
-import Notification from '../UI/Notification/Notification'
 import FormModal from '../UI/FormModal/FormModal'
 import Search from '../Search/Search'
 import WordDetails from '../Words/WordDetails/WordDetails'
@@ -98,19 +97,21 @@ const MyVocabulary = (props) => {
   }
 
   const updateLearned = async () => {
-    try {
-      const learningdata = {
-        user: props.user.id,
-        word: props.word.word_id,
-        learned: true
+    if (props.word.word_id) {
+      try {
+        const learningdata = {
+          user: props.user.id,
+          word: props.word.word_id,
+          learned: true
+        }
+        await learningdataService.update(props.word.id, learningdata)
+      } catch (error) {
+        console.log(error.response.data)
+        props.displayNotification({
+          message: error.response.data.detail,
+          messageType: 'danger'
+        })
       }
-      await learningdataService.update(props.word.id, learningdata)
-    } catch (error) {
-      console.log(error.response.data)
-      props.displayNotification({
-        message: error.response.data.detail,
-        messageType: 'danger'
-      })
     }
   }
 
@@ -188,21 +189,40 @@ const MyVocabulary = (props) => {
     setStateNothingSelected()
   }
 
-  const removeWords = () => {
+  const removeWords = async () => {
     const wordsToRemove = props.visibleWords.filter(w => w.selected)
-    wordsToRemove.forEach(async (word) => {
-      props.removeWordFromMyVocabulary(word)
-      try {
-        await learningdataService.remove(word.id)
-      } catch (error) {
-        console.log(error.response.data)
+    const idsToRemove = wordsToRemove.map(w => w.id)
+    try {
+      await learningdataService.removeMany(idsToRemove)
+      wordsToRemove.forEach(word => {props.removeWordFromMyVocabulary(word)})
+      if (wordsToRemove.length > 0) {
+        let lemmas = wordsToRemove[0].lemma
+        if (wordsToRemove.length > 1) {
+          wordsToRemove.shift()
+          lemmas = wordsToRemove.reduce((acc, cur) =>
+            `${acc}, ${cur.lemma}`, lemmas
+          )
+        }
+        const wordsRemoved = t('WordsRemovedMessage')
         props.displayNotification({
-          message: error.response.data.detail,
+          message: `${wordsRemoved} ${lemmas}`,
+          messageType: 'success'
+        })
+        setNothingSelected(true)
+      }
+    } catch (error) {
+      console.log(error.response)
+      if (error.response.request.status === 404) {
+        wordsToRemove.forEach(word => {props.removeWordFromMyVocabulary(word)})
+        setNothingSelected(true)
+      } else {
+        props.displayNotification({
+          message: t('RemovingFailed'),
           messageType: 'danger'
         })
+        setNothingSelected(false)
       }
-    })
-    setStateNothingSelected()
+    }
   }
 
   const l = 8
@@ -211,63 +231,66 @@ const MyVocabulary = (props) => {
   if (props.myVocabulary.length === 0) {
     return (
       <Fragment>
-        <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
-          <h1>{t('MyVocabularyTitle')}</h1>
-          <p>{t('NoWordsInVocabulary')}</p>
-        </Col>
+        <Row>
+          <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
+            <h1>{t('MyVocabularyTitle')}</h1>
+            <p>{t('NoWordsInVocabulary')}</p>
+          </Col>
+        </Row>
       </Fragment>
     )
   }
 
   return (
     <Fragment>
-      <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
-        <Notification />
-        <h1>{t('MyVocabularyTitle')}</h1>
-        {count > 0
-          ? (
-            <Trans i18nKey="NumberOfWordsLearned">
-              You know {{count}} word!
-            </Trans>
-          )
-          : null
-        }
-        <Search />
-        <ButtonToolbar className="mp-2">
-          <SelectButton
-            selectAll={selectAll}
-            selectNothing={selectNothing}
-            selectLearned={selectLearned}
-            selectNotLearned={selectNotLearned} />
-          <Button
-            disabled={nothingSelected}
-            onClick={practiceWords}>{t('PracticeWordsButton')}</Button>
-          <Button variant="danger"
-            disabled={nothingSelected}
-            onClick={removeWords}>{t('RemoveSelectedWordsButton')}</Button>
-        </ButtonToolbar>
-        <Words
-          words={props.visibleWords}
-          showDetails={showDetailsHandler}
-          selectable="true"
-          toggleChecked={toggleChecked} />
-        <FormModal
-          close={closeDetailsHandler}
-          showNext={showNextHandler}>
-          <WordDetails />
-        </FormModal>
-        <LearningForm
-          word={props.word}
-          myTry={myTry}
-          check={check}
-          solution={solution}
-          practicing={practicing}
-          disabled={disabled}
-          stopPracticing={stopPracticing}
-          next={practiceNext}
-          checkWord={checkWord}
-          change={valueChangedHandler} />
-      </Col>
+      <Row>
+        <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
+          <h1>{t('MyVocabularyTitle')}</h1>
+          {count > 0
+            ? (
+              <Trans i18nKey="NumberOfWordsLearned">
+                You know {{count}} word!
+              </Trans>
+            )
+            : null
+          }
+          <Search />
+          <ButtonToolbar className="mp-2">
+            <SelectButton
+              selectAll={selectAll}
+              selectNothing={selectNothing}
+              selectLearned={selectLearned}
+              selectNotLearned={selectNotLearned} />
+            <Button
+              disabled={nothingSelected}
+              onClick={practiceWords}>{t('PracticeWordsButton')}</Button>
+            <Button variant="danger"
+              disabled={nothingSelected}
+              onClick={removeWords}>{t('RemoveSelectedWordsButton')}</Button>
+          </ButtonToolbar>
+          <Words
+            words={props.visibleWords}
+            showDetails={showDetailsHandler}
+            selectable="true"
+            toggleChecked={toggleChecked} />
+          <FormModal
+            close={closeDetailsHandler}
+            showNext={showNextHandler}>
+            <WordDetails />
+          </FormModal>
+          <LearningForm
+            word={props.word}
+            myTry={myTry}
+            check={check}
+            solution={solution}
+            practicing={practicing}
+            disabled={disabled}
+            stopPracticing={stopPracticing}
+            next={practiceNext}
+            checkWord={checkWord}
+            change={valueChangedHandler} />
+        </Col>
+      </Row>
     </Fragment>
   )
 }

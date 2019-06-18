@@ -6,7 +6,7 @@ const SelectButton = (props) => {
   const { t } = useTranslation()
 
   return (
-    <DropdownButton title={t('SelectWordsToShow')}>
+    <DropdownButton size={props.size} title={t('SelectWordsToShow')}>
       <Dropdown.Item
         as="button"
         onClick={props.selectNotLearned}>{t('SelectNotLearned')}</Dropdown.Item>

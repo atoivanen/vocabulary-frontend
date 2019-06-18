@@ -1,10 +1,8 @@
 import React, { useState, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { Form, Button, Col } from 'react-bootstrap'
+import { Form, Button, Col, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-
-import Notification from '../../UI/Notification/Notification'
 
 import loginService from '../../../services/login'
 
@@ -44,27 +42,28 @@ const Login = (props) => {
 
   return (
     <Fragment>
-      <Col />
-      <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
-        <h2>{t('LoginTitle')}</h2>
-        <Notification />
-        <Form onSubmit={loginHandler}>
-            <Form.Control
-              type="text"
-              value={username}
-              placeholder={t('Username')}
-              name="Username"
-              onChange={({ target }) => setUsername(target.value)} />
-            <Form.Control
-              type="password"
-              value={password}
-              placeholder={t('Password')}
-              name="Password"
-              onChange={({ target }) => setPassword(target.value)} />
-            <Button type="submit">{t('LoginButton')}</Button>
-        </Form>
-      </Col>
-      <Col />
+      <Row>
+        <Col />
+        <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
+          <h2>{t('LoginTitle')}</h2>
+          <Form onSubmit={loginHandler}>
+              <Form.Control
+                type="text"
+                value={username}
+                placeholder={t('Username')}
+                name="Username"
+                onChange={({ target }) => setUsername(target.value)} />
+              <Form.Control
+                type="password"
+                value={password}
+                placeholder={t('Password')}
+                name="Password"
+                onChange={({ target }) => setPassword(target.value)} />
+              <Button type="submit">{t('LoginButton')}</Button>
+          </Form>
+        </Col>
+        <Col />
+      </Row>
     </Fragment>
   )
 }

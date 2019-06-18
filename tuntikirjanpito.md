@@ -11,3 +11,7 @@
 | 10.6. | 7    | Uuden käyttäjän rekisteröinti ja opiskelin Django Rest-Framework-tutoriaalia |
 | 11.6. | 7    | LearningForm-komponentti, sanaston harjoittelutoiminnallisuus |
 | 12.6. | 7    | MyVocabulary-komponentti |
+| 13.6. | 7    | Sanojen poisto- ja valintatoiminnallisuus MyDictionary-komponentissa, APIn laajentaminen chapter-objektin osalta |
+| 14.6. | 5    | Sanojen poisto ja valinta Chapter-komponentissa, Chapter-komponentin tyylit, kappaleiden valinta Chapters-komponentissa |
+| 17.6. | 7    | NewChapter-komponentti |
+| 18.7. |      | EditChapter-komponentti |

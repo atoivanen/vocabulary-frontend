@@ -2,20 +2,20 @@ import userService from '../services/users'
 
 const myVocabularyReducer = (state = [], action) => {
   switch (action.type) {
-    case 'NEW_WORD':
+    case 'NEW_MY_WORD':
       return [...state, action.data]
-    case 'REMOVE_WORD':
+    case 'REMOVE_MY_WORD':
       const i = state.findIndex(word => word.id === action.data.id)
       const updatedVocabulary = [...state]
       updatedVocabulary.splice(i, 1)
       return updatedVocabulary
-    case 'UPDATE_WORD':
+    case 'UPDATE_MY_WORD':
       const id = action.data.id
       const updatedWord = { ...action.data }
       return state.map(word => word.id !== id ? word : updatedWord)
-    case 'INIT_VOCABULARY':
+    case 'INIT_MY_VOCABULARY':
       return action.data
-    case 'RESET':
+    case 'RESET_MY_VOCABULARY':
       return []
     default:
       return state
@@ -24,28 +24,28 @@ const myVocabularyReducer = (state = [], action) => {
 
 export const addWordToMyVocabulary = (content) => {
   return {
-    type: 'NEW_WORD',
+    type: 'NEW_MY_WORD',
     data: content
   }
 }
 
 export const updateMyVocabulary = (content) => {
   return {
-    type: 'UPDATE_WORD',
+    type: 'UPDATE_MY_WORD',
     data: content
   }
 }
 
 export const removeWordFromMyVocabulary = (content) => {
   return {
-    type: 'REMOVE_WORD',
+    type: 'REMOVE_MY_WORD',
     data: content
   }
 }
 
 export const resetMyVocabulary = () => {
   return {
-    type: 'RESET'
+    type: 'RESET_MY_VOCABULARY'
   }
 }
 
@@ -56,7 +56,7 @@ export const initializeMyVocabulary = (userId) => {
       ({ ...word, selected: false })
     )
     dispatch({
-      type: 'INIT_VOCABULARY',
+      type: 'INIT_MY_VOCABULARY',
       data: initialWords
     })
   }
