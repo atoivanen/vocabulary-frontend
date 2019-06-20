@@ -18,8 +18,8 @@
   "FeminineOption": "Feminine",
   "MasculineOption": "Masculine",
   "CloseButton": "Close",
-  "PreviousButton": "Previous",
   "NextButton": "Next",
+  "PreviousButton": "Previous",
   "WordModalTitle": "Word",
   "DictionaryTitle": "Dictionary",
   "VocabularyAppName": "Vocabulary",
@@ -61,7 +61,6 @@
   "PracticeAllWordsButton": "Practice",
   "PracticeWordsButton": "Practice Selected",
   "TranslationPlaceholder": "Translation",
-  "NextButton": "Next",
   "MyVocabularyLink": "My Vocabulary",
   "MyVocabularyTitle": "My Vocabulary",
   "NumberOfWordsLearned": "You know {{count}} words!",
@@ -93,5 +92,7 @@
   "Loading": "Loading...",
   "WordExists": "The word exists",
   "UnauthorizedMyVocabulary": "Please, login to access your vocabulary",
-  "Unauthorized": "Unauthorized"
+  "Unauthorized": "Unauthorized",
+  "WelcomeTitle": "Welcome",
+  "WelcomeMessage": "Build your French vocabulary with the Vocabulary app"
 }

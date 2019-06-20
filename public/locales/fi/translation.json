@@ -61,7 +61,6 @@
   "PracticeAllWordsButton": "Harjoittele",
   "PracticeWordsButton": "Harjoittele valittuja",
   "TranslationPlaceholder": "Käännös",
-  "NextButton": "Seuraava",
   "MyVocabularyLink": "Oma sanasto",
   "MyVocabularyTitle": "Oma sanasto",
   "NumberOfWordsLearned": "Osaat {{count}} sanaa!",
@@ -93,5 +92,7 @@
   "Loading": "Ladataan...",
   "WordExists": "Sana on jo sanakirjassa",
   "UnauthorizedMyVocabulary": "Kirjaudu sisään, jotta voit tarkastella sanastoa",
-  "Unauthorized": "Ei pääsyä"
+  "Unauthorized": "Ei pääsyä",
+  "WelcomeTitle": "Tervetuloa",
+  "WelcomeMessage": "Opettele ranskan sanoja Sanasto-sovelluksen avulla"
 }

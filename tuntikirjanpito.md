@@ -16,4 +16,4 @@
 | 17.6. | 7    | NewChapter-komponentti |
 | 18.6. | 7    | EditChapter-komponentti, sanakirjadatan filtteröinti APIssa ja Dictionary-komponentissa |
 | 19.6. | 7    | pientä säätöä, backendin tekstiä analysoivien funktioiden korjailua |
-| 20.6. |      | Asennettu Eslint, virheet korjattu. |
+| 20.6. | 8    | Asennettu Eslint, virheet korjattu. Backendistä siivottu turha koodi pois. FrontPage-komponentti. |

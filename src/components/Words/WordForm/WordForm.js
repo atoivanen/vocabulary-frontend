@@ -69,7 +69,6 @@ const WordForm = (props) => {
           )
           props.resetWord()
           props.closeModal()
-          props.newSearch(returnedWord.lemma)
           props.updateWords(returnedWord)
           props.displayNotification({
             message: t('WordSavedSuccessfully'),

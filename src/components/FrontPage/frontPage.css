@@ -1,0 +1,35 @@
+#background {
+  width: 100vw;
+  position: fixed;
+  left: 0;
+  top: 30px;
+}
+.text {
+  position: absolute;
+  z-index: 999;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  top: 15vw;
+  font-family: Impact, sans-serif;
+}
+.text h1 {
+  font-size: 300%;
+}
+.iconsBox {
+  display: flex;
+  margin: auto;
+  width: 28vw;
+}
+.icon {
+  padding: 1vw;
+  margin: 1vw;
+  width: 12vw;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+a {
+  color: black;
+}

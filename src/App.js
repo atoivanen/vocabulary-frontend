@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Layout from './components/Layout/Layout'
+import FrontPage from './components/FrontPage/FrontPage'
 import Dictionary from './components/Dictionary/Dictionary'
 import MyVocabulary from './components/MyVocabulary/MyVocabulary'
 import Chapters from './components/Chapters/Chapters'
@@ -27,9 +28,10 @@ const App = (props) => {
 
   return (
     <BrowserRouter>
-      <div className="container">
+      <div>
         <Suspense fallback="loading">
           <Layout>
+            <Route exact path="/" component={FrontPage} />
             <Route exact path="/chapters" component={Chapters} />
             <Route
               exact path="/chapters/:id"
