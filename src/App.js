@@ -27,7 +27,7 @@ const App = (props) => {
 
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="container">
         <Suspense fallback="loading">
           <Layout>
             <Route exact path="/chapters" component={Chapters} />

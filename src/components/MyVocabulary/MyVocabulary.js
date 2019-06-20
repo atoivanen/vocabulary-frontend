@@ -1,15 +1,13 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { useTranslation, Trans } from 'react-i18next'
-import { Col, Row, Button, ButtonToolbar } from 'react-bootstrap'
+import { Col, Row, Button, ButtonToolbar, Spinner } from 'react-bootstrap'
 
 import Words from '../Words/Words'
-import FormModal from '../UI/FormModal/FormModal'
 import Search from '../Search/Search'
 import WordDetails from '../Words/WordDetails/WordDetails'
 import LearningForm from '../Words/LearningForm/LearningForm'
 import SelectButton from '../UI/SelectButton/SelectButton'
-
 import {
   initializeMyVocabulary,
   updateMyVocabulary,
@@ -19,15 +17,13 @@ import { displayNotification } from '../../reducers/notificationReducer'
 import { setWord, resetWord } from '../../reducers/wordReducer'
 import { openModal, closeModal } from '../../reducers/modalReducer'
 import { newSearch } from '../../reducers/searchReducer'
-
 import learningdataService from '../../services/learningdata'
-
 import { wordsToShow } from '../../helpers/helpers'
-
 import checkmark from '../../images/checkmark-32.gif'
 import xMark from '../../images/x-mark-32.gif'
 
 const MyVocabulary = (props) => {
+  const [loading, setLoading] = useState(false)
   const [practicing, setPracticing] = useState(false)
   const [myTry, setMyTry] = useState('')
   const [solution, setSolution] = useState('')
@@ -38,7 +34,16 @@ const MyVocabulary = (props) => {
   const { t } = useTranslation()
 
   useEffect(() => {
-    props.initializeMyVocabulary(props.user.id)
+    const fetchData = async () => {
+      setLoading(true)
+      try {
+        await props.initializeMyVocabulary(props.user.id)
+      } catch (error) {
+        console.log(error.response)
+      }
+      setLoading(false)
+    }
+    fetchData()
   }, [])
 
   const count = props.myVocabulary.filter(w => w.learned).length
@@ -60,9 +65,9 @@ const MyVocabulary = (props) => {
 
     if (name === 'next') {
       newIndex = i === props.visibleWords.length - 1 ? 0 : i + 1
-     } else if (name === 'previous') {
+    } else if (name === 'previous') {
       newIndex = i === 0 ? props.visibleWords.length - 1 : i - 1
-     }
+    }
     props.resetWord()
     showDetailsHandler(props.visibleWords[newIndex])
   }
@@ -228,6 +233,18 @@ const MyVocabulary = (props) => {
   const l = 8
   const s = 12
 
+  if (loading) {
+    return (
+      <Spinner animation="border">
+        <span className="sr-only">{t('Loading')}</span>
+      </Spinner>
+    )
+  }
+
+  if (!props.user.id) {
+    return <p>{t('UnauthorizedMyVocabulary')}</p>
+  }
+
   if (props.myVocabulary.length === 0) {
     return (
       <Fragment>
@@ -249,7 +266,7 @@ const MyVocabulary = (props) => {
           {count > 0
             ? (
               <Trans i18nKey="NumberOfWordsLearned">
-                You know {{count}} word!
+                You know {{ count }} word!
               </Trans>
             )
             : null
@@ -273,11 +290,9 @@ const MyVocabulary = (props) => {
             showDetails={showDetailsHandler}
             selectable="true"
             toggleChecked={toggleChecked} />
-          <FormModal
+          <WordDetails
             close={closeDetailsHandler}
-            showNext={showNextHandler}>
-            <WordDetails />
-          </FormModal>
+            showNext={showNextHandler} />
           <LearningForm
             word={props.word}
             myTry={myTry}

@@ -14,7 +14,7 @@ const ChapterForm = (props) => {
         onChange={(event) => props.setTitle(event)} />
       <Form.Control
         as="textarea"
-        rows="20"
+        rows="18"
         placeholder={t('TextareaPlaceholder')}
         value={props.textArea}
         onChange={(event) => props.setText(event)} />

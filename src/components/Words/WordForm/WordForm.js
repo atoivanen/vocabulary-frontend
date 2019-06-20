@@ -1,15 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, ButtonToolbar, Modal } from 'react-bootstrap'
 
 import Notification from '../../UI/Notification/Notification'
 
 import { updateWords, addWord } from '../../../reducers/dictionaryReducer'
-import { setWord, resetWord} from '../../../reducers/wordReducer'
+import { setWord, resetWord } from '../../../reducers/wordReducer'
 import { displayNotification } from '../../../reducers/notificationReducer'
 import { openModal, closeModal } from '../../../reducers/modalReducer'
 import { isNotNew } from '../../../reducers/newReducer'
+import { newSearch } from '../../../reducers/searchReducer'
 
 import wordService from '../../../services/words'
 
@@ -57,19 +58,25 @@ const WordForm = (props) => {
     if (validate(props.word)) {
       if (!props.new) {
         try {
+          const updatedWord = {
+            ...props.word,
+            modified_by: props.user.id,
+            gender: props.word.gender ? props.word.gender : null
+          }
           const returnedWord = await wordService.update(
             props.word.id,
-            props.word
+            updatedWord
           )
           props.resetWord()
           props.closeModal()
+          props.newSearch(returnedWord.lemma)
           props.updateWords(returnedWord)
           props.displayNotification({
             message: t('WordSavedSuccessfully'),
             messageType: 'success'
           })
         } catch(error) {
-          console.log(error)
+          console.log(error.response)
           props.displayNotification({
             message: t('ErrorWhenSaving'),
             messageType: 'danger'
@@ -77,21 +84,34 @@ const WordForm = (props) => {
         }
       } else {
         try {
-          const returnedWord = await wordService.create(props.word)
+          const newWord = {
+            ...props.word,
+            created_by: props.user.id,
+            gender: props.word.gender ? props.word.gender : null
+          }
+          const returnedWord = await wordService.create(newWord)
           props.isNotNew()
           props.resetWord()
           props.closeModal()
+          props.newSearch(returnedWord.lemma)
           props.addWord(returnedWord)
-          displayNotification({
+          props.displayNotification({
             message: t('WordSavedSuccessfully'),
             messageType: 'success'
           })
         } catch(error) {
-          console.log(error)
-          displayNotification({
-            message: t('ErrorWhenSaving'),
-            messageType: 'danger'
-          })
+          console.log(error.response)
+          if (error.request.status === 400) {
+            props.displayNotification({
+              message: t('WordExists'),
+              messageType: 'danger'
+            })
+          } else {
+            props.displayNotification({
+              message: t('ErrorWhenSaving'),
+              messageType: 'danger'
+            })
+          }
         }
       }
     }
@@ -108,66 +128,99 @@ const WordForm = (props) => {
   const gender = props.word.gender ? props.word.gender : ''
 
   return (
-    <Form onSubmit={saveWord}>
-      <Notification />
-      <Form.Group controlId="formGroupLemma">
-        <Form.Label>{t('WordLabel')}:</Form.Label>
-        <Form.Control
-          type="text"
-          name="lemma"
-          value={props.word.lemma}
-          onChange={(event) => changeValue(event)} />
-      </Form.Group>
-      <Form.Group controlId="formGroupTranslation">
-        <Form.Label>{t('TranslationLabel')}:</Form.Label>
-        <Form.Control
-          type="text"
-          name="translation"
-          value={props.word.translation}
-          onChange={(event) => changeValue(event)} />
-      </Form.Group>
-      <Form.Group controlId="formGroupPOS">
-        <Form.Label>{t('POSLabel')}:</Form.Label>
-        <Form.Control
-          as="select"
-          name="pos"
-          value={pos}
-          onChange={(event) => changeValue(event)}>
-          <option value="ADJ">{t('AdjectiveOption')}</option>
-          <option value="ADP">{t('AdpositionOption')}</option>
-          <option value="ADV">{t('AdverbOption')}</option>
-          <option value="AUX">{t('AuxiliaryOption')}</option>
-          <option value="CCONJ">{t('CConjunctionOption')}</option>
-          <option value="DET">{t('DeterminerOption')}</option>
-          <option value="INTJ">{t('InterjectionOption')}</option>
-          <option value="NOUN">{t('NounOption')}</option>
-          <option value="PRON">{t('PronounOption')}</option>
-          <option value="PROPN">{t('PropernounOption')}</option>
-          <option value="SCONJ">{t('SconjunctionOption')}</option>
-          <option value="VERB">{t('VerbOption')}</option>
-        </Form.Control>
-      </Form.Group>
-      <Form.Group controlId="formGroupGender">
-        <Form.Label>{t('GenderLabel')}:</Form.Label>
-        <Form.Control
-          as="select"
-          name="gender"
-          value={gender}
-          onChange={(event) => changeValue(event)}>
-          <option value=""></option>
-          <option value="f">{t('FeminineOption')}</option>
-          <option value="m">{t('MasculineOption')}</option>
-        </Form.Control>
-      </Form.Group>
-      <Button type="submit">{t('SubmitWordButton')}</Button>
-    </Form>
+    <Modal show={props.modal} onHide={props.close}>
+      <Modal.Header closeButton>
+        <Modal.Title>{props.word.lemma}</Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body>
+        <Form onSubmit={saveWord}>
+          <Notification />
+          <Form.Group controlId="formGroupLemma">
+            <Form.Label>{t('WordLabel')}:</Form.Label>
+            <Form.Control
+              type="text"
+              name="lemma"
+              value={props.word.lemma}
+              readOnly={!props.user.id}
+              onChange={(event) => changeValue(event)} />
+          </Form.Group>
+          <Form.Group controlId="formGroupTranslation">
+            <Form.Label>{t('TranslationLabel')}:</Form.Label>
+            <Form.Control
+              type="text"
+              name="translation"
+              value={props.word.translation}
+              readOnly={!props.user.id}
+              onChange={(event) => changeValue(event)} />
+          </Form.Group>
+          <Form.Group controlId="formGroupPOS">
+            <Form.Label>{t('POSLabel')}:</Form.Label>
+            <Form.Control
+              as="select"
+              name="pos"
+              value={pos}
+              readOnly={!props.user.id}
+              onChange={(event) => changeValue(event)}>
+              <option value="ADJ">{t('AdjectiveOption')}</option>
+              <option value="ADP">{t('AdpositionOption')}</option>
+              <option value="ADV">{t('AdverbOption')}</option>
+              <option value="AUX">{t('AuxiliaryOption')}</option>
+              <option value="CCONJ">{t('CConjunctionOption')}</option>
+              <option value="DET">{t('DeterminerOption')}</option>
+              <option value="INTJ">{t('InterjectionOption')}</option>
+              <option value="NOUN">{t('NounOption')}</option>
+              <option value="PRON">{t('PronounOption')}</option>
+              <option value="PROPN">{t('PropernounOption')}</option>
+              <option value="SCONJ">{t('SconjunctionOption')}</option>
+              <option value="VERB">{t('VerbOption')}</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="formGroupGender">
+            <Form.Label>{t('GenderLabel')}:</Form.Label>
+            <Form.Control
+              as="select"
+              name="gender"
+              value={gender}
+              readOnly={!props.user.id}
+              onChange={(event) => changeValue(event)}>
+              <option value=""></option>
+              <option value="f">{t('FeminineOption')}</option>
+              <option value="m">{t('MasculineOption')}</option>
+            </Form.Control>
+          </Form.Group>
+          {props.user.id
+            ? (<Button type="submit">{t('SubmitWordButton')}</Button>)
+            : null
+          }
+          {props.showNextAllowed
+            ? (
+              <ButtonToolbar className="float-right">
+                <Button
+                  as="input"
+                  name="previous"
+                  onClick={props.showNext}
+                  value={t('PreviousButton')} />
+                <Button
+                  as="input"
+                  name="next"
+                  onClick={props.showNext}
+                  value={t('NextButton')} />
+              </ButtonToolbar>
+            ) : null
+          }
+        </Form>
+      </Modal.Body>
+    </Modal>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
     word: state.word,
-    new: state.new
+    new: state.new,
+    modal: state.modal,
+    user: state.user
   }
 }
 
@@ -177,6 +230,7 @@ const mapDispatchToProps = {
   setWord,
   resetWord,
   displayNotification,
+  newSearch,
   openModal,
   closeModal,
   isNotNew

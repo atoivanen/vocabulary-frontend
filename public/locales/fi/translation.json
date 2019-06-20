@@ -20,7 +20,7 @@
   "CloseButton": "Sulje",
   "PreviousButton": "Edellinen",
   "NextButton": "Seuraava",
-  "EditWordModalTitle": "Muokkaa sanaa",
+  "WordModalTitle": "Sana",
   "DictionaryTitle": "Sanakirja",
   "VocabularyAppName": "Sanasto",
   "ChaptersLink": "Lukemisto",
@@ -28,7 +28,7 @@
   "LoginLink": "Kirjaudu",
   "NewWord": "Lisää sana",
   "SubmitWordButton": "Tallenna",
-  "ErrorWhenSaving": "Tallennettaessa sanaa tapahtui virhe. Ole hyvä ja yritä uudestaan.",
+  "ErrorWhenSaving": "Tallennettaessa sanaa tapahtui virhe.",
   "WordSavedSuccessfully": "Sana tallennettiin onnistuneesti.",
   "WordIsMissingMessage": "Sana ei voi olla tyhjä",
   "TranslationIsMissingMessage": "Käännös ei voi olla tyhjä",
@@ -89,5 +89,9 @@
   "EditChapterButton": "Muokkaa",
   "EditingNotAllowed": "Sinulla ei ole oikeutta muokata tätä tekstiä",
   "CancelButton": "Peruuta",
-  "SavingSucceeded": "Tallennettiin muutokset"
+  "SavingSucceeded": "Tallennettiin muutokset",
+  "Loading": "Ladataan...",
+  "WordExists": "Sana on jo sanakirjassa",
+  "UnauthorizedMyVocabulary": "Kirjaudu sisään, jotta voit tarkastella sanastoa",
+  "Unauthorized": "Ei pääsyä"
 }

@@ -1,11 +1,11 @@
 const searchReducer = (state = '', action) => {
   switch (action.type) {
-    case 'NEW_SEARCH':
-      return action.data
-    case 'RESET':
-      return ''
-    default:
-      return state
+  case 'NEW_SEARCH':
+    return action.data
+  case 'RESET':
+    return ''
+  default:
+    return state
   }
 }
 

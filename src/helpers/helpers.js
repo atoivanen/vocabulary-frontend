@@ -41,6 +41,23 @@ export const wordsToShow = (words, search) => {
   return sortedWords
 }
 
+export const dictionaryWordsToShow = (words, search) => {
+  if (!search) {
+    return []
+  }
+  const filteredWords = words.filter(word => {
+    const comparableLemma = makeComparable(word.lemma)
+    const comparableTranslation = makeComparable(word.translation)
+    const comparableSearch = makeComparable(search)
+    return (comparableLemma.startsWith(comparableSearch)
+      || comparableTranslation.startsWith(comparableSearch))
+  })
+
+  //const sortedWords = filteredWords.sort((a, b) => alphabeticalSort(a, b))
+
+  return filteredWords
+}
+
 export const vocabularyWordsToShow = (words, search) => {
   const filteredWords = words.filter(word => {
     const comparableLemma = makeComparable(word.lemma)

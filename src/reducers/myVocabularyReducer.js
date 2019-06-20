@@ -2,23 +2,25 @@ import userService from '../services/users'
 
 const myVocabularyReducer = (state = [], action) => {
   switch (action.type) {
-    case 'NEW_MY_WORD':
-      return [...state, action.data]
-    case 'REMOVE_MY_WORD':
-      const i = state.findIndex(word => word.id === action.data.id)
-      const updatedVocabulary = [...state]
-      updatedVocabulary.splice(i, 1)
-      return updatedVocabulary
-    case 'UPDATE_MY_WORD':
-      const id = action.data.id
-      const updatedWord = { ...action.data }
-      return state.map(word => word.id !== id ? word : updatedWord)
-    case 'INIT_MY_VOCABULARY':
-      return action.data
-    case 'RESET_MY_VOCABULARY':
-      return []
-    default:
-      return state
+  case 'NEW_MY_WORD':
+    return [...state, action.data]
+  case 'REMOVE_MY_WORD': {
+    const i = state.findIndex(word => word.id === action.data.id)
+    const updatedVocabulary = [...state]
+    updatedVocabulary.splice(i, 1)
+    return updatedVocabulary
+  }
+  case 'UPDATE_MY_WORD': {
+    const id = action.data.id
+    const updatedWord = { ...action.data }
+    return state.map(word => word.id !== id ? word : updatedWord)
+  }
+  case 'INIT_MY_VOCABULARY':
+    return action.data
+  case 'RESET_MY_VOCABULARY':
+    return []
+  default:
+    return state
   }
 }
 

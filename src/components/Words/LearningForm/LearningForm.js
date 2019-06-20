@@ -25,9 +25,9 @@ const LearningForm = (props) => {
             </Form.Row>
             {props.solution
               ? <Form.Control
-                  plaintext
-                  readOnly
-                  defaultValue={props.solution} />
+                plaintext
+                readOnly
+                defaultValue={props.solution} />
               : null
             }
             <ButtonToolbar>

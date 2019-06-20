@@ -46,6 +46,7 @@ const NewChapter = (props) => {
       setAnalyzing(false)
       props.history.push(`/chapters/${response.id}`)
     } catch (error) {
+      setAnalyzing(false)
       console.log(error.response)
       props.displayNotification({
         message: t('ChapterCreationFailed'),
@@ -84,6 +85,14 @@ const NewChapter = (props) => {
             {t('AnalyzingMessage')}
           </Modal.Body>
         </Modal>
+        <footer>
+          <a href="https://spacy.io">
+            <img
+              src="https://img.shields.io/badge/made%20with%20❤%20and-spaCy-09a3d5.svg"
+              alt="made with love and spaCy"
+              height="20" />
+          </a>
+        </footer>
       </Col>
     </Row>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Form } from 'react-bootstrap'
+import { Form, Modal, Button, ButtonToolbar } from 'react-bootstrap'
 
 const WordDetails = (props) => {
   const { t } = useTranslation()
@@ -54,41 +54,62 @@ const WordDetails = (props) => {
 
   const displayGender = props.word.pos === 'NOUN'
     ? (<Form.Group>
-        <Form.Label>{t('GenderLabel')}:</Form.Label>
-        <Form.Control readOnly value={gender} />
-      </Form.Group>)
+      <Form.Label>{t('GenderLabel')}:</Form.Label>
+      <Form.Control readOnly value={gender} />
+    </Form.Group>)
     : null
 
   return (
-    <Form>
-      <Form.Group>
-        <Form.Label>{t('WordLabel')}:</Form.Label>
-        <Form.Control readOnly value={wordForms} />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>{t('TranslationLabel')}:</Form.Label>
-        <Form.Control readOnly value={props.word.translation} />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>{t('POSLabel')}:</Form.Label>
-        <Form.Control readOnly value={pos} />
-      </Form.Group>
-      {displayGender}
-      <label>
-        <input
-          type="checkbox"
-          checked={props.word.learned ? props.word.learned : false}
-          readOnly
-          id="learned"/>
-        {t('LearnedLabel')}
-      </label>
-    </Form>
+    <Modal show={props.modal} onHide={props.close}>
+      <Modal.Header closeButton>
+        <Modal.Title>{props.word.lemma}</Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body>
+        <Form>
+          <Form.Group>
+            <Form.Label>{t('WordLabel')}:</Form.Label>
+            <Form.Control readOnly value={wordForms} />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>{t('TranslationLabel')}:</Form.Label>
+            <Form.Control readOnly value={props.word.translation} />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>{t('POSLabel')}:</Form.Label>
+            <Form.Control readOnly value={pos} />
+          </Form.Group>
+          {displayGender}
+          <label>
+            <input
+              type="checkbox"
+              checked={props.word.learned ? props.word.learned : false}
+              readOnly
+              id="learned"/>
+            {t('LearnedLabel')}
+          </label>
+          <ButtonToolbar className="float-right">
+            <Button
+              as="input"
+              name="previous"
+              onClick={props.showNext}
+              value={t('PreviousButton')} />
+            <Button
+              as="input"
+              name="next"
+              onClick={props.showNext}
+              value={t('NextButton')} />
+          </ButtonToolbar>
+        </Form>
+      </Modal.Body>
+    </Modal>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
     word: state.word,
+    modal: state.modal
   }
 }
 

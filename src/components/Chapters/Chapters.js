@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { Col, Row, Table, Button, ButtonToolbar } from 'react-bootstrap'
+import { Col, Row, Table, Button, ButtonToolbar, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -12,6 +12,7 @@ import { displayNotification } from '../../reducers/notificationReducer'
 import chapterService from '../../services/chapters'
 
 const Chapters = (props) => {
+  const [loading, setLoading] = useState(false)
   const [nothingSelected, setNothingSelected] = useState(true)
 
   const { t } = useTranslation()
@@ -20,7 +21,16 @@ const Chapters = (props) => {
   const s = 12
 
   useEffect(() => {
-    props.initializeChapters()
+    const fetchData = async () => {
+      setLoading(true)
+      try {
+        await props.initializeChapters()
+      } catch (error) {
+        console.log(error.response)
+      }
+      setLoading(false)
+    }
+    fetchData()
   }, [])
 
   const setStateNothingSelected = () => {
@@ -73,6 +83,14 @@ const Chapters = (props) => {
     }
   }
 
+  if (loading) {
+    return (
+      <Spinner animation="border">
+        <span className="sr-only">{t('Loading')}</span>
+      </Spinner>
+    )
+  }
+
   return (
     <Fragment>
       <Row>
@@ -82,16 +100,16 @@ const Chapters = (props) => {
             ? (
               <ButtonToolbar>
                 <Button href="/new">
-                    {t('CreateNewChapterButton')}
-                 </Button>
+                  {t('CreateNewChapterButton')}
+                </Button>
                 {props.chapters.find(c => c.created_by === props.user.id)
                   ? (<Button
-                      variant="danger"
-                      disabled={nothingSelected}
-                      onClick={removeChapters}>
-                        {t('RemoveSelectedChaptersButton')}
-                     </Button>
-                    )
+                    variant="danger"
+                    disabled={nothingSelected}
+                    onClick={removeChapters}>
+                    {t('RemoveSelectedChaptersButton')}
+                  </Button>
+                  )
                   : null
                 }
               </ButtonToolbar>
@@ -100,25 +118,25 @@ const Chapters = (props) => {
           }
           <Table>
             <tbody>
-            {props.chapters.map(chapter =>
-              <tr key={chapter.id}>
-                {props.user.id === chapter.created_by
-                  ? (<td>
+              {props.chapters.map(chapter =>
+                <tr key={chapter.id}>
+                  {props.user.id === chapter.created_by
+                    ? (<td>
                       <input
                         type="checkbox"
                         name={chapter.id}
                         onClick={toggleChecked} />
-                     </td>
+                    </td>
                     )
-                  : null
-                }
-                <td>
-                  <a href={`/chapters/${chapter.id}`}>
-                    {chapter.title}
-                  </a>
-                </td>
-              </tr>
-            )}
+                    : null
+                  }
+                  <td>
+                    <a href={`/chapters/${chapter.id}`}>
+                      {chapter.title}
+                    </a>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </Col>

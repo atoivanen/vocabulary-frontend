@@ -47,19 +47,19 @@ const Login = (props) => {
         <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
           <h2>{t('LoginTitle')}</h2>
           <Form onSubmit={loginHandler}>
-              <Form.Control
-                type="text"
-                value={username}
-                placeholder={t('Username')}
-                name="Username"
-                onChange={({ target }) => setUsername(target.value)} />
-              <Form.Control
-                type="password"
-                value={password}
-                placeholder={t('Password')}
-                name="Password"
-                onChange={({ target }) => setPassword(target.value)} />
-              <Button type="submit">{t('LoginButton')}</Button>
+            <Form.Control
+              type="text"
+              value={username}
+              placeholder={t('Username')}
+              name="Username"
+              onChange={({ target }) => setUsername(target.value)} />
+            <Form.Control
+              type="password"
+              value={password}
+              placeholder={t('Password')}
+              name="Password"
+              onChange={({ target }) => setPassword(target.value)} />
+            <Button type="submit">{t('LoginButton')}</Button>
           </Form>
         </Col>
         <Col />

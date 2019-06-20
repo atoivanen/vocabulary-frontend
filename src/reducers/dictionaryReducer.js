@@ -2,36 +2,37 @@ import wordService from '../services/words'
 
 const dictionaryReducer = (state = [], action) => {
   switch (action.type) {
-    case 'NEW_WORD':
-      return [...state, action.data]
-    case 'UPDATE_WORDS':
-      const id = action.data.id
-      const updatedWord = { ...action.data }
-      return state.map(word => word.id !== id ? word : updatedWord)
-    case 'INIT_WORDS':
-      return action.data
-    default:
-      return state
+  case 'NEW_WORD':
+    return [...state, action.data]
+  case 'UPDATE_WORDS': {
+    const id = action.data.id
+    const updatedWord = { ...action.data }
+    return state.map(word => word.id !== id ? word : updatedWord)
+  }
+  case 'INIT_WORDS':
+    return action.data
+  default:
+    return state
   }
 }
 
-export const addWord = (content) => {
+export const addWord = (word) => {
   return {
     type: 'NEW_WORD',
-    data: content
+    data: word
   }
 }
 
-export const updateWords = (content) => {
+export const updateWords = (word) => {
   return {
     type: 'UPDATE_WORDS',
-    data: content
+    data: word
   }
 }
 
-export const initializeFirstPage = () => {
+export const initializeFilteredWords = (filter) => {
   return async dispatch => {
-    const words = await wordService.getFirstPage()
+    const words = await wordService.getFiltered(filter)
     dispatch({
       type: 'INIT_WORDS',
       data: words

@@ -20,7 +20,7 @@
   "CloseButton": "Close",
   "PreviousButton": "Previous",
   "NextButton": "Next",
-  "EditWordModalTitle": "Edit Word",
+  "WordModalTitle": "Word",
   "DictionaryTitle": "Dictionary",
   "VocabularyAppName": "Vocabulary",
   "ChaptersLink": "Chapters",
@@ -28,7 +28,7 @@
   "LoginLink": "Login",
   "NewWord": "Add Word",
   "SubmitWordButton": "Save",
-  "ErrorWhenSaving": "An error occurred when saving the word. Please, try again.",
+  "ErrorWhenSaving": "An error occurred when saving the word.",
   "WordSavedSuccessfully": "The word was saved successfully.",
   "WordIsMissingMessage": "Please, provide word",
   "TranslationIsMissingMessage": "Please, provide translation",
@@ -89,5 +89,9 @@
   "EditChapterButton": "Edit",
   "EditingNotAllowed": "You are not allowed to edit this chapter",
   "CancelButton": "Cancel",
-  "SavingSucceeded": "Changes saved"
+  "SavingSucceeded": "Changes saved",
+  "Loading": "Loading...",
+  "WordExists": "The word exists",
+  "UnauthorizedMyVocabulary": "Please, login to access your vocabulary",
+  "Unauthorized": "Unauthorized"
 }

@@ -11,12 +11,12 @@ const emptyWord = {
 
 const wordReducer = (state = emptyWord, action) => {
   switch (action.type) {
-    case 'SET_WORD':
-      return { ...action.data }
-    case 'RESET_WORD':
-      return emptyWord
-    default:
-      return state
+  case 'SET_WORD':
+    return { ...action.data }
+  case 'RESET_WORD':
+    return emptyWord
+  default:
+    return state
   }
 }
 

@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row, Spinner } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 
 import ChapterForm from '../ChapterForm/ChapterForm'
@@ -11,8 +11,15 @@ import { initializeChapter } from '../../../reducers/chapterReducer'
 import chapterService from '../../../services/chapters'
 
 const EditChapter = (props) => {
+  const [loading, setLoading] = useState(false)
+
   useEffect(() => {
-    props.initializeChapter(props.id)
+    const fetchData = async () => {
+      setLoading(true)
+      await props.initializeChapter(props.id)
+      setLoading(false)
+    }
+    fetchData()
   }, [])
 
   const { t } = useTranslation()
@@ -29,7 +36,8 @@ const EditChapter = (props) => {
     event.preventDefault()
     const updatedChapter = {
       title: props.chapter.title,
-      body: props.chapter.body
+      body: props.chapter.body,
+      modified_by: props.user.id
     }
     try {
       await chapterService.update(props.chapter.id, updatedChapter)
@@ -54,7 +62,14 @@ const EditChapter = (props) => {
   const l = 8
   const s = 12
 
-  if (!props.chapter.id) {
+
+  if (loading) {
+    return (
+      <Spinner animation="border">
+        <span className="sr-only">{t('Loading')}</span>
+      </Spinner>
+    )
+  } else if (!props.chapter.id) {
     return null
   }
 

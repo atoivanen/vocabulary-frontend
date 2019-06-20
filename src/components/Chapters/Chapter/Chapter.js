@@ -1,11 +1,10 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Col, Row, Button, ButtonToolbar } from 'react-bootstrap'
+import { Col, Row, Button, ButtonToolbar, Spinner } from 'react-bootstrap'
 
 import './chapter.css'
 import Words from '../../Words/Words'
-import FormModal from '../../UI/FormModal/FormModal'
 import WordDetails from '../../Words/WordDetails/WordDetails'
 import Search from '../../Search/Search'
 import LearningForm from '../../Words/LearningForm/LearningForm'
@@ -33,6 +32,7 @@ import checkmark from '../../../images/checkmark-32.gif'
 import xMark from '../../../images/x-mark-32.gif'
 
 const Chapter = (props) => {
+  const [loading, setLoading] = useState(false)
   const [practicing, setPracticing] = useState(false)
   const [myTry, setMyTry] = useState('')
   const [solution, setSolution] = useState('')
@@ -43,7 +43,16 @@ const Chapter = (props) => {
   const { t } = useTranslation()
 
   useEffect(() => {
-    props.initializeChapter(props.id)
+    const fetchData = async () => {
+      setLoading(true)
+      try {
+        await props.initializeChapter(props.id)
+      } catch (error) {
+        console.log(error.response)
+      }
+      setLoading(false)
+    }
+    fetchData()
   }, [])
 
   useEffect(() => {
@@ -52,18 +61,14 @@ const Chapter = (props) => {
     }
   }, [])
 
-  if (!props.chapter.id) {
-    return null
-  }
-
   const showDetailsHandler = word => {
     props.setWord(word)
     props.openModal()
   }
 
   const closeDetailsHandler = () => {
-      props.resetWord()
-      props.closeModal()
+    props.resetWord()
+    props.closeModal()
   }
 
   const showNextHandler = (event) => {
@@ -77,9 +82,9 @@ const Chapter = (props) => {
 
     if (name === 'next') {
       newIndex = i === visibleWords.length - 1 ? 0 : i + 1
-     } else if (name === 'previous') {
+    } else if (name === 'previous') {
       newIndex = i === 0 ? visibleWords.length - 1 : i - 1
-     }
+    }
     props.resetWord()
     showDetailsHandler(visibleWords[newIndex])
   }
@@ -106,23 +111,18 @@ const Chapter = (props) => {
           await learningdataService.update(oldWord.id, learningdata)
           props.updateMyVocabulary(props.word)
         } catch (error) {
-          console.log(error.response.data)
-          props.displayNotification({
-            message: error.response.data.detail,
-            messageType: 'danger'
-          })
+          console.log(error.response)
         }
       } else {
         // create new
         try {
-          await learningdataService.create(learningdata)
-          props.addWordToMyVocabulary(props.word)
-        } catch (error) {
-          console.log(error.response.data)
-          props.displayNotification({
-            message: error.response.data.detail,
-            messageType: 'danger'
+          const newLearningdata = await learningdataService.create(learningdata)
+          props.addWordToMyVocabulary({
+            ...props.word,
+            id: newLearningdata.id
           })
+        } catch (error) {
+          console.log(error.response)
         }
       }
     }
@@ -168,7 +168,7 @@ const Chapter = (props) => {
         setSolution('')
         setDisabled(false)
         practiceNextHandler()
-      }, 3000)
+      }, 1000)
     }
   }
 
@@ -303,6 +303,19 @@ const Chapter = (props) => {
   const l = 8
   const r = 4
 
+  if (loading) {
+    return (
+      <Spinner animation="border">
+        <span className="sr-only">{t('Loading')}</span>
+      </Spinner>
+    )
+  } else if (!props.chapter.id) {
+    return null
+  } else if ((props.user.id !== props.chapter.created_by)
+              && !props.chapter.public) {
+    return <h2>{t('Unauthorized')}</h2>
+  }
+
   return (
     <Fragment>
       <Row>
@@ -333,12 +346,10 @@ const Chapter = (props) => {
               showDetails={showDetailsHandler}
               selectable="true"
               toggleChecked={toggleCheckedHandler} />
-            </div>
-          <FormModal
+          </div>
+          <WordDetails
             close={closeDetailsHandler}
-            showNext={showNextHandler}>
-            <WordDetails />
-          </FormModal>
+            showNext={showNextHandler} />
           <LearningForm
             word={props.word}
             myTry={myTry}
@@ -357,16 +368,16 @@ const Chapter = (props) => {
           <ButtonToolbar>
             {props.chapter.created_by === props.user.id && !props.chapter.public
               ? (<Button
-                  onClick={publishChapterHandler}>{t('PublishChapterButton')}
-                 </Button>
-                )
+                onClick={publishChapterHandler}>{t('PublishChapterButton')}
+              </Button>
+              )
               : null
             }
             {props.chapter.created_by === props.user.id
               ? (<Button
-                  href={`/edit/${props.chapter.id}`}>{t('EditChapterButton')}
-                 </Button>
-                )
+                href={`/edit/${props.chapter.id}`}>{t('EditChapterButton')}
+              </Button>
+              )
               : null
             }
           </ButtonToolbar>
@@ -374,11 +385,11 @@ const Chapter = (props) => {
         <Col lg={r} md={r} sm={r} xl={r} xs={r}>
           {props.chapter.created_by === props.user.id
             ? (<Button variant="danger"
-                disabled={nothingSelected}
-                onClick={removeWordsHandler}>
-                  {t('RemoveSelectedWordsButton')}
-               </Button>
-              )
+              disabled={nothingSelected}
+              onClick={removeWordsHandler}>
+              {t('RemoveSelectedWordsButton')}
+            </Button>
+            )
             : null
           }
         </Col>

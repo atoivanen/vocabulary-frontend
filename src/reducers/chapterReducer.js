@@ -2,29 +2,31 @@ import chapterService from '../services/chapters'
 
 const chapterReducer = (state = {}, action) => {
   switch (action.type) {
-    case 'SET_CHAPTER':
-      return action.data
-    case 'RESET_CHAPTER':
-      return {}
-    case 'PUBLISH_CHAPTER':
-      return { ...state, public: true }
-    case 'SET_TITLE':
-      return { ...state, title: action.data }
-    case 'SET_BODY':
-      return { ...state, body: action.data }
-    case 'REMOVE_WORD':
-      const i = state.words.findIndex(word => word.id === action.data.id)
-      const updatedWords = [...state.words]
-      updatedWords.splice(i, 1)
-      return { ...state, words: updatedWords }
-    case 'UPDATE_WORD':
-      const id = action.data.id
-      const updatedWordList = state.words.map(word =>
-        word.id !== id ? word : action.data
-      )
-      return { ...state, words: updatedWordList}
-    default:
-      return state
+  case 'SET_CHAPTER':
+    return action.data
+  case 'RESET_CHAPTER':
+    return {}
+  case 'PUBLISH_CHAPTER':
+    return { ...state, public: true }
+  case 'SET_TITLE':
+    return { ...state, title: action.data }
+  case 'SET_BODY':
+    return { ...state, body: action.data }
+  case 'REMOVE_WORD': {
+    const i = state.words.findIndex(word => word.id === action.data.id)
+    const updatedWords = [...state.words]
+    updatedWords.splice(i, 1)
+    return { ...state, words: updatedWords }
+  }
+  case 'UPDATE_WORD': {
+    const id = action.data.id
+    const updatedWordList = state.words.map(word =>
+      word.id !== id ? word : action.data
+    )
+    return { ...state, words: updatedWordList }
+  }
+  default:
+    return state
   }
 }
 

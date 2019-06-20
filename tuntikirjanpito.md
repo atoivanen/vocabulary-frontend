@@ -14,4 +14,6 @@
 | 13.6. | 7    | Sanojen poisto- ja valintatoiminnallisuus MyDictionary-komponentissa, APIn laajentaminen chapter-objektin osalta |
 | 14.6. | 5    | Sanojen poisto ja valinta Chapter-komponentissa, Chapter-komponentin tyylit, kappaleiden valinta Chapters-komponentissa |
 | 17.6. | 7    | NewChapter-komponentti |
-| 18.7. |      | EditChapter-komponentti |
+| 18.6. | 7    | EditChapter-komponentti, sanakirjadatan filtteröinti APIssa ja Dictionary-komponentissa |
+| 19.6. | 7    | pientä säätöä, backendin tekstiä analysoivien funktioiden korjailua |
+| 20.6. |      | Asennettu Eslint, virheet korjattu. |
