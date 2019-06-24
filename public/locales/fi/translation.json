@@ -94,5 +94,11 @@
   "UnauthorizedMyVocabulary": "Kirjaudu sisään, jotta voit tarkastella sanastoa",
   "Unauthorized": "Ei pääsyä",
   "WelcomeTitle": "Tervetuloa",
-  "WelcomeMessage": "Opettele ranskan sanoja Sanasto-sovelluksen avulla"
+  "WelcomeMessage": "Opettele ranskan sanoja Sanasto-sovelluksen avulla",
+  "AboutLink": "Tietoa",
+  "AboutTitle": "Tietoa Sanasto-sovelluksesta",
+  "AboutUsage": "Sanasto-sovellus on tarkoitettu ranskankielen sanavaraston laajentamiseen ja luetun ymmärtämisen kehittämiseen. Sitä voi käyttää kuten perinteisiä oppikirjoja: lukemalla <1>Lukemiston</1> tekstejä ja opettelemalla niihin liittyviä sanoja. Sovellus tarjoaa sanojen harjoittelutoiminnallisuuden opettelun avuksi.",
+  "AboutRegistering": "<0>Rekisteröitymällä käyttäjäksi</0> voit luoda uusia tekstejä lukemistoon ja julkaista niitä muiden luettaviksi. Kun olet kirjautunut sisään, harjoittelemasi sanat tallentuvat <2>Omaan sanastoon</2>, jossa voit edelleen kerrata näitä sanoja.",
+  "AboutGeneral": "Sanasto-sovellus on tehty Helsingin yliopiston Full Stack Open -kurssin harjoitustyönä. Sen käyttö on ilmaista eikä käyttäjistä kerätä henkilötietoja. Sovellusta ei ylläpidetä eikä kehitetä aktiivisesti.",
+  "AboutTechnical": "Sovelluksen tekniset tiedot löytyvät sen GitHub-repositorioista:"
 }

@@ -3,6 +3,7 @@
   position: fixed;
   left: 0;
   top: 30px;
+  opacity: 0.8;
 }
 .text {
   position: absolute;
@@ -30,6 +31,6 @@
   border-radius: 5px;
   background-color: white;
 }
-a {
+.linkText {
   color: black;
 }

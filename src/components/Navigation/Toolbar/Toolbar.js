@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Nav, Navbar } from 'react-bootstrap'
+import { Nav, Navbar, ButtonToolbar, Button } from 'react-bootstrap'
 
 const Toolbar = (props) => {
   const { t } = useTranslation()
@@ -23,20 +23,31 @@ const Toolbar = (props) => {
             : null
           }
         </Nav>
-        { props.user.username
-          ? (
-            <Nav>
-              <Navbar.Text>{props.user.username}</Navbar.Text>
-              <Nav.Link href="/logout">{t('LogoutLink')}</Nav.Link>
-            </Nav>
-          )
-          : (
-            <Nav>
-              <Nav.Link href="register">{t('RegisterLink')}</Nav.Link>
-              <Nav.Link href="/login">{t('LoginLink')}</Nav.Link>
-            </Nav>
-          )
-        }
+        <Nav>
+          { props.user.username
+            ? (
+              <Fragment>
+                <Navbar.Text>{props.user.username}</Navbar.Text>
+                <Nav.Link href="/logout">{t('LogoutLink')}</Nav.Link>
+              </Fragment>
+            )
+            : (
+              <Fragment>
+                <Nav.Link href="/register">{t('RegisterLink')}</Nav.Link>
+                <Nav.Link href="/login">{t('LoginLink')}</Nav.Link>
+              </Fragment>
+            )
+          }
+          <Nav.Link href="/about">{t('AboutLink')}</Nav.Link>
+          <ButtonToolbar>
+            <Button
+              variant="link"
+              onClick={() => props.changeLanguage('fi')}>FI</Button>
+            <Button
+              variant="link"
+              onClick={() => props.changeLanguage('en')}>EN</Button>
+          </ButtonToolbar>
+        </Nav>
       </Navbar.Collapse>
     </Navbar>
   )

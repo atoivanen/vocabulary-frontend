@@ -19,11 +19,11 @@ const FrontPage = () => {
         <div className="iconsBox">
           <a href="/chapters">
             <img className="icon" src={documents} alt="Chapters" />
-            <p>{t('ChaptersLink')}</p>
+            <p className="linkText">{t('ChaptersLink')}</p>
           </a>
           <a href="/dictionary">
             <img className="icon" src={literature} alt="Dictionary" />
-            <p>{t('DictionaryLink')}</p>
+            <p className="linkText">{t('DictionaryLink')}</p>
           </a>
         </div>
       </div>

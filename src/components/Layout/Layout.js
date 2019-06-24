@@ -7,7 +7,7 @@ import Notification from '../UI/Notification/Notification'
 const Layout = (props) => {
   return (
     <div>
-      <Toolbar />
+      <Toolbar changeLanguage={props.changeLanguage} />
       <Container>
         <Row>
           <Notification />

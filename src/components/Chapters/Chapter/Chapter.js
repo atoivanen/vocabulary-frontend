@@ -302,6 +302,7 @@ const Chapter = (props) => {
 
   const l = 8
   const r = 4
+  const s = 6
 
   if (loading) {
     return (
@@ -319,14 +320,14 @@ const Chapter = (props) => {
   return (
     <Fragment>
       <Row>
-        <Col lg={l} md={l} sm={l} xl={l} xs={l}>
+        <Col lg={l} md={s} sm={s} xl={l} xs={s}>
           <div id="chapter">
             <h1>{props.chapter.title}</h1>
             <p>{props.chapter.body}</p>
           </div>
         </Col>
-        <Col lg={r} md={r} sm={r} xl={r} xs={r}>
-          <h2>{t('VocabularyTitle')}</h2>
+        <Col lg={r} md={s} sm={s} xl={r} xs={s}>
+          <h2 id="vocabularyTitle">{t('VocabularyTitle')}</h2>
           <Search />
           <ButtonToolbar className="mp-2">
             <SelectButton
