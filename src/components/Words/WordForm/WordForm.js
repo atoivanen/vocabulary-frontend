@@ -5,7 +5,7 @@ import { Form, Button, ButtonToolbar, Modal } from 'react-bootstrap'
 
 import Notification from '../../UI/Notification/Notification'
 
-import { updateWords, addWord } from '../../../reducers/dictionaryReducer'
+import { updateDictionary, addWordToDictionary } from '../../../reducers/dictionaryReducer'
 import { setWord, resetWord } from '../../../reducers/wordReducer'
 import { displayNotification } from '../../../reducers/notificationReducer'
 import { openModal, closeModal } from '../../../reducers/modalReducer'
@@ -69,7 +69,7 @@ const WordForm = (props) => {
           )
           props.resetWord()
           props.closeModal()
-          props.updateWords(returnedWord)
+          props.updateDictionary(returnedWord)
           props.displayNotification({
             message: t('WordSavedSuccessfully'),
             messageType: 'success'
@@ -93,7 +93,7 @@ const WordForm = (props) => {
           props.resetWord()
           props.closeModal()
           props.newSearch(returnedWord.lemma)
-          props.addWord(returnedWord)
+          props.addWordToDictionary(returnedWord)
           props.displayNotification({
             message: t('WordSavedSuccessfully'),
             messageType: 'success'
@@ -224,8 +224,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  updateWords,
-  addWord,
+  updateDictionary,
+  addWordToDictionary,
   setWord,
   resetWord,
   displayNotification,

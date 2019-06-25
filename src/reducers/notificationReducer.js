@@ -32,7 +32,7 @@ export const displayNotification = (content) => {
       dispatch({
         type: 'RESET_NOTIFICATION'
       })
-    }, 3000)
+    }, 5000)
   }
 }
 

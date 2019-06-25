@@ -53,9 +53,9 @@ export const dictionaryWordsToShow = (words, search) => {
       || comparableTranslation.startsWith(comparableSearch))
   })
 
-  //const sortedWords = filteredWords.sort((a, b) => alphabeticalSort(a, b))
+  const sortedWords = filteredWords.sort((a, b) => alphabeticalSort(a, b))
 
-  return filteredWords
+  return sortedWords
 }
 
 export const vocabularyWordsToShow = (words, search) => {

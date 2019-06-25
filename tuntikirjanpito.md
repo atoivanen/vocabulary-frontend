@@ -17,4 +17,5 @@
 | 18.6. | 7    | EditChapter-komponentti, sanakirjadatan filtteröinti APIssa ja Dictionary-komponentissa |
 | 19.6. | 7    | pientä säätöä, backendin tekstiä analysoivien funktioiden korjailua |
 | 20.6. | 8    | Asennettu Eslint, virheet korjattu. Backendistä siivottu turha koodi pois. FrontPage-komponentti. |
-| 24.6. |      | About-komponentti, nappulat kielen vaihtamiseen. |
+| 24.6. | 6    | About-komponentti, nappulat kielen vaihtamiseen, yksikkötestejä. |
+| 25.6. |     | Lisää yksikkötestejä |

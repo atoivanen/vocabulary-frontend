@@ -21,7 +21,7 @@ const Login = (props) => {
       const token = await loginService.login({
         username, password
       })
-      const user = { username: username, token: token.token, id: token.id}
+      const user = { username: username, token: token.token, id: token.id }
       window.localStorage.setItem(
         'loggedVocabularyUser', JSON.stringify(user)
       )
@@ -52,14 +52,16 @@ const Login = (props) => {
               value={username}
               placeholder={t('Username')}
               name="Username"
+              id="usernameField"
               onChange={({ target }) => setUsername(target.value)} />
             <Form.Control
               type="password"
               value={password}
               placeholder={t('Password')}
               name="Password"
+              id="passwordField"
               onChange={({ target }) => setPassword(target.value)} />
-            <Button type="submit">{t('LoginButton')}</Button>
+            <Button id="loginButton" type="submit">{t('LoginButton')}</Button>
           </Form>
         </Col>
         <Col />

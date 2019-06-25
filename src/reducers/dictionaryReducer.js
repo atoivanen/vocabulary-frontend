@@ -16,14 +16,14 @@ const dictionaryReducer = (state = [], action) => {
   }
 }
 
-export const addWord = (word) => {
+export const addWordToDictionary = (word) => {
   return {
     type: 'NEW_WORD',
     data: word
   }
 }
 
-export const updateWords = (word) => {
+export const updateDictionary = (word) => {
   return {
     type: 'UPDATE_WORDS',
     data: word

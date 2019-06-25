@@ -73,7 +73,9 @@ const WordDetails = (props) => {
           </Form.Group>
           <Form.Group>
             <Form.Label>{t('TranslationLabel')}:</Form.Label>
-            <Form.Control readOnly value={props.word.translation} />
+            <Form.Control
+              readOnly
+              value={props.word.translation} />
           </Form.Group>
           <Form.Group>
             <Form.Label>{t('POSLabel')}:</Form.Label>

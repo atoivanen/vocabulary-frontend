@@ -100,5 +100,6 @@
   "AboutUsage": "Use the Vocabulary app to build your French-Finnish vocabulary and develop your reading comprehension. It can be used like traditional study books: reading <1>Chapters</1> and studying related words. The app offers functionality to help with learning words.",
   "AboutRegistering": "<0>Registering as a user</0> allows you to create new chapters and publish them for others to read. Also, when you practice words, they are saved to <2>My Vocabulary</2>.",
   "AboutGeneral": "The Vocabulary app has been made as part of the Full Stack Open course of the University of Helsinki. Its usage is free and personal information of users is not collected. The app is not actively developed or maintained.",
-  "AboutTechnical": "Technical details of the app can be found in its GitHub repositories:"
+  "AboutTechnical": "Technical details of the app can be found in its GitHub repositories:",
+  "ErrorWhenFetchingWords": "Could not get words from server"
 }

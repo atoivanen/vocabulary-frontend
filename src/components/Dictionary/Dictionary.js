@@ -13,6 +13,7 @@ import { createWord, setWord, resetWord } from '../../reducers/wordReducer'
 import { openModal, closeModal } from '../../reducers/modalReducer'
 import { isNew, isNotNew } from '../../reducers/newReducer'
 import { newSearch } from '../../reducers/searchReducer'
+import { displayNotification } from '../../reducers/notificationReducer'
 import { dictionaryWordsToShow as wordsToShow } from '../../helpers/helpers'
 
 const Dictionary = (props) => {
@@ -71,10 +72,19 @@ const Dictionary = (props) => {
   const searchWordHandler = async ({ target }) => {
     props.newSearch(target.value)
     if (target.value && filter !== target.value[0]) {
-      setLoading(true)
-      setFilter(target.value[0])
-      await props.initializeFilteredWords(target.value[0])
-      setLoading(false)
+      try {
+        setLoading(true)
+        setFilter(target.value[0])
+        await props.initializeFilteredWords(target.value[0])
+        setLoading(false)
+      } catch (error) {
+        console.log(error.response)
+        setLoading(false)
+        props.displayNotification({
+          message: t('ErrorWhenFetchingWords'),
+          messageType: 'danger'
+        })
+      }
     }
   }
 
@@ -142,7 +152,8 @@ const mapDispatchToProps = {
   openModal,
   closeModal,
   isNew,
-  isNotNew
+  isNotNew,
+  displayNotification
 }
 
 export default connect(

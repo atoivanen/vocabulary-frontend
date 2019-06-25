@@ -1,30 +1,21 @@
 import deepFreeze from 'deep-freeze'
 
-import searchReducer from './searchReducer'
+import searchReducer, { newSearch, resetSearch } from './searchReducer'
 
 describe('searchReducer', () => {
-  test('returns new state with action NEW_SEARCH', () => {
+  test('returns new state with function newSearch', () => {
     const state = []
-    const action = {
-      type: 'NEW_SEARCH',
-      data: 'test'
-    }
-
     deepFreeze(state)
-    const newState = searchReducer(state, action)
+    const newState = searchReducer(state, newSearch('test'))
 
-    expect(newState.length).toContainEqual(action.data)
+    expect(newState).toBe('test')
   })
 
-  test('returns new state with action RESET', () => {
+  test('returns empty state with function resetSearch', () => {
     const state = 'test'
-    const action = {
-      type: 'RESET'
-    }
-
     deepFreeze(state)
-    const newState = searchReducer(state, action)
+    const newState = searchReducer(state, resetSearch())
 
-    expect(newState).toContainEqual('')
+    expect(newState).toBe('')
   })
 })
