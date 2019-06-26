@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { getConfig } from '../helpers/helpers'
 
-const baseUrl = 'http://localhost:8000/api/learningdata'
+const baseUrl = '/api/learningdata'
 
 const create = async (newObject) => {
   const config = getConfig()

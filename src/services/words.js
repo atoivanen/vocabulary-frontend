@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { getConfig } from '../helpers/helpers'
 
-const baseUrl = 'http://localhost:8000/api/words'
+const baseUrl = '/api/words'
 
 const getOnePage = async (pageUrl=baseUrl) => {
   const response = await axios.get(pageUrl)

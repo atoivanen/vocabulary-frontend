@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { getConfig } from '../helpers/helpers'
 
-const baseUrl = 'http://localhost:8000/api/users'
+const baseUrl = '/api/users'
 
 const getOne = async (id) => {
   const config = getConfig()

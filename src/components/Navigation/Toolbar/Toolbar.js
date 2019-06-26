@@ -22,6 +22,7 @@ const Toolbar = (props) => {
             )
             : null
           }
+          <Nav.Link href="/about">{t('AboutLink')}</Nav.Link>
         </Nav>
         <Nav>
           { props.user.username
@@ -38,7 +39,6 @@ const Toolbar = (props) => {
               </Fragment>
             )
           }
-          <Nav.Link href="/about">{t('AboutLink')}</Nav.Link>
           <ButtonToolbar>
             <Button
               variant="link"

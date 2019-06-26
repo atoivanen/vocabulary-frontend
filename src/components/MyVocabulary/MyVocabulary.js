@@ -263,14 +263,6 @@ const MyVocabulary = (props) => {
       <Row>
         <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
           <h1>{t('MyVocabularyTitle')}</h1>
-          {count > 0
-            ? (
-              <Trans i18nKey="NumberOfWordsLearned">
-                You know {{ count }} word!
-              </Trans>
-            )
-            : null
-          }
           <Search />
           <ButtonToolbar className="mp-2">
             <SelectButton

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { getConfig } from '../helpers/helpers'
 
-const baseUrl = 'http://localhost:8000/api/wordproperties'
+const baseUrl = '/api/wordproperties'
 
 const remove = async (id) => {
   const config = getConfig()
