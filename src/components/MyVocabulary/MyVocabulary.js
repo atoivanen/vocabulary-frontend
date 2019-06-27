@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { Col, Row, Button, ButtonToolbar, Spinner } from 'react-bootstrap'
 
 import Words from '../Words/Words'
@@ -45,8 +45,6 @@ const MyVocabulary = (props) => {
     }
     fetchData()
   }, [])
-
-  const count = props.myVocabulary.filter(w => w.learned).length
 
   const showDetailsHandler = word => {
     props.setWord(word)

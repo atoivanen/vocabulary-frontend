@@ -1,5 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Col, Row, Button, ButtonToolbar, Spinner } from 'react-bootstrap'
 
@@ -12,6 +13,7 @@ import SelectButton from '../../UI/SelectButton/SelectButton'
 import {
   initializeChapter,
   publishChapter,
+  resetChapter,
   updateChapterWord,
   removeChapterWord
 } from '../../../reducers/chapterReducer'
@@ -300,6 +302,25 @@ const Chapter = (props) => {
     }
   }
 
+  const removeChapterHandler = async () => {
+    try {
+      await chapterService.remove(props.chapter.id)
+      props.resetChapter()
+      const msg = t('RemovalSucceeded')
+      props.displayNotification({
+        message: `${msg} ${props.chapter.title}`,
+        messageType: 'success'
+      })
+      props.history.push('/chapters')
+    } catch (error) {
+      console.log(error.response)
+      props.displayNotification({
+        message: t('RemovalFailed'),
+        messageType: 'danger'
+      })
+    }
+  }
+
   const l = 8
   const r = 4
   const s = 6
@@ -375,9 +396,16 @@ const Chapter = (props) => {
               : null
             }
             {props.chapter.created_by === props.user.id
-              ? (<Button
-                href={`/edit/${props.chapter.id}`}>{t('EditChapterButton')}
-              </Button>
+              ? (<Fragment>
+                <Button
+                  href={`/edit/${props.chapter.id}`}>{t('EditChapterButton')}
+                </Button>
+                <Button
+                  variant="danger"
+                  onClick={removeChapterHandler}>
+                  {t('RemoveButton')}
+                </Button>
+              </Fragment>
               )
               : null
             }
@@ -412,6 +440,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   initializeChapter,
   publishChapter,
+  resetChapter,
   updateChapterWord,
   removeChapterWord,
   initializeMyVocabulary,
@@ -425,7 +454,9 @@ const mapDispatchToProps = {
   newSearch
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Chapter)
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Chapter)
+)

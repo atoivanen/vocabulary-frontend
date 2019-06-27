@@ -20,7 +20,7 @@ const About = () => {
         <p>
           <Trans i18nKey="AboutRegistering">
             <Link to="/register">Register</Link> link and why to register.
-            <Link to="myvocabulary">My Vocabulary</Link>.
+            <Link to="/myvocabulary">My Vocabulary</Link>.
           </Trans>
         </p>
         <p>
