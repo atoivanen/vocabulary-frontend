@@ -373,7 +373,9 @@ const Chapter = (props) => {
           </div>
           <WordDetails
             close={closeDetailsHandler}
-            showNext={showNextHandler} />
+            showNext={showNextHandler}
+            displayToken
+            edit={props.chapter.created_by === props.user.id} />
           <LearningForm
             word={props.word}
             myTry={myTry}

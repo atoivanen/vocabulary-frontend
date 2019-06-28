@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Form, Modal, Button, ButtonToolbar } from 'react-bootstrap'
+
+import Notification from '../../UI/Notification/Notification'
+import { setWord, resetWord } from '../../../reducers/wordReducer'
+import { updateChapterWord, removeChapterWord } from '../../../reducers/chapterReducer'
+import { displayNotification } from '../../../reducers/notificationReducer'
+import chapterWordService from '../../../services/chapterWords'
 
 const WordDetails = (props) => {
   const { t } = useTranslation()
@@ -9,10 +15,6 @@ const WordDetails = (props) => {
   if (!props.word) {
     return null
   }
-
-  const wordForms = props.word.token
-    ? `${props.word.lemma} (${props.word.token})`
-    : props.word.lemma
 
   let pos
   if (!props.word.pos) {
@@ -52,12 +54,49 @@ const WordDetails = (props) => {
     gender = t('MasculineOption')
   }
 
-  const displayGender = props.word.pos === 'NOUN'
-    ? (<Form.Group>
-      <Form.Label>{t('GenderLabel')}:</Form.Label>
-      <Form.Control readOnly value={gender} />
-    </Form.Group>)
-    : null
+  const tokenChangedHandler = ({ target }) => {
+    props.setWord({ ...props.word, token: target.value })
+  }
+
+  const saveWordHandler = async (event) => {
+    event.preventDefault()
+    const wordproperties = { token: props.word.token }
+    try {
+      await chapterWordService.update(props.word.id, wordproperties)
+      props.updateChapterWord(props.word)
+      props.close()
+      props.displayNotification({
+        message: t('WordSavedSuccessfully'),
+        messageType: 'success'
+      })
+    } catch (error) {
+      console.log(error.response)
+      props.displayNotification({
+        message: t('ErrorWhenSaving'),
+        messageType: 'danger'
+      })
+    }
+  }
+
+  const removeWordHandler = async () => {
+    try {
+      await chapterWordService.remove(props.word.id)
+      props.removeChapterWord(props.word)
+      props.close()
+      const msg = t('RemovalSucceeded')
+      props.displayNotification({
+        message: `${msg} ${props.word.lemma}`,
+        messageType: 'success'
+      })
+      props.resetWord()
+    } catch (error) {
+      console.log(error.response)
+      props.displayNotification({
+        message: t('RemovalFailed'),
+        messageType: 'danger'
+      })
+    }
+  }
 
   return (
     <Modal show={props.modal} onHide={props.close}>
@@ -66,30 +105,64 @@ const WordDetails = (props) => {
       </Modal.Header>
 
       <Modal.Body>
-        <Form>
+        <Form onSubmit={saveWordHandler}>
+          <Notification />
           <Form.Group>
             <Form.Label>{t('WordLabel')}:</Form.Label>
-            <Form.Control readOnly value={wordForms} />
+            <Form.Control readOnly value={props.word.lemma} />
           </Form.Group>
+          { props.displayToken
+            ? (<Fragment>
+              <Form.Group>
+                <Form.Label>{t('TokenLabel')}:</Form.Label>
+                <Form.Control
+                  type="text"
+                  readOnly={!props.edit}
+                  value={props.word.token}
+                  onChange={(event) => tokenChangedHandler(event)} />
+              </Form.Group>
+            </Fragment>
+            )
+            : null
+          }
           <Form.Group>
             <Form.Label>{t('TranslationLabel')}:</Form.Label>
             <Form.Control
+              type="text"
               readOnly
               value={props.word.translation} />
           </Form.Group>
           <Form.Group>
             <Form.Label>{t('POSLabel')}:</Form.Label>
-            <Form.Control readOnly value={pos} />
+            <Form.Control type="text" readOnly value={pos} />
           </Form.Group>
-          {displayGender}
-          <label>
-            <input
-              type="checkbox"
-              checked={props.word.learned ? props.word.learned : false}
-              readOnly
-              id="learned"/>
-            {t('LearnedLabel')}
-          </label>
+          { props.word.pos === 'NOUN'
+            ? (<Form.Group>
+              <Form.Label>{t('GenderLabel')}:</Form.Label>
+              <Form.Control type="text" readOnly value={gender} />
+            </Form.Group>)
+            : null
+          }
+          <Form.Group>
+            <label>
+              <input
+                type="checkbox"
+                checked={props.word.learned ? props.word.learned : false}
+                readOnly
+                id="learned"/>
+              {t('LearnedLabel')}
+            </label>
+          </Form.Group>
+          { props.edit
+            ? (<ButtonToolbar className="float-left">
+              <Button type="submit">{t('SubmitWordButton')}</Button>
+              <Button
+                variant="danger"
+                onClick={removeWordHandler}>{t('RemoveButton')}</Button>
+            </ButtonToolbar>
+            )
+            : null
+          }
           <ButtonToolbar className="float-right">
             <Button
               as="input"
@@ -115,6 +188,15 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = {
+  setWord,
+  resetWord,
+  updateChapterWord,
+  removeChapterWord,
+  displayNotification
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(WordDetails)

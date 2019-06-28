@@ -2,7 +2,8 @@ import deepFreeze from 'deep-freeze'
 
 import dictionaryReducer, {
   addWordToDictionary,
-  updateDictionary
+  updateDictionary,
+  removeWordFromDictionary
 } from './dictionaryReducer'
 
 describe('dictionaryReducer', () => {
@@ -23,5 +24,14 @@ describe('dictionaryReducer', () => {
 
     expect(newState[0].lemma).toBe(word.lemma)
     expect(newState[0].translation).toBe(word.translation)
+  })
+
+  test('removes word with function removeWordFromDictionary', () => {
+    const state = [{ id: 1, lemma: 'je', translation: 'minä' }]
+    const word = { id: 1 }
+    deepFreeze(state)
+    const newState = dictionaryReducer(state, removeWordFromDictionary(word))
+
+    expect(newState).toEqual([])
   })
 })

@@ -5,7 +5,11 @@ import { Form, Button, ButtonToolbar, Modal } from 'react-bootstrap'
 
 import Notification from '../../UI/Notification/Notification'
 
-import { updateDictionary, addWordToDictionary } from '../../../reducers/dictionaryReducer'
+import {
+  updateDictionary,
+  addWordToDictionary,
+  removeWordFromDictionary
+} from '../../../reducers/dictionaryReducer'
 import { setWord, resetWord } from '../../../reducers/wordReducer'
 import { displayNotification } from '../../../reducers/notificationReducer'
 import { openModal, closeModal } from '../../../reducers/modalReducer'
@@ -123,6 +127,26 @@ const WordForm = (props) => {
     props.setWord(updatedWord)
   }
 
+  const deleteWordHandler = async () => {
+    try {
+      await wordService.remove(props.word.id)
+      props.removeWordFromDictionary(props.word)
+      const msg = t('RemovalSucceeded')
+      props.displayNotification({
+        message: `${msg} ${props.word.lemma}`,
+        messageType: 'success'
+      })
+      props.resetWord()
+      props.close()
+    } catch (error) {
+      console.log(error.response)
+      props.displayNotification({
+        message: t('RemovalFailed'),
+        messageType: 'danger'
+      })
+    }
+  }
+
   const pos = props.word.pos ? props.word.pos : ''
   const gender = props.word.gender ? props.word.gender : ''
 
@@ -189,7 +213,15 @@ const WordForm = (props) => {
             </Form.Control>
           </Form.Group>
           {props.user.id
-            ? (<Button type="submit">{t('SubmitWordButton')}</Button>)
+            ? (<ButtonToolbar className="float-left">
+              <Button type="submit">{t('SubmitWordButton')}</Button>
+              {props.user.id === props.word.created_by
+                ? <Button
+                  variant="danger"
+                  onClick={deleteWordHandler}>{t('RemoveButton')}</Button>
+                : null
+              }
+            </ButtonToolbar>)
             : null
           }
           {props.showNextAllowed
@@ -226,6 +258,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   updateDictionary,
   addWordToDictionary,
+  removeWordFromDictionary,
   setWord,
   resetWord,
   displayNotification,

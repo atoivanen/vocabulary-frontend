@@ -9,6 +9,12 @@ const dictionaryReducer = (state = [], action) => {
     const updatedWord = { ...action.data }
     return state.map(word => word.id !== id ? word : updatedWord)
   }
+  case 'DELETE_WORD': {
+    const i = state.findIndex(word => word.id === action.data.id)
+    const updatedDictionary = [...state]
+    updatedDictionary.splice(i, 1)
+    return updatedDictionary
+  }
   case 'INIT_WORDS':
     return action.data
   default:
@@ -19,6 +25,13 @@ const dictionaryReducer = (state = [], action) => {
 export const addWordToDictionary = (word) => {
   return {
     type: 'NEW_WORD',
+    data: word
+  }
+}
+
+export const removeWordFromDictionary = (word) => {
+  return {
+    type: 'DELETE_WORD',
     data: word
   }
 }

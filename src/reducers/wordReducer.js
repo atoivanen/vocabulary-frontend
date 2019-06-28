@@ -5,6 +5,7 @@ const emptyWord = {
   translation: '',
   pos: 'ADJ',
   gender: '',
+  token: '',
   source_lang,
   target_lang
 }

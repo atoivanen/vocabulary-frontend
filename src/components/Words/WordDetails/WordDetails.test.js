@@ -8,6 +8,7 @@ import thunk from 'redux-thunk'
 import WordDetails from './WordDetails'
 import wordReducer, { setWord } from '../../../reducers/wordReducer'
 import modalReducer, { openModal } from '../../../reducers/modalReducer'
+import notificationReducer from '../../../reducers/notificationReducer'
 
 afterEach(cleanup)
 
@@ -23,7 +24,8 @@ test('renders content', () => {
 
   const reducer = combineReducers({
     word: wordReducer,
-    modal: modalReducer
+    modal: modalReducer,
+    notification: notificationReducer
   })
 
   const store = createStore(reducer, applyMiddleware(thunk))
@@ -37,7 +39,7 @@ test('renders content', () => {
     </Provider>
   )
 
-  const wordInput = component.getByDisplayValue('écrire (écris)')
+  const wordInput = component.getByDisplayValue('écrire')
   expect(wordInput).toBeDefined()
 
   const translationInput = component.getByDisplayValue('kirjoittaa, laatia')
