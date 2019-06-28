@@ -10,6 +10,7 @@ import WordDetails from '../../Words/WordDetails/WordDetails'
 import Search from '../../Search/Search'
 import LearningForm from '../../Words/LearningForm/LearningForm'
 import SelectButton from '../../UI/SelectButton/SelectButton'
+import ChapterWordForm from '../../Words/ChapterWordForm/ChapterWordForm'
 import {
   initializeChapter,
   publishChapter,
@@ -41,6 +42,7 @@ const Chapter = (props) => {
   const [check, setCheck] = useState(null)
   const [disabled, setDisabled] = useState(false)
   const [nothingSelected, setNothingSelected] = useState(true)
+  const [modal, setModal] = useState(false)
 
   const { t } = useTranslation()
 
@@ -413,11 +415,18 @@ const Chapter = (props) => {
         </Col>
         <Col lg={r} md={r} sm={r} xl={r} xs={r}>
           {props.chapter.created_by === props.user.id
-            ? (<Button variant="danger"
-              disabled={nothingSelected}
-              onClick={removeWordsHandler}>
-              {t('RemoveSelectedWordsButton')}
-            </Button>
+            ? (<Fragment>
+              <ChapterWordForm modal={modal} close={() => setModal(false)} />
+              <Button
+                onClick={() => setModal(true)}>
+                {t('AddWordFromDictionaryButton')}
+              </Button>
+              <Button variant="danger"
+                disabled={nothingSelected}
+                onClick={removeWordsHandler}>
+                {t('RemoveSelectedWordsButton')}
+              </Button>
+            </Fragment>
             )
             : null
           }

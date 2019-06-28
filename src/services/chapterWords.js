@@ -18,4 +18,10 @@ const removeMany = async (ids) => {
   return responses.map(response => response.data)
 }
 
-export default { remove, removeMany }
+const create = async (newObject) => {
+  const config = getConfig()
+  const response = await axios.post(`${baseUrl}/`, newObject, config)
+  return response.data
+}
+
+export default { remove, removeMany, create }

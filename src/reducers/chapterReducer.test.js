@@ -5,6 +5,7 @@ import chapterReducer, {
   resetChapter,
   updateChapterWord,
   removeChapterWord,
+  addChapterWord,
   publishChapter,
   setTitle,
   setBody
@@ -46,6 +47,15 @@ describe('chapterReducer', () => {
     const newState = chapterReducer(state, removeChapterWord(word))
 
     expect(newState.words).toEqual([])
+  })
+
+  test('adds word with function addChapterWord', () => {
+    const state = { id: 1, title: 'test', words: [{ id: 1, lemma: 'test' }] }
+    const word = { id: 2, lemma: 'test2' }
+    deepFreeze(state)
+    const newState = chapterReducer(state, addChapterWord(word))
+
+    expect(newState.words.length).toBe(2)
   })
 
   test('sets value of public to true with function publishChapter', () => {

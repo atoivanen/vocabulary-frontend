@@ -5,10 +5,7 @@ import { Col, Row, Button, Form, Spinner } from 'react-bootstrap'
 
 import Words from '../Words/Words'
 import WordForm from '../Words/WordForm/WordForm'
-import {
-  initializeWords,
-  initializeFilteredWords
-} from '../../reducers/dictionaryReducer'
+import { initializeFilteredWords } from '../../reducers/dictionaryReducer'
 import { createWord, setWord, resetWord } from '../../reducers/wordReducer'
 import { openModal, closeModal } from '../../reducers/modalReducer'
 import { isNew, isNotNew } from '../../reducers/newReducer'
@@ -143,7 +140,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  initializeWords,
   initializeFilteredWords,
   createWord,
   setWord,

@@ -30,6 +30,13 @@ export const updateDictionary = (word) => {
   }
 }
 
+export const setDictionary = (words) => {
+  return {
+    type: 'INIT_WORDS',
+    data: words
+  }
+}
+
 export const initializeFilteredWords = (filter) => {
   return async dispatch => {
     const words = await wordService.getFiltered(filter)

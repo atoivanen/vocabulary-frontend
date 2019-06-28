@@ -104,5 +104,10 @@
   "ErrorWhenFetchingWords": "Sanoja ei voitu hakea palvelimelta",
   "RemoveButton": "Poista",
   "RemovalSucceeded": "Poistettiin",
-  "RemovalFailed": "Poisto epäonnistui"
+  "RemovalFailed": "Poisto epäonnistui",
+  "AddWordFromDictionaryButton": "Lisää sanakirjasta",
+  "AddWordToVocabulary": "Lisää sanastoon",
+  "WordForms": "Taivutusmuodot",
+  "AddedWord": "Lisättiin sana",
+  "ChooseWordFromDictionary": "Et voi lisätä tätä sanaa. Syötä vähintään kaksi kirjainta Sana-kenttään, jotta saat näkyviin vaihtoehdot."
 }

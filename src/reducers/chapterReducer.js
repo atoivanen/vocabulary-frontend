@@ -18,6 +18,14 @@ const chapterReducer = (state = {}, action) => {
     updatedWords.splice(i, 1)
     return { ...state, words: updatedWords }
   }
+  case 'ADD_WORD': {
+    const initialWord = {
+      ...action.data,
+      learned: false,
+      selected: false
+    }
+    return { ...state, words: state.words.concat(initialWord) }
+  }
   case 'UPDATE_WORD': {
     const id = action.data.id
     const updatedWordList = state.words.map(word =>
@@ -55,6 +63,13 @@ export const resetChapter = () => {
 export const updateChapterWord = (word) => {
   return {
     type: 'UPDATE_WORD',
+    data: word
+  }
+}
+
+export const addChapterWord = (word) => {
+  return {
+    type: 'ADD_WORD',
     data: word
   }
 }
