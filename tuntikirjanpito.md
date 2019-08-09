@@ -21,4 +21,4 @@
 | 25.6. | 8    | Lisää yksikkötestejä, sisällön kehittämistä |
 | 26.6. | 8    | Sovelluksen deployaus Herokuun, sisällön kehittämistä |
 | 27.6. | 7    | Tuotantoversion testausta ja bugien korjailua, poistotoiminnallisuus Chapter-komponenttiin, sanojen lisäys sanakirjasta -toiminnallisuuden toteutusta |
-| 28.6. |     | Sanojen lisäys sanakirjasta -toiminnallisuuden toteutusta, sanakirjan yksittäisen sanan poisto, sanaston yksittäisen sanan poisto |
+| 28.6. | 7    | Sanojen lisäys sanakirjasta -toiminnallisuuden toteutusta, sanakirjan yksittäisen sanan poisto, sanaston yksittäisen sanan poisto |

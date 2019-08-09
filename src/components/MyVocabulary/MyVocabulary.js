@@ -120,7 +120,7 @@ const MyVocabulary = (props) => {
 
   const checkWord = (event) => {
     event.preventDefault()
-    if (props.word.lemma === myTry) {
+    if (props.word.lemma.toLowerCase() === myTry.toLowerCase()) {
       setCheck(checkmark)
       const updatedWord = { ...props.word }
       updatedWord.learned = true

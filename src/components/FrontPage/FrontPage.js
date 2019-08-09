@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Row } from 'react-bootstrap'
 
 import './frontPage.css'
-import bookPicture from '../../images/blur-data-definition-261779.jpg'
+import bookPicture from '../../images/blur-data-definition-261779.gif'
 import documents from '../../images/documents-128.gif'
 import literature from '../../images/literature-128.gif'
 
