@@ -33,4 +33,7 @@
 }
 .linkText {
   color: black;
+  background-color: white;
+  display: inline-block;
+  border-radius: 5px;
 }
