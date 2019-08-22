@@ -22,11 +22,9 @@ const wordReducer = (state = emptyWord, action) => {
 }
 
 export const createWord = () => {
-  const id = Number((Math.random() * 1000000).toFixed(0))
-  const initialWord = { id, ...emptyWord }
   return {
     type: 'SET_WORD',
-    data: initialWord
+    data: emptyWord
   }
 }
 
