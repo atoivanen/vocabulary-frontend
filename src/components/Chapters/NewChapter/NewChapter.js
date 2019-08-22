@@ -48,10 +48,19 @@ const NewChapter = (props) => {
     } catch (error) {
       setAnalyzing(false)
       console.log(error.response)
-      props.displayNotification({
-        message: t('ChapterCreationFailed'),
-        messageType: 'danger'
-      })
+      if (error.response.status === 503) {
+        props.displayNotification({
+          message: t('ChapterCreationFailedMemoryLimitation'),
+          messageType: 'danger'
+        })
+        props.history.push('/chapters/')
+      }
+      else {
+        props.displayNotification({
+          message: t('ChapterCreationFailed'),
+          messageType: 'danger'
+        })
+      }
     }
   }
 
