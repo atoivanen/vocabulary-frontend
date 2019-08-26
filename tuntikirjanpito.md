@@ -24,3 +24,4 @@
 | 28.6. | 7    | Sanojen lisäys sanakirjasta -toiminnallisuuden toteutusta, sanakirjan yksittäisen sanan poisto, sanaston yksittäisen sanan poisto |
 | 9.8.  | 1    | Pieniä korjauksia |
 | 22.8. | 5    | Lisätty virheenkäsittely tilanteeseen, jossa palvelimella ei ole tarpeeksi muistia spacyn pyörittämiseen. Heroku-ongelmien selvittelyä. |
+| 23.8. | 6    | Kopioitaessa tietokantaa kehitysympäristöstä Herokuun, ID:t kopioituvat myös ja aiheuttavat ongelmia automaattiseen ID:n generointiin palvelimella. Yritin tähän löytää ratkaisua, mutta en onnistunut. |

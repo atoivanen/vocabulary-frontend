@@ -27,13 +27,29 @@ const alphabeticalSort = (a, b) => {
   return 0
 }
 
+const lengthSort = (a, b) => {
+  const wordA = makeComparable(a.lemma)
+  const wordB = makeComparable(b.lemma)
+  if (wordA.length < wordB.length) {
+    return -1
+  }
+  if (wordA < wordB) {
+    return -1
+  }
+  if (wordA > wordB) {
+    return 1
+  }
+  return 0
+}
+
 export const wordsToShow = (words, search) => {
+  if (!search) {
+    return words.sort((a, b) => alphabeticalSort(a, b))
+  }
   const filteredWords = words.filter(word => {
     const comparableLemma = makeComparable(word.lemma)
-    const comparableTranslation = makeComparable(word.translation)
     const comparableSearch = makeComparable(search)
-    return (comparableLemma.startsWith(comparableSearch)
-      || comparableTranslation.startsWith(comparableSearch))
+    return (comparableLemma.startsWith(comparableSearch))
   })
 
   const sortedWords = filteredWords.sort((a, b) => alphabeticalSort(a, b))
@@ -47,10 +63,8 @@ export const dictionaryWordsToShow = (words, search) => {
   }
   const filteredWords = words.filter(word => {
     const comparableLemma = makeComparable(word.lemma)
-    const comparableTranslation = makeComparable(word.translation)
     const comparableSearch = makeComparable(search)
-    return (comparableLemma.startsWith(comparableSearch)
-      || comparableTranslation.startsWith(comparableSearch))
+    return (comparableLemma.startsWith(comparableSearch))
   })
 
   const sortedWords = filteredWords.sort((a, b) => alphabeticalSort(a, b))
@@ -59,19 +73,32 @@ export const dictionaryWordsToShow = (words, search) => {
 }
 
 export const vocabularyWordsToShow = (words, search) => {
-  const filteredWords = words.filter(word => {
+  if (!search) {
+    return words.sort((a, b) => alphabeticalSort(a, b))
+  }
+
+  const filteredByStartsWith = words.filter(word => {
     const comparableLemma = makeComparable(word.lemma)
-    const comparableTranslation = makeComparable(word.translation)
     const comparableToken = makeComparable(word.token)
     const comparableSearch = makeComparable(search)
-    return (comparableLemma.startsWith(comparableSearch)
-      || comparableTranslation.startsWith(comparableSearch)
-      || comparableToken.includes(comparableSearch))
+
+    return comparableLemma.startsWith(comparableSearch)
+      || comparableToken.startsWith(comparableSearch)
   })
 
-  const sortedWords = filteredWords.sort((a, b) => alphabeticalSort(a, b))
+  const filteredByIncludes = words.filter(word => {
+    const comparableLemma = makeComparable(word.lemma)
+    const comparableToken = makeComparable(word.token)
+    const comparableSearch = makeComparable(search)
 
-  return sortedWords
+    return comparableLemma.includes(comparableSearch)
+      || comparableToken.includes(comparableSearch)
+  })
+
+  const sortedA = filteredByStartsWith.sort((a, b) => lengthSort(a, b))
+  const sortedB = filteredByIncludes.sort((a, b) => lengthSort(a, b))
+
+  return [...new Set([...sortedA, ...sortedB])]
 }
 
 export const getConfig = () => {
