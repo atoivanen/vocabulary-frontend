@@ -43,6 +43,7 @@ const Chapter = (props) => {
   const [disabled, setDisabled] = useState(false)
   const [nothingSelected, setNothingSelected] = useState(true)
   const [modal, setModal] = useState(false)
+  const [wordsToPractice, setWordsToPractice] = useState([])
 
   const { t } = useTranslation()
 
@@ -93,12 +94,6 @@ const Chapter = (props) => {
     showDetailsHandler(visibleWords[newIndex])
   }
 
-  const setRandomWordToPractice = () => {
-    const wordsToPractice = props.chapter.words.filter(w => w.selected)
-    const randomIndex = Math.floor(Math.random() * wordsToPractice.length)
-    props.setWord(wordsToPractice[randomIndex])
-  }
-
   const saveWordToMyVocabulary = async () => {
     if (props.user.id && props.word.word_id) {
       const learningdata = {
@@ -132,8 +127,25 @@ const Chapter = (props) => {
     }
   }
 
+  const setNewWordToPractice = () => {
+    if (wordsToPractice.length === 0) {
+      const selectedWords = props.chapter.words.filter(w => w.selected)
+      const randomIndex = Math.floor(Math.random() * selectedWords.length)
+      props.setWord(selectedWords[randomIndex])
+      selectedWords.splice(randomIndex, 1)
+      setWordsToPractice(selectedWords)
+    }
+    else {
+      const randomIndex = Math.floor(Math.random() * wordsToPractice.length)
+      props.setWord(wordsToPractice[randomIndex])
+      const newWordsToPractice = [...wordsToPractice]
+      newWordsToPractice.splice(randomIndex, 1)
+      setWordsToPractice(newWordsToPractice)
+    }
+  }
+
   const practiceWordsHandler = () => {
-    setRandomWordToPractice()
+    setNewWordToPractice()
     props.newSearch('   ')
     setPracticing(true)
   }
@@ -145,6 +157,7 @@ const Chapter = (props) => {
     setCheck(null)
     setSolution('')
     props.newSearch('')
+    setWordsToPractice([])
     setPracticing(false)
   }
 
@@ -153,7 +166,7 @@ const Chapter = (props) => {
     setMyTry('')
     setCheck(null)
     setSolution('')
-    setRandomWordToPractice()
+    setNewWordToPractice()
   }
 
   const checkWordHandler = (event) => {

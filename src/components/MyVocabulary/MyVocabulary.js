@@ -30,6 +30,7 @@ const MyVocabulary = (props) => {
   const [check, setCheck] = useState(null)
   const [disabled, setDisabled] = useState(false)
   const [nothingSelected, setNothingSelected] = useState(true)
+  const [wordsToPractice, setWordsToPractice] = useState([])
 
   const { t } = useTranslation()
 
@@ -70,33 +71,45 @@ const MyVocabulary = (props) => {
     showDetailsHandler(props.visibleWords[newIndex])
   }
 
-  const setRandomWordToPractice = () => {
-    const wordsToPractice = props.myVocabulary.filter(w => w.selected)
-    const randomIndex = Math.floor(Math.random() * wordsToPractice.length)
-    props.setWord(wordsToPractice[randomIndex])
+  const setNewWordToPractice = () => {
+    if (wordsToPractice.length === 0) {
+      const selectedWords = props.myVocabulary.filter(w => w.selected)
+      const randomIndex = Math.floor(Math.random() * selectedWords.length)
+      props.setWord(selectedWords[randomIndex])
+      selectedWords.splice(randomIndex, 1)
+      setWordsToPractice(selectedWords)
+    }
+    else {
+      const randomIndex = Math.floor(Math.random() * wordsToPractice.length)
+      props.setWord(wordsToPractice[randomIndex])
+      const newWordsToPractice = [...wordsToPractice]
+      newWordsToPractice.splice(randomIndex, 1)
+      setWordsToPractice(newWordsToPractice)
+    }
   }
 
-  const practiceWords = () => {
-    setRandomWordToPractice()
+  const practiceWordsHandler = () => {
+    setNewWordToPractice()
     props.newSearch('   ')
     setPracticing(true)
   }
 
-  const stopPracticing = () => {
+  const stopPracticingHandler = () => {
     props.resetWord()
     setMyTry('')
     setCheck(null)
     setSolution('')
     props.newSearch('')
-    selectNothing()
+    selectNothingHandler()
+    setWordsToPractice([])
     setPracticing(false)
   }
 
-  const practiceNext = () => {
+  const practiceNextHandler = () => {
     setMyTry('')
     setCheck(null)
     setSolution('')
-    setRandomWordToPractice()
+    setNewWordToPractice()
   }
 
   const updateLearned = async () => {
@@ -118,7 +131,7 @@ const MyVocabulary = (props) => {
     }
   }
 
-  const checkWord = (event) => {
+  const checkWordHandler = (event) => {
     event.preventDefault()
     if (props.word.lemma.toLowerCase() === myTry.toLowerCase()) {
       setCheck(checkmark)
@@ -133,7 +146,7 @@ const MyVocabulary = (props) => {
       setTimeout(() => {
         setSolution('')
         setDisabled(false)
-        practiceNext()
+        practiceNextHandler()
       }, 1000)
     }
   }
@@ -148,7 +161,7 @@ const MyVocabulary = (props) => {
       : setNothingSelected(true)
   }
 
-  const toggleChecked = (event) => {
+  const toggleCheckedHandler = (event) => {
     const id = Number(event.target.name)
     const updatedWord = props.visibleWords.find(w => w.id === id)
     updatedWord.selected = !updatedWord.selected
@@ -156,7 +169,7 @@ const MyVocabulary = (props) => {
     props.updateMyVocabulary(updatedWord)
   }
 
-  const selectAll = () => {
+  const selectAllHandler = () => {
     props.visibleWords.forEach(word => {
       word.selected = true
       props.updateMyVocabulary(word)
@@ -164,7 +177,7 @@ const MyVocabulary = (props) => {
     setStateNothingSelected()
   }
 
-  const selectNothing = () => {
+  const selectNothingHandler = () => {
     props.visibleWords.forEach(word => {
       word.selected = false
       props.updateMyVocabulary(word)
@@ -172,8 +185,8 @@ const MyVocabulary = (props) => {
     setStateNothingSelected()
   }
 
-  const selectLearned = () => {
-    selectNothing()
+  const selectLearnedHandler = () => {
+    selectNothingHandler()
     const learnedWords = props.visibleWords.filter(word => word.learned)
     learnedWords.forEach(word => {
       word.selected = true
@@ -182,8 +195,8 @@ const MyVocabulary = (props) => {
     setStateNothingSelected()
   }
 
-  const selectNotLearned = () => {
-    selectNothing()
+  const selectNotLearnedHandler = () => {
+    selectNothingHandler()
     const notLearnedWords = props.visibleWords.filter(word => !word.learned)
     notLearnedWords.forEach(word => {
       word.selected = true
@@ -192,7 +205,7 @@ const MyVocabulary = (props) => {
     setStateNothingSelected()
   }
 
-  const removeWords = async () => {
+  const removeWordsHandler = async () => {
     const wordsToRemove = props.visibleWords.filter(w => w.selected)
     const idsToRemove = wordsToRemove.map(w => w.id)
     try {
@@ -264,22 +277,23 @@ const MyVocabulary = (props) => {
           <Search />
           <ButtonToolbar className="mp-2">
             <SelectButton
-              selectAll={selectAll}
-              selectNothing={selectNothing}
-              selectLearned={selectLearned}
-              selectNotLearned={selectNotLearned} />
+              selectAll={selectAllHandler}
+              selectNothing={selectNothingHandler}
+              selectLearned={selectLearnedHandler}
+              selectNotLearned={selectNotLearnedHandler} />
             <Button
               disabled={nothingSelected}
-              onClick={practiceWords}>{t('PracticeWordsButton')}</Button>
+              onClick={practiceWordsHandler}>{t('PracticeWordsButton')}</Button>
             <Button variant="danger"
               disabled={nothingSelected}
-              onClick={removeWords}>{t('RemoveSelectedWordsButton')}</Button>
+              onClick={removeWordsHandler}>{t('RemoveSelectedWordsButton')}
+            </Button>
           </ButtonToolbar>
           <Words
             words={props.visibleWords}
             showDetails={showDetailsHandler}
             selectable="true"
-            toggleChecked={toggleChecked} />
+            toggleChecked={toggleCheckedHandler} />
           <WordDetails
             close={closeDetailsHandler}
             showNext={showNextHandler} />
@@ -290,9 +304,9 @@ const MyVocabulary = (props) => {
             solution={solution}
             practicing={practicing}
             disabled={disabled}
-            stopPracticing={stopPracticing}
-            next={practiceNext}
-            checkWord={checkWord}
+            stopPracticing={stopPracticingHandler}
+            next={practiceNextHandler}
+            checkWord={checkWordHandler}
             change={valueChangedHandler} />
         </Col>
       </Row>
