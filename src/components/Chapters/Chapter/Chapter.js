@@ -372,51 +372,55 @@ const Chapter = (props) => {
     <Fragment>
       <Row>
         <Col lg={l} md={s} sm={s} xl={l} xs={s}>
-          <div id="chapter">
+          <div id="chapterContainer" className={marginB}>
             <h1>{props.chapter.title}</h1>
             <p>{props.chapter.body}</p>
           </div>
         </Col>
         <Col lg={r} md={s} sm={s} xl={r} xs={s}>
-          <h2 id="vocabularyTitle">{t('VocabularyTitle')}</h2>
-          <ButtonToolbar className={marginB}>
-            <SelectButton
-              selectAll={selectAllHandler}
-              selectNothing={selectNothingHandler}
-              selectLearned={selectLearnedHandler}
-              selectNotLearned={selectNotLearnedHandler}
-              size="sm" />
-            <Button
-              variant={variantNormal}
-              className={marginR}
-              disabled={nothingSelected}
-              onClick={practiceWordsHandler}
-              size="sm">{t('PracticeWordsButton')}</Button>
-          </ButtonToolbar>
-          <Search />
-          <div id="vocabulary">
-            <Words
-              words={vocabularyWordsToShow(props.chapter.words, props.search)}
-              showDetails={showDetailsHandler}
-              selectable="true"
-              toggleChecked={toggleCheckedHandler} />
+          <div id="vocabularyContainer" className={marginB}>
+            <div id="stickyContainer">
+              <h2>{t('VocabularyTitle')}</h2>
+              <ButtonToolbar className={marginB}>
+                <SelectButton
+                  selectAll={selectAllHandler}
+                  selectNothing={selectNothingHandler}
+                  selectLearned={selectLearnedHandler}
+                  selectNotLearned={selectNotLearnedHandler}
+                  size="sm" />
+                <Button
+                  variant={variantNormal}
+                  className={marginR}
+                  disabled={nothingSelected}
+                  onClick={practiceWordsHandler}
+                  size="sm">{t('PracticeWordsButton')}</Button>
+              </ButtonToolbar>
+              <Search />
+            </div>
+            <div id="vocabulary">
+              <Words
+                words={vocabularyWordsToShow(props.chapter.words, props.search)}
+                showDetails={showDetailsHandler}
+                selectable="true"
+                toggleChecked={toggleCheckedHandler} />
+            </div>
+            <WordDetails
+              close={closeDetailsHandler}
+              showNext={showNextHandler}
+              displayToken
+              edit={props.chapter.created_by === props.user.id} />
+            <LearningForm
+              word={props.word}
+              myTry={myTry}
+              check={check}
+              solution={solution}
+              practicing={practicing}
+              disabled={disabled}
+              stopPracticing={stopPracticingHandler}
+              next={practiceNextHandler}
+              checkWord={checkWordHandler}
+              change={valueChangedHandler} />
           </div>
-          <WordDetails
-            close={closeDetailsHandler}
-            showNext={showNextHandler}
-            displayToken
-            edit={props.chapter.created_by === props.user.id} />
-          <LearningForm
-            word={props.word}
-            myTry={myTry}
-            check={check}
-            solution={solution}
-            practicing={practicing}
-            disabled={disabled}
-            stopPracticing={stopPracticingHandler}
-            next={practiceNextHandler}
-            checkWord={checkWordHandler}
-            change={valueChangedHandler} />
         </Col>
       </Row>
       <Row>

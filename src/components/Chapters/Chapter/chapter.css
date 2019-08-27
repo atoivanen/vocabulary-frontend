@@ -1,25 +1,39 @@
-.middlePage {
-  max-height: 80vh;
-}
-#chapter {
+#chapterContainer {
   border: 0.5px solid;
   border-color: LightGray;
+  border-radius: 10px;
   padding: 15px;
+  width: 100%;
+  height: 77vh;
+  overflow-y: scroll;
+  white-space: pre-line; /* To keep original formatting of text */
+}
+#vocabularyContainer {
+  border: 0.5px solid;
+  border-color: LightGray;
   border-radius: 10px;
   width: 100%;
   height: 77vh;
   overflow-y: scroll;
-  white-space: pre-line;
 }
-#chapter h1 {
-  font-size: x-large;
-}
-#vocabularyTitle {
-  font-size: x-large;
+#stickyContainer {
+  position: -webkit-sticky;
+  position: sticky;
+  margin: 0;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  opacity: 1;
+  background-color: white;
+  top: 0;
 }
 #vocabulary {
-  margin: 15px;
-  width: 100%;
-  height: 60vh;
-  overflow-y: scroll;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+#chapterContainer h1 {
+  font-size: x-large;
+}
+#vocabularyContainer h2 {
+  font-size: x-large;
 }
