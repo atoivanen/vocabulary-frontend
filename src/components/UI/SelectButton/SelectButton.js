@@ -5,8 +5,15 @@ import { DropdownButton, Dropdown } from 'react-bootstrap'
 const SelectButton = (props) => {
   const { t } = useTranslation()
 
+  const variantNormal = 'outline-primary'
+  const marginR = 'mr-1'
+
   return (
-    <DropdownButton size={props.size} title={t('SelectWordsToShow')}>
+    <DropdownButton
+      className={marginR}
+      variant={variantNormal}
+      size={props.size}
+      title={t('SelectWordsToShow')}>
       <Dropdown.Item
         as="button"
         onClick={props.selectNotLearned}>{t('SelectNotLearned')}</Dropdown.Item>

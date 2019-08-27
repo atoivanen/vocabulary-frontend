@@ -8,12 +8,15 @@ import { newSearch } from '../../reducers/searchReducer'
 const Search = (props) => {
   const { t } = useTranslation()
 
+  const marginB = 'mb-2'
+
   const searchWord = (event) => {
     props.newSearch(event.target.value)
   }
 
   return (
     <Form.Control
+      className={marginB}
       type="text"
       placeholder={t('SearchPlaceholder')}
       value={props.search}

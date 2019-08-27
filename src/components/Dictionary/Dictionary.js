@@ -19,6 +19,12 @@ const Dictionary = (props) => {
 
   const { t } = useTranslation()
 
+  const emptyDictionary = t('StartTyping')
+  const l = 8
+  const s = 12
+  const variantNormal = 'outline-primary'
+  const marginB = 'mb-2'
+
   const createWordHandler = () => {
     props.createWord()
     props.isNew()
@@ -85,22 +91,16 @@ const Dictionary = (props) => {
     }
   }
 
-  const l = 8
-  const s = 12
-
   return (
     <Fragment>
       <Row>
         <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
           <h1>{t('DictionaryTitle')}</h1>
-          <Form.Control
-            type="text"
-            placeholder={t('SearchPlaceholder')}
-            value={props.search}
-            onChange={searchWordHandler} />
           {props.user.id
             ? (
               <Button
+                className={marginB}
+                variant={variantNormal}
                 as="input"
                 type="button"
                 value={t('NewWord')}
@@ -108,6 +108,12 @@ const Dictionary = (props) => {
             )
             : null
           }
+          <Form.Control
+            className={marginB}
+            type="text"
+            placeholder={t('SearchPlaceholder')}
+            value={props.search}
+            onChange={searchWordHandler} />
           {loading ? (
             <div>
               <Spinner animation="border">
@@ -116,9 +122,14 @@ const Dictionary = (props) => {
             </div>
           ) : null
           }
-          <Words
-            words={props.visibleWords}
-            showDetails={showDetailsHandler}/>
+          <div className="scrollableArea">
+            {props.visibleWords.length === 0
+              ? <p className="text-muted">{emptyDictionary}</p>
+              : <Words
+                words={props.visibleWords}
+                showDetails={showDetailsHandler}/>
+            }
+          </div>
           <WordForm
             close={closeDetailsHandler}
             showNext={showNextHandler}

@@ -15,6 +15,11 @@ const Login = (props) => {
 
   const { t } = useTranslation()
 
+  const l = 4
+  const s = 10
+  const variantNormal = 'outline-primary'
+  const marginB = 'mb-2'
+
   const loginHandler = async (event) => {
     event.preventDefault()
     try {
@@ -37,9 +42,6 @@ const Login = (props) => {
     }
   }
 
-  const l = 4
-  const s = 10
-
   return (
     <Fragment>
       <Row>
@@ -48,6 +50,7 @@ const Login = (props) => {
           <h2>{t('LoginTitle')}</h2>
           <Form onSubmit={loginHandler}>
             <Form.Control
+              className={marginB}
               type="text"
               value={username}
               placeholder={t('Username')}
@@ -55,13 +58,19 @@ const Login = (props) => {
               id="usernameField"
               onChange={({ target }) => setUsername(target.value)} />
             <Form.Control
+              className={marginB}
               type="password"
               value={password}
               placeholder={t('Password')}
               name="Password"
               id="passwordField"
               onChange={({ target }) => setPassword(target.value)} />
-            <Button id="loginButton" type="submit">{t('LoginButton')}</Button>
+            <Button
+              className={marginB}
+              variant={variantNormal}
+              id="loginButton"
+              type="submit">{t('LoginButton')}
+            </Button>
           </Form>
         </Col>
         <Col />

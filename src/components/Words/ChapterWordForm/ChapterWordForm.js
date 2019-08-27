@@ -22,6 +22,8 @@ const WordForm = (props) => {
 
   const { t } = useTranslation()
 
+  const variantNormal = 'outline-primary'
+
   const getSuggestionValue = suggestion => {
     setWordId(suggestion.id)
     return suggestion.lemma
@@ -152,7 +154,9 @@ const WordForm = (props) => {
               type="text"
               onChange={({ target }) => setToken(target.value)} />
           </Form.Group>
-          <Button type="submit">{t('SubmitWordButton')}</Button>
+          <Button
+            variant={variantNormal}
+            type="submit">{t('SubmitWordButton')}</Button>
         </Form>
       </Modal.Body>
     </Modal>

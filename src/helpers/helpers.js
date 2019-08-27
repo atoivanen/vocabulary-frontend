@@ -1,4 +1,4 @@
-const makeComparable = (word) => {
+export const makeComparable = (word) => {
   const regexA = /[âàá]/g
   const regexE = /[êèéë]/g
   const regexI = /[îï]/g

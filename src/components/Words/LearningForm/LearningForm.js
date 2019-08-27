@@ -5,6 +5,10 @@ import { useTranslation } from 'react-i18next'
 const LearningForm = (props) => {
   const { t } = useTranslation()
 
+  const variantNormal = 'outline-primary'
+  const marginR = 'mr-1'
+  const marginY = 'my-2'
+
   return (
     <div>
       <Modal show={props.practicing} onHide={props.stopPracticing}>
@@ -30,12 +34,18 @@ const LearningForm = (props) => {
                 defaultValue={props.solution} />
               : null
             }
-            <ButtonToolbar>
-              <Button disabled={props.disabled} type="submit">
-                {t('CheckButton')}
+            <ButtonToolbar className={marginY}>
+              <Button
+                className={marginR}
+                variant={variantNormal}
+                disabled={props.disabled}
+                type="submit">{t('CheckButton')}
               </Button>
-              <Button disabled={props.disabled} onClick={props.next}>
-                {t('NextButton')}
+              <Button
+                className={marginR}
+                variant={variantNormal}
+                disabled={props.disabled}
+                onClick={props.next}>{t('NextButton')}
               </Button>
             </ButtonToolbar>
           </Form>

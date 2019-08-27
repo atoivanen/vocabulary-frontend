@@ -34,6 +34,14 @@ const MyVocabulary = (props) => {
 
   const { t } = useTranslation()
 
+  const emptyMyVocabulary = t('NoWordsInVocabulary')
+  const l = 8
+  const s = 12
+  const variantNormal = 'outline-primary'
+  const variantDanger = 'outline-danger'
+  const marginR = 'mr-1'
+  const marginB = 'mb-2'
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
@@ -245,9 +253,6 @@ const MyVocabulary = (props) => {
     }
   }
 
-  const l = 8
-  const s = 12
-
   if (loading) {
     return (
       <Spinner animation="border">
@@ -260,44 +265,40 @@ const MyVocabulary = (props) => {
     return <p>{t('UnauthorizedMyVocabulary')}</p>
   }
 
-  if (props.myVocabulary.length === 0) {
-    return (
-      <Fragment>
-        <Row>
-          <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
-            <h1>{t('MyVocabularyTitle')}</h1>
-            <p>{t('NoWordsInVocabulary')}</p>
-          </Col>
-        </Row>
-      </Fragment>
-    )
-  }
-
   return (
     <Fragment>
       <Row>
         <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
           <h1>{t('MyVocabularyTitle')}</h1>
-          <Search />
-          <ButtonToolbar className="mp-2">
+          <ButtonToolbar className={marginB}>
             <SelectButton
               selectAll={selectAllHandler}
               selectNothing={selectNothingHandler}
               selectLearned={selectLearnedHandler}
               selectNotLearned={selectNotLearnedHandler} />
             <Button
+              className={marginR}
+              variant={variantNormal}
               disabled={nothingSelected}
               onClick={practiceWordsHandler}>{t('PracticeWordsButton')}</Button>
-            <Button variant="danger"
+            <Button
+              className={marginR}
+              variant={variantDanger}
               disabled={nothingSelected}
               onClick={removeWordsHandler}>{t('RemoveSelectedWordsButton')}
             </Button>
           </ButtonToolbar>
-          <Words
-            words={props.visibleWords}
-            showDetails={showDetailsHandler}
-            selectable="true"
-            toggleChecked={toggleCheckedHandler} />
+          <Search />
+          <div className="scrollableArea">
+            {props.myVocabulary.length === 0
+              ? <p className="text-muted">{emptyMyVocabulary}</p>
+              : <Words
+                words={props.visibleWords}
+                showDetails={showDetailsHandler}
+                selectable="true"
+                toggleChecked={toggleCheckedHandler} />
+            }
+          </div>
           <WordDetails
             close={closeDetailsHandler}
             showNext={showNextHandler} />

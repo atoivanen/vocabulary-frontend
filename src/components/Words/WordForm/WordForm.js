@@ -21,6 +21,10 @@ import wordService from '../../../services/words'
 const WordForm = (props) => {
   const { t } = useTranslation()
 
+  const variantNormal = 'outline-primary'
+  const variantDanger = 'outline-danger'
+  const marginR = 'mr-1'
+
   if (!props.word) {
     return null
   }
@@ -217,10 +221,14 @@ const WordForm = (props) => {
           </Form.Group>
           {props.user.id
             ? (<ButtonToolbar className="float-left">
-              <Button type="submit">{t('SubmitWordButton')}</Button>
+              <Button
+                className={marginR}
+                variant={variantNormal}
+                type="submit">{t('SubmitWordButton')}</Button>
               {props.user.id === props.word.created_by
                 ? <Button
-                  variant="danger"
+                  className={marginR}
+                  variant={variantDanger}
                   onClick={deleteWordHandler}>{t('RemoveButton')}</Button>
                 : null
               }
@@ -231,11 +239,15 @@ const WordForm = (props) => {
             ? (
               <ButtonToolbar className="float-right">
                 <Button
+                  className={marginR}
+                  variant={variantNormal}
                   as="input"
                   name="previous"
                   onClick={props.showNext}
                   value={t('PreviousButton')} />
                 <Button
+                  className={marginR}
+                  variant={variantNormal}
                   as="input"
                   name="next"
                   onClick={props.showNext}

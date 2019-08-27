@@ -47,6 +47,14 @@ const Chapter = (props) => {
 
   const { t } = useTranslation()
 
+  const l = 8
+  const r = 4
+  const s = 6
+  const variantNormal = 'outline-primary'
+  const variantDanger = 'outline-danger'
+  const marginR = 'mr-1'
+  const marginB = 'mb-2'
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
@@ -347,10 +355,6 @@ const Chapter = (props) => {
     props.history.push('/chapters')
   }
 
-  const l = 8
-  const r = 4
-  const s = 6
-
   if (loading) {
     return (
       <Spinner animation="border">
@@ -375,8 +379,7 @@ const Chapter = (props) => {
         </Col>
         <Col lg={r} md={s} sm={s} xl={r} xs={s}>
           <h2 id="vocabularyTitle">{t('VocabularyTitle')}</h2>
-          <Search />
-          <ButtonToolbar className="mp-2">
+          <ButtonToolbar className={marginB}>
             <SelectButton
               selectAll={selectAllHandler}
               selectNothing={selectNothingHandler}
@@ -384,10 +387,13 @@ const Chapter = (props) => {
               selectNotLearned={selectNotLearnedHandler}
               size="sm" />
             <Button
+              variant={variantNormal}
+              className={marginR}
               disabled={nothingSelected}
               onClick={practiceWordsHandler}
               size="sm">{t('PracticeWordsButton')}</Button>
           </ButtonToolbar>
+          <Search />
           <div id="vocabulary">
             <Words
               words={vocabularyWordsToShow(props.chapter.words, props.search)}
@@ -416,9 +422,15 @@ const Chapter = (props) => {
       <Row>
         <Col lg={l} md={l} sm={l} xl={l} xs={l}>
           <ButtonToolbar>
-            <Button onClick={returnHandler}>{t('ReturnButton')}</Button>
+            <Button
+              variant={variantNormal}
+              className={marginR}
+              onClick={returnHandler}>{t('ReturnButton')}
+            </Button>
             {props.chapter.created_by === props.user.id && !props.chapter.public
               ? (<Button
+                variant={variantNormal}
+                className={marginR}
                 onClick={publishChapterHandler}>{t('PublishChapterButton')}
               </Button>
               )
@@ -427,10 +439,13 @@ const Chapter = (props) => {
             {props.chapter.created_by === props.user.id
               ? (<Fragment>
                 <Button
+                  variant={variantNormal}
+                  className={marginR}
                   href={`/edit/${props.chapter.id}`}>{t('EditChapterButton')}
                 </Button>
                 <Button
-                  variant="danger"
+                  variant={variantDanger}
+                  className={marginR}
                   onClick={removeChapterHandler}>
                   {t('RemoveButton')}
                 </Button>
@@ -444,15 +459,21 @@ const Chapter = (props) => {
           {props.chapter.created_by === props.user.id
             ? (<Fragment>
               <ChapterWordForm modal={modal} close={() => setModal(false)} />
-              <Button
-                onClick={() => setModal(true)}>
-                {t('AddWordFromDictionaryButton')}
-              </Button>
-              <Button variant="danger"
-                disabled={nothingSelected}
-                onClick={removeWordsHandler}>
-                {t('RemoveSelectedWordsButton')}
-              </Button>
+              <ButtonToolbar>
+                <Button
+                  variant={variantNormal}
+                  className={marginR}
+                  onClick={() => setModal(true)}>
+                  {t('AddWordFromDictionaryButton')}
+                </Button>
+                <Button
+                  variant={variantDanger}
+                  className={marginR}
+                  disabled={nothingSelected}
+                  onClick={removeWordsHandler}>
+                  {t('RemoveSelectedWordsButton')}
+                </Button>
+              </ButtonToolbar>
             </Fragment>
             )
             : null

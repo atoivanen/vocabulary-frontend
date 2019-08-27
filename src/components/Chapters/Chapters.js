@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import { Col, Row, Table, Button, ButtonToolbar, Spinner } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 
+import Search from '../Search/Search'
+import { newSearch } from '../../reducers/searchReducer'
+import { makeComparable } from '../../helpers/helpers'
 import {
   initializeChapters,
   updateChapter,
@@ -19,6 +22,10 @@ const Chapters = (props) => {
 
   const l = 8
   const s = 12
+  const variantNormal = 'outline-primary'
+  const variantDanger = 'outline-danger'
+  const marginR = 'mr-1'
+  const marginB = 'mb-2'
 
   useEffect(() => {
     const fetchData = async () => {
@@ -102,13 +109,14 @@ const Chapters = (props) => {
           <h1>{t('ChaptersPageTitle')}</h1>
           {props.user.id
             ? (
-              <ButtonToolbar>
-                <Button href="/new">
+              <ButtonToolbar className={marginB}>
+                <Button href="/new" className={marginR} variant={variantNormal}>
                   {t('CreateNewChapterButton')}
                 </Button>
-                {props.chapters.find(c => c.created_by === props.user.id)
+                {props.visibleChapters.find(c => c.created_by === props.user.id)
                   ? (<Button
-                    variant="danger"
+                    className={marginR}
+                    variant={variantDanger}
                     disabled={nothingSelected}
                     onClick={removeChapters}>
                     {t('RemoveSelectedChaptersButton')}
@@ -120,39 +128,53 @@ const Chapters = (props) => {
             )
             : null
           }
-          <Table>
-            <tbody>
-              {props.chapters.map(chapter =>
-                <tr key={chapter.id}>
-                  {props.user.id === chapter.created_by
-                    ? (<td>
-                      <input
-                        type="checkbox"
-                        name={chapter.id}
-                        onClick={toggleChecked} />
+          <Search />
+          <div className="scrollableArea">
+            <Table borderless>
+              <tbody>
+                {props.visibleChapters.map(chapter =>
+                  <tr key={chapter.id}>
+                    {props.user.id === chapter.created_by
+                      ? (<td>
+                        <input
+                          type="checkbox"
+                          name={chapter.id}
+                          onClick={toggleChecked} />
+                      </td>
+                      )
+                      : null
+                    }
+                    <td>
+                      <a href={`/chapters/${chapter.id}`}>
+                        {chapter.title}
+                      </a>
                     </td>
-                    )
-                    : null
-                  }
-                  <td>
-                    <a href={`/chapters/${chapter.id}`}>
-                      {chapter.title}
-                    </a>
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </Table>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
+          </div>
         </Col>
       </Row>
     </Fragment>
   )
 }
 
+const chaptersToShow = (chapters, search) => {
+  const filteredChapters = chapters.filter(chapter => {
+    const comparableTitle = makeComparable(chapter.title)
+    const comparableSearch = makeComparable(search)
+    return (comparableTitle.includes(comparableSearch))
+  })
+
+  return filteredChapters
+}
+
 const mapStateToProps = (state) => {
   return {
-    chapters: state.chapters,
-    user: state.user
+    visibleChapters: chaptersToShow(state.chapters, state.search),
+    user: state.user,
+    search: state.search
   }
 }
 
@@ -160,7 +182,8 @@ const mapDispatchToProps = {
   initializeChapters,
   updateChapter,
   removeChapter,
-  displayNotification
+  displayNotification,
+  newSearch
 }
 
 export default connect(

@@ -6,6 +6,9 @@ import { Nav, Navbar, ButtonToolbar, Button } from 'react-bootstrap'
 const Toolbar = (props) => {
   const { t } = useTranslation()
 
+  const variantNormal = 'outline-primary'
+  const marginR = 'mr-1'
+
   return (
     <Navbar collapseOnSelect expand="lg" sticky="top" bg="light">
       <Navbar.Brand href="/">{t('VocabularyAppName')}</Navbar.Brand>
@@ -41,10 +44,14 @@ const Toolbar = (props) => {
           }
           <ButtonToolbar>
             <Button
-              variant="link"
+              className={marginR}
+              variant={variantNormal}
+              size="sm"
               onClick={() => props.changeLanguage('fi')}>FI</Button>
             <Button
-              variant="link"
+              className={marginR}
+              variant={variantNormal}
+              size="sm"
               onClick={() => props.changeLanguage('en')}>EN</Button>
           </ButtonToolbar>
         </Nav>

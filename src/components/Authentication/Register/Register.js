@@ -15,6 +15,11 @@ const Register = (props) => {
 
   const { t } = useTranslation()
 
+  const l = 4
+  const s = 10
+  const variantNormal = 'outline-primary'
+  const marginB = 'mb-2'
+
   const validate = () => {
     if (username.length > 150) {
       props.displayNotification({
@@ -69,9 +74,6 @@ const Register = (props) => {
     }
   }
 
-  const l = 4
-  const s = 10
-
   return (
     <Fragment>
       <Row>
@@ -80,24 +82,30 @@ const Register = (props) => {
           <h2>{t('RegisterTitle')}</h2>
           <Form onSubmit={registerHandler}>
             <Form.Control
+              className={marginB}
               type="text"
               value={username}
               placeholder={t('Username')}
               name="Username"
               onChange={({ target }) => setUsername(target.value)} />
             <Form.Control
+              className={marginB}
               type="password"
               value={password1}
               placeholder={t('Password')}
               name="Password1"
               onChange={({ target }) => setPassword1(target.value)} />
             <Form.Control
+              className={marginB}
               type="password"
               value={password2}
               placeholder={t('PasswordAgain')}
               name="Password2"
               onChange={({ target }) => setPassword2(target.value)} />
-            <Button type="submit">{t('RegisterButton')}</Button>
+            <Button
+              className={marginB}
+              variant={variantNormal}
+              type="submit">{t('RegisterButton')}</Button>
           </Form>
         </Col>
         <Col />

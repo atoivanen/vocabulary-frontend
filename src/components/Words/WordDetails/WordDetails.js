@@ -12,6 +12,10 @@ import chapterWordService from '../../../services/chapterWords'
 const WordDetails = (props) => {
   const { t } = useTranslation()
 
+  const variantNormal = 'outline-primary'
+  const variantDanger = 'outline-danger'
+  const marginR = 'mr-1'
+
   if (!props.word) {
     return null
   }
@@ -158,9 +162,13 @@ const WordDetails = (props) => {
           </Form.Group>
           { props.edit
             ? (<ButtonToolbar className="float-left">
-              <Button type="submit">{t('SubmitWordButton')}</Button>
               <Button
-                variant="danger"
+                className={marginR}
+                variant={variantNormal}
+                type="submit">{t('SubmitWordButton')}</Button>
+              <Button
+                className={marginR}
+                variant={variantDanger}
                 onClick={removeWordHandler}>{t('RemoveButton')}</Button>
             </ButtonToolbar>
             )
@@ -168,11 +176,15 @@ const WordDetails = (props) => {
           }
           <ButtonToolbar className="float-right">
             <Button
+              className={marginR}
+              variant={variantNormal}
               as="input"
               name="previous"
               onClick={props.showNext}
               value={t('PreviousButton')} />
             <Button
+              className={marginR}
+              variant={variantNormal}
               as="input"
               name="next"
               onClick={props.showNext}
