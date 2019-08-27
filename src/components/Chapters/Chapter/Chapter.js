@@ -265,36 +265,40 @@ const Chapter = (props) => {
       props.search
     )
     const wordsToRemove = visibleWords.filter(w => w.selected)
+    const lemmasToRemove = wordsToRemove.map(w => w.lemma)
     const idsToRemove = wordsToRemove.map(w => w.id)
-    try {
-      await chapterWordService.removeMany(idsToRemove)
-      wordsToRemove.forEach(word => {props.removeChapterWord(word)})
-      if (wordsToRemove.length > 0) {
-        let lemmas = wordsToRemove[0].lemma
-        if (wordsToRemove.length > 1) {
-          wordsToRemove.shift()
-          lemmas = wordsToRemove.reduce((acc, cur) =>
-            `${acc}, ${cur.lemma}`, lemmas
-          )
-        }
-        const wordsRemoved = t('WordsRemovedMessage')
-        props.displayNotification({
-          message: `${wordsRemoved} ${lemmas}`,
-          messageType: 'success'
-        })
-        setNothingSelected(true)
-      }
-    } catch (error) {
-      console.log(error.response)
-      if (error.response.request.status === 404) {
+    let lemmas = lemmasToRemove[0]
+    if (lemmasToRemove.length > 1) {
+      lemmasToRemove.shift()
+      lemmas = lemmasToRemove.reduce((acc, cur) =>
+        `${acc}, ${cur}`, lemmas
+      )
+    }
+    const message = t('ConfirmRemove')
+    if (window.confirm(`${message} ${lemmas}?`)) {
+      try {
+        await chapterWordService.removeMany(idsToRemove)
         wordsToRemove.forEach(word => {props.removeChapterWord(word)})
-        setNothingSelected(true)
-      } else {
-        props.displayNotification({
-          message: t('RemovingFailed'),
-          messageType: 'danger'
-        })
-        setNothingSelected(false)
+        if (wordsToRemove.length > 0) {
+          const wordsRemoved = t('WordsRemovedMessage')
+          props.displayNotification({
+            message: `${wordsRemoved} ${lemmas}`,
+            messageType: 'success'
+          })
+          setNothingSelected(true)
+        }
+      } catch (error) {
+        console.log(error.response)
+        if (error.response.request.status === 404) {
+          wordsToRemove.forEach(word => {props.removeChapterWord(word)})
+          setNothingSelected(true)
+        } else {
+          props.displayNotification({
+            message: t('RemovingFailed'),
+            messageType: 'danger'
+          })
+          setNothingSelected(false)
+        }
       }
     }
   }
@@ -318,21 +322,24 @@ const Chapter = (props) => {
   }
 
   const removeChapterHandler = async () => {
-    try {
-      await chapterService.remove(props.chapter.id)
-      props.resetChapter()
-      const msg = t('RemovalSucceeded')
-      props.displayNotification({
-        message: `${msg} ${props.chapter.title}`,
-        messageType: 'success'
-      })
-      props.history.push('/chapters')
-    } catch (error) {
-      console.log(error.response)
-      props.displayNotification({
-        message: t('RemovalFailed'),
-        messageType: 'danger'
-      })
+    const message = t('ConfirmRemove')
+    if (window.confirm(`${message} ${props.chapter.title}?`)) {
+      try {
+        await chapterService.remove(props.chapter.id)
+        props.resetChapter()
+        const msg = t('RemovalSucceeded')
+        props.displayNotification({
+          message: `${msg} ${props.chapter.title}`,
+          messageType: 'success'
+        })
+        props.history.push('/chapters')
+      } catch (error) {
+        console.log(error.response)
+        props.displayNotification({
+          message: t('RemovalFailed'),
+          messageType: 'danger'
+        })
+      }
     }
   }
 

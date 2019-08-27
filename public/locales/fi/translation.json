@@ -111,5 +111,6 @@
   "WordForms": "Taivutusmuodot",
   "AddedWord": "Lisättiin sana",
   "ChooseWordFromDictionary": "Et voi lisätä tätä sanaa. Syötä vähintään kaksi kirjainta Sana-kenttään, jotta saat näkyviin vaihtoehdot.",
-  "TokenLabel": "Sananmuodot"
+  "TokenLabel": "Sananmuodot",
+  "ConfirmRemove": "Poistetaanko"
 }

@@ -49,36 +49,40 @@ const Chapters = (props) => {
 
   const removeChapters = async () => {
     const chaptersToRemove = props.chapters.filter(c => c.selected)
+    const titlesToRemove = chaptersToRemove.map(c => c.title)
     const idsToRemove = chaptersToRemove.map(c => c.id)
-    try {
-      await chapterService.removeMany(idsToRemove)
-      chaptersToRemove.forEach(chapter => {props.removeChapter(chapter)})
-      if (chaptersToRemove.length > 0) {
-        let titles = chaptersToRemove[0].title
-        if (chaptersToRemove.length > 1) {
-          chaptersToRemove.shift()
-          titles = chaptersToRemove.reduce((acc, cur) =>
-            `${acc}, ${cur.title}`, titles
-          )
-        }
-        const chaptersRemoved = t('ChaptersRemovedMessage')
-        props.displayNotification({
-          message: `${chaptersRemoved} ${titles}`,
-          messageType: 'success'
-        })
-        setNothingSelected(true)
-      }
-    } catch (error) {
-      console.log(error.response)
-      if (error.response.request.status === 404) {
+    let titles = titlesToRemove[0]
+    if (titlesToRemove.length > 1) {
+      titlesToRemove.shift()
+      titles = titlesToRemove.reduce((acc, cur) =>
+        `${acc}, ${cur}`, titles
+      )
+    }
+    const message = t('ConfirmRemove')
+    if (window.confirm(`${message} ${titles}?`)) {
+      try {
+        await chapterService.removeMany(idsToRemove)
         chaptersToRemove.forEach(chapter => {props.removeChapter(chapter)})
-        setNothingSelected(true)
-      } else {
-        props.displayNotification({
-          message: t('RemovingFailed'),
-          messageType: 'danger'
-        })
-        setNothingSelected(false)
+        if (chaptersToRemove.length > 0) {
+          const chaptersRemoved = t('ChaptersRemovedMessage')
+          props.displayNotification({
+            message: `${chaptersRemoved} ${titles}`,
+            messageType: 'success'
+          })
+          setNothingSelected(true)
+        }
+      } catch (error) {
+        console.log(error.response)
+        if (error.response.request.status === 404) {
+          chaptersToRemove.forEach(chapter => {props.removeChapter(chapter)})
+          setNothingSelected(true)
+        } else {
+          props.displayNotification({
+            message: t('RemovingFailed'),
+            messageType: 'danger'
+          })
+          setNothingSelected(false)
+        }
       }
     }
   }

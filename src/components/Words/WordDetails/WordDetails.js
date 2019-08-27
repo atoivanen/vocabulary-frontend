@@ -79,22 +79,25 @@ const WordDetails = (props) => {
   }
 
   const removeWordHandler = async () => {
-    try {
-      await chapterWordService.remove(props.word.id)
-      props.removeChapterWord(props.word)
-      props.close()
-      const msg = t('RemovalSucceeded')
-      props.displayNotification({
-        message: `${msg} ${props.word.lemma}`,
-        messageType: 'success'
-      })
-      props.resetWord()
-    } catch (error) {
-      console.log(error.response)
-      props.displayNotification({
-        message: t('RemovalFailed'),
-        messageType: 'danger'
-      })
+    const message = t('ConfirmRemove')
+    if (window.confirm(`${message} ${props.word.lemma}?`)) {
+      try {
+        await chapterWordService.remove(props.word.id)
+        props.removeChapterWord(props.word)
+        props.close()
+        const msg = t('RemovalSucceeded')
+        props.displayNotification({
+          message: `${msg} ${props.word.lemma}`,
+          messageType: 'success'
+        })
+        props.resetWord()
+      } catch (error) {
+        console.log(error.response)
+        props.displayNotification({
+          message: t('RemovalFailed'),
+          messageType: 'danger'
+        })
+      }
     }
   }
 

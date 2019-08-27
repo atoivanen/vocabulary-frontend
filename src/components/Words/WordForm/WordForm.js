@@ -128,22 +128,25 @@ const WordForm = (props) => {
   }
 
   const deleteWordHandler = async () => {
-    try {
-      await wordService.remove(props.word.id)
-      props.removeWordFromDictionary(props.word)
-      const msg = t('RemovalSucceeded')
-      props.displayNotification({
-        message: `${msg} ${props.word.lemma}`,
-        messageType: 'success'
-      })
-      props.resetWord()
-      props.close()
-    } catch (error) {
-      console.log(error.response)
-      props.displayNotification({
-        message: t('RemovalFailed'),
-        messageType: 'danger'
-      })
+    const message = t('ConfirmRemove')
+    if (window.confirm(`${message} ${props.word.lemma}?`)) {
+      try {
+        await wordService.remove(props.word.id)
+        props.removeWordFromDictionary(props.word)
+        const msg = t('RemovalSucceeded')
+        props.displayNotification({
+          message: `${msg} ${props.word.lemma}`,
+          messageType: 'success'
+        })
+        props.resetWord()
+        props.close()
+      } catch (error) {
+        console.log(error.response)
+        props.displayNotification({
+          message: t('RemovalFailed'),
+          messageType: 'danger'
+        })
+      }
     }
   }
 
