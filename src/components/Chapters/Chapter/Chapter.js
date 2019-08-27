@@ -343,6 +343,10 @@ const Chapter = (props) => {
     }
   }
 
+  const returnHandler = () => {
+    props.history.push('/chapters')
+  }
+
   const l = 8
   const r = 4
   const s = 6
@@ -412,6 +416,7 @@ const Chapter = (props) => {
       <Row>
         <Col lg={l} md={l} sm={l} xl={l} xs={l}>
           <ButtonToolbar>
+            <Button onClick={returnHandler}>{t('ReturnButton')}</Button>
             {props.chapter.created_by === props.user.id && !props.chapter.public
               ? (<Button
                 onClick={publishChapterHandler}>{t('PublishChapterButton')}
