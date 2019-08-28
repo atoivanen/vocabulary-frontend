@@ -16,16 +16,10 @@
   height: 77vh;
   overflow-y: scroll;
 }
-#stickyContainer {
-  position: -webkit-sticky;
-  position: sticky;
-  margin: 0;
+#stickyWithPadding {
   padding-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
-  opacity: 1;
-  background-color: white;
-  top: 0;
 }
 #vocabulary {
   padding-left: 15px;

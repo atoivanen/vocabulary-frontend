@@ -41,21 +41,21 @@ const Chapters = (props) => {
   }, [])
 
   const setStateNothingSelected = () => {
-    props.chapters.find(c => c.selected)
+    props.visibleChapters.find(c => c.selected)
       ? setNothingSelected(false)
       : setNothingSelected(true)
   }
 
   const toggleChecked = (event) => {
     const id = Number(event.target.name)
-    const updatedChapter = props.chapters.find(c => c.id === id)
+    const updatedChapter = props.visibleChapters.find(c => c.id === id)
     updatedChapter.selected = !updatedChapter.selected
     setStateNothingSelected()
     props.updateChapter(updatedChapter)
   }
 
   const removeChapters = async () => {
-    const chaptersToRemove = props.chapters.filter(c => c.selected)
+    const chaptersToRemove = props.visibleChapters.filter(c => c.selected)
     const titlesToRemove = chaptersToRemove.map(c => c.title)
     const idsToRemove = chaptersToRemove.map(c => c.id)
     let titles = titlesToRemove[0]
@@ -106,31 +106,33 @@ const Chapters = (props) => {
     <Fragment>
       <Row>
         <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
-          <h1>{t('ChaptersPageTitle')}</h1>
-          {props.user.id
-            ? (
-              <ButtonToolbar className={marginB}>
-                <Button href="/new" className={marginR} variant={variantNormal}>
-                  {t('CreateNewChapterButton')}
-                </Button>
-                {props.visibleChapters.find(c => c.created_by === props.user.id)
-                  ? (<Button
-                    className={marginR}
-                    variant={variantDanger}
-                    disabled={nothingSelected}
-                    onClick={removeChapters}>
-                    {t('RemoveSelectedChaptersButton')}
-                  </Button>
-                  )
-                  : null
-                }
-              </ButtonToolbar>
-            )
-            : null
-          }
-          <Search />
-          <div className="scrollableArea">
-            <Table borderless>
+          <div className="contentContainer">
+            <div className="stickyContainer">
+              <h1>{t('ChaptersPageTitle')}</h1>
+              {props.user.id
+                ? (
+                  <ButtonToolbar className={marginB}>
+                    <Button href="/new" className={marginR} variant={variantNormal}>
+                      {t('CreateNewChapterButton')}
+                    </Button>
+                    {props.visibleChapters.find(c => c.created_by === props.user.id)
+                      ? (<Button
+                        className={marginR}
+                        variant={variantDanger}
+                        disabled={nothingSelected}
+                        onClick={removeChapters}>
+                        {t('RemoveSelectedChaptersButton')}
+                      </Button>
+                      )
+                      : null
+                    }
+                  </ButtonToolbar>
+                )
+                : null
+              }
+              <Search />
+            </div>
+            <Table>
               <tbody>
                 {props.visibleChapters.map(chapter =>
                   <tr key={chapter.id}>

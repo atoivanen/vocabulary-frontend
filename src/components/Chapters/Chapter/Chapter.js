@@ -379,7 +379,7 @@ const Chapter = (props) => {
         </Col>
         <Col lg={r} md={s} sm={s} xl={r} xs={s}>
           <div id="vocabularyContainer" className={marginB}>
-            <div id="stickyContainer">
+            <div id="stickyWithPadding" className="stickyContainer">
               <h2>{t('VocabularyTitle')}</h2>
               <ButtonToolbar className={marginB}>
                 <SelectButton

@@ -26,3 +26,4 @@
 | 22.8. | 5    | Lisätty virheenkäsittely tilanteeseen, jossa palvelimella ei ole tarpeeksi muistia spacyn pyörittämiseen. Heroku-ongelmien selvittelyä. |
 | 23.8. | 6    | Kopioitaessa tietokantaa kehitysympäristöstä Herokuun, ID:t kopioituvat myös ja aiheuttavat ongelmia automaattiseen ID:n generointiin palvelimella. Yritin tähän löytää ratkaisua, mutta en onnistunut. |
 | 26.8. | 5    | Sanaston hakutoiminnon parantelua, sanojen kyselytoiminnon parantelua, poistonappuloihin confirm-viestien lisäämistä. |
+| 27.8. | 6    | Poistonappuloihin confirm-viestien lisäämistä, ulkoasun muokkausta, paluupainike Chapter-komponenttiin. |

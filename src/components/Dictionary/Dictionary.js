@@ -95,45 +95,47 @@ const Dictionary = (props) => {
     <Fragment>
       <Row>
         <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
-          <h1>{t('DictionaryTitle')}</h1>
-          {props.user.id
-            ? (
-              <Button
+          <div className="contentContainer">
+            <div className="stickyContainer">
+              <h1>{t('DictionaryTitle')}</h1>
+              {props.user.id
+                ? (
+                  <Button
+                    className={marginB}
+                    variant={variantNormal}
+                    as="input"
+                    type="button"
+                    value={t('NewWord')}
+                    onClick={createWordHandler} />
+                )
+                : null
+              }
+              <Form.Control
                 className={marginB}
-                variant={variantNormal}
-                as="input"
-                type="button"
-                value={t('NewWord')}
-                onClick={createWordHandler} />
-            )
-            : null
-          }
-          <Form.Control
-            className={marginB}
-            type="text"
-            placeholder={t('SearchPlaceholder')}
-            value={props.search}
-            onChange={searchWordHandler} />
-          {loading ? (
-            <div>
-              <Spinner animation="border">
-                <span className="sr-only">{t('Loading')}</span>
-              </Spinner>
+                type="text"
+                placeholder={t('SearchPlaceholder')}
+                value={props.search}
+                onChange={searchWordHandler} />
+              {loading ? (
+                <div>
+                  <Spinner animation="border">
+                    <span className="sr-only">{t('Loading')}</span>
+                  </Spinner>
+                </div>
+              ) : null
+              }
             </div>
-          ) : null
-          }
-          <div className="scrollableArea">
             {props.visibleWords.length === 0
               ? <p className="text-muted">{emptyDictionary}</p>
               : <Words
                 words={props.visibleWords}
                 showDetails={showDetailsHandler}/>
             }
+            <WordForm
+              close={closeDetailsHandler}
+              showNext={showNextHandler}
+              showNextAllowed={props.visibleWords.length > 1} />
           </div>
-          <WordForm
-            close={closeDetailsHandler}
-            showNext={showNextHandler}
-            showNextAllowed={props.visibleWords.length > 1} />
         </Col>
       </Row>
     </Fragment>

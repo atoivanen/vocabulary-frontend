@@ -1,9 +1,13 @@
-.scrollableArea {
-    border: 0.5px solid;
-    border-color: LightGray;
-    padding: 15px;
-    border-radius: 10px;
-    width: 100%;
-    height: 65vh;
-    overflow-y: scroll;
-  }
+.contentContainer {
+  height: 80vh;
+  overflow-y: scroll;
+}
+.stickyContainer {
+  position: -webkit-sticky;
+  position: sticky;
+  margin: 0;
+  padding-bottom: 6px;
+  opacity: 1;
+  background-color: white;
+  top: 0;
+}

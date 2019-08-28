@@ -269,27 +269,29 @@ const MyVocabulary = (props) => {
     <Fragment>
       <Row>
         <Col lg={l} md={l} sm={s} xl={l}  xs={s}>
-          <h1>{t('MyVocabularyTitle')}</h1>
-          <ButtonToolbar className={marginB}>
-            <SelectButton
-              selectAll={selectAllHandler}
-              selectNothing={selectNothingHandler}
-              selectLearned={selectLearnedHandler}
-              selectNotLearned={selectNotLearnedHandler} />
-            <Button
-              className={marginR}
-              variant={variantNormal}
-              disabled={nothingSelected}
-              onClick={practiceWordsHandler}>{t('PracticeWordsButton')}</Button>
-            <Button
-              className={marginR}
-              variant={variantDanger}
-              disabled={nothingSelected}
-              onClick={removeWordsHandler}>{t('RemoveSelectedWordsButton')}
-            </Button>
-          </ButtonToolbar>
-          <Search />
-          <div className="scrollableArea">
+          <div className="contentContainer">
+            <div className="stickyContainer">
+              <h1>{t('MyVocabularyTitle')}</h1>
+              <ButtonToolbar className={marginB}>
+                <SelectButton
+                  selectAll={selectAllHandler}
+                  selectNothing={selectNothingHandler}
+                  selectLearned={selectLearnedHandler}
+                  selectNotLearned={selectNotLearnedHandler} />
+                <Button
+                  className={marginR}
+                  variant={variantNormal}
+                  disabled={nothingSelected}
+                  onClick={practiceWordsHandler}>{t('PracticeWordsButton')}</Button>
+                <Button
+                  className={marginR}
+                  variant={variantDanger}
+                  disabled={nothingSelected}
+                  onClick={removeWordsHandler}>{t('RemoveSelectedWordsButton')}
+                </Button>
+              </ButtonToolbar>
+              <Search />
+            </div>
             {props.myVocabulary.length === 0
               ? <p className="text-muted">{emptyMyVocabulary}</p>
               : <Words
@@ -298,21 +300,21 @@ const MyVocabulary = (props) => {
                 selectable="true"
                 toggleChecked={toggleCheckedHandler} />
             }
+            <WordDetails
+              close={closeDetailsHandler}
+              showNext={showNextHandler} />
+            <LearningForm
+              word={props.word}
+              myTry={myTry}
+              check={check}
+              solution={solution}
+              practicing={practicing}
+              disabled={disabled}
+              stopPracticing={stopPracticingHandler}
+              next={practiceNextHandler}
+              checkWord={checkWordHandler}
+              change={valueChangedHandler} />
           </div>
-          <WordDetails
-            close={closeDetailsHandler}
-            showNext={showNextHandler} />
-          <LearningForm
-            word={props.word}
-            myTry={myTry}
-            check={check}
-            solution={solution}
-            practicing={practicing}
-            disabled={disabled}
-            stopPracticing={stopPracticingHandler}
-            next={practiceNextHandler}
-            checkWord={checkWordHandler}
-            change={valueChangedHandler} />
         </Col>
       </Row>
     </Fragment>
