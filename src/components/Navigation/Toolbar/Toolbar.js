@@ -15,30 +15,40 @@ const Toolbar = (props) => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/chapters">{t('ChaptersLink')}</Nav.Link>
-          <Nav.Link href="/dictionary">{t('DictionaryLink')}</Nav.Link>
+          <Nav.Link href="/chapters" data-cy="chapters-link">
+            {t('ChaptersLink')}
+          </Nav.Link>
+          <Nav.Link href="/dictionary" data-cy="dictionary-link">
+            {t('DictionaryLink')}
+          </Nav.Link>
           { props.user.username
             ? (
-              <Nav.Link href="/myvocabulary">
+              <Nav.Link href="/myvocabulary" data-cy="my-vocabulary-link">
                 {t('MyVocabularyLink')}
               </Nav.Link>
             )
             : null
           }
-          <Nav.Link href="/about">{t('AboutLink')}</Nav.Link>
+          <Nav.Link href="/about" data-cy="about-link">{t('AboutLink')}</Nav.Link>
         </Nav>
         <Nav>
           { props.user.username
             ? (
               <Fragment>
-                <Navbar.Text>{props.user.username}</Navbar.Text>
-                <Nav.Link href="/logout">{t('LogoutLink')}</Nav.Link>
+                <Navbar.Text data-cy="username">{props.user.username}</Navbar.Text>
+                <Nav.Link href="/logout" data-cy="logout-link">
+                  {t('LogoutLink')}
+                </Nav.Link>
               </Fragment>
             )
             : (
               <Fragment>
-                <Nav.Link href="/register">{t('RegisterLink')}</Nav.Link>
-                <Nav.Link href="/login">{t('LoginLink')}</Nav.Link>
+                <Nav.Link href="/register" data-cy="register-link">
+                  {t('RegisterLink')}
+                </Nav.Link>
+                <Nav.Link href="/login" data-cy="login-link">
+                  {t('LoginLink')}
+                </Nav.Link>
               </Fragment>
             )
           }
@@ -47,11 +57,13 @@ const Toolbar = (props) => {
               className={marginR}
               variant={variantNormal}
               size="sm"
+              data-cy="finnish-button"
               onClick={() => props.changeLanguage('fi')}>FI</Button>
             <Button
               className={marginR}
               variant={variantNormal}
               size="sm"
+              data-cy="english-button"
               onClick={() => props.changeLanguage('en')}>EN</Button>
           </ButtonToolbar>
         </Nav>

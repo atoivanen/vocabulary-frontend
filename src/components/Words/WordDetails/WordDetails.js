@@ -106,7 +106,7 @@ const WordDetails = (props) => {
   }
 
   return (
-    <Modal show={props.modal} onHide={props.close}>
+    <Modal show={props.modal} onHide={props.close} data-cy="word-details-modal">
       <Modal.Header closeButton>
         <Modal.Title>{props.word.lemma}</Modal.Title>
       </Modal.Header>
@@ -165,10 +165,12 @@ const WordDetails = (props) => {
               <Button
                 className={marginR}
                 variant={variantNormal}
+                data-cy="save-word-button"
                 type="submit">{t('SubmitWordButton')}</Button>
               <Button
                 className={marginR}
                 variant={variantDanger}
+                data-cy="remove-word-button"
                 onClick={removeWordHandler}>{t('RemoveButton')}</Button>
             </ButtonToolbar>
             )
@@ -178,6 +180,7 @@ const WordDetails = (props) => {
             <Button
               className={marginR}
               variant={variantNormal}
+              data-cy="previous-word-button"
               as="input"
               name="previous"
               onClick={props.showNext}
@@ -185,6 +188,7 @@ const WordDetails = (props) => {
             <Button
               className={marginR}
               variant={variantNormal}
+              data-cy="next-word-button"
               as="input"
               name="next"
               onClick={props.showNext}

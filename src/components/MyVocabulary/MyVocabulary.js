@@ -262,7 +262,7 @@ const MyVocabulary = (props) => {
   }
 
   if (!props.user.id) {
-    return <p>{t('UnauthorizedMyVocabulary')}</p>
+    return <p data-cy="unauthorized-message">{t('UnauthorizedMyVocabulary')}</p>
   }
 
   return (

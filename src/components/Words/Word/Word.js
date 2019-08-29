@@ -21,6 +21,7 @@ const Word = (props) => {
         : null
       }
       <td
+        data-cy="word-lemma"
         style={cursorStyle}
         onClick={() => props.showDetails(props.word)}>
         <b>{props.word.lemma}</b> {token} <i>{props.word.gender}</i>

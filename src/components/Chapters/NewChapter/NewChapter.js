@@ -90,7 +90,7 @@ const NewChapter = (props) => {
           textArea={textArea} />
         <Modal size="sm" show={analyzing} onHide={closeModalHandler}>
           <Modal.Body>
-            <Spinner animation="border" />
+            <Spinner animation="border" data-cy="analyzing-spinner"/>
             {t('AnalyzingMessage')}
           </Modal.Body>
         </Modal>

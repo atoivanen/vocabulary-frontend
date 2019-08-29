@@ -20,6 +20,7 @@ const Search = (props) => {
       type="text"
       placeholder={t('SearchPlaceholder')}
       value={props.search}
+      data-cy="search-field"
       onChange={searchWord} />
   )
 }

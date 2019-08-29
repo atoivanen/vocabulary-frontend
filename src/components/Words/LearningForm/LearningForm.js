@@ -14,7 +14,7 @@ const LearningForm = (props) => {
       <Modal show={props.practicing} onHide={props.stopPracticing}>
         <Modal.Header closeButton />
         <Modal.Body>
-          <p>{props.word.translation}</p>
+          <p data-cy="word-to-practice">{props.word.translation}</p>
           <Form onSubmit={props.checkWord}>
             <Form.Row>
               <Col>
@@ -31,6 +31,7 @@ const LearningForm = (props) => {
               ? <Form.Control
                 plaintext
                 readOnly
+                data-cy="correct-solution"
                 defaultValue={props.solution} />
               : null
             }
@@ -38,12 +39,14 @@ const LearningForm = (props) => {
               <Button
                 className={marginR}
                 variant={variantNormal}
+                data-cy="check-solution-button"
                 disabled={props.disabled}
                 type="submit">{t('CheckButton')}
               </Button>
               <Button
                 className={marginR}
                 variant={variantNormal}
+                data-cy="practice-next-button"
                 disabled={props.disabled}
                 onClick={props.next}>{t('NextButton')}
               </Button>

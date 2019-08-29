@@ -16,18 +16,24 @@ const ChapterForm = (props) => {
         type="text"
         placeholder={t('TitlePlaceholder')}
         value={props.title}
+        data-cy="chapter-title-field"
         onChange={(event) => props.setTitle(event)} />
       <Form.Control
         as="textarea"
         rows="18"
         placeholder={t('TextareaPlaceholder')}
         value={props.textArea}
+        data-cy="chapter-body-field"
         onChange={(event) => props.setText(event)} />
       <ButtonToolbar className={marginY}>
         <Button type="submit" className={marginR} variant={variantNormal}>
           {t('SaveChapterButton')}
         </Button>
-        <Button onClick={props.cancel} className={marginR} variant={variantNormal}>
+        <Button
+          onClick={props.cancel}
+          className={marginR}
+          variant={variantNormal}
+          data-cy="cancel-new-chapter-button">
           {t('CancelButton')}
         </Button>
       </ButtonToolbar>

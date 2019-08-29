@@ -112,7 +112,11 @@ const Chapters = (props) => {
               {props.user.id
                 ? (
                   <ButtonToolbar className={marginB}>
-                    <Button href="/new" className={marginR} variant={variantNormal}>
+                    <Button
+                      href="/new"
+                      className={marginR}
+                      variant={variantNormal}
+                      data-cy="new-chapter-button">
                       {t('CreateNewChapterButton')}
                     </Button>
                     {props.visibleChapters.find(c => c.created_by === props.user.id)
@@ -120,7 +124,8 @@ const Chapters = (props) => {
                         className={marginR}
                         variant={variantDanger}
                         disabled={nothingSelected}
-                        onClick={removeChapters}>
+                        onClick={removeChapters}
+                        data-cy="remove-chapters-button">
                         {t('RemoveSelectedChaptersButton')}
                       </Button>
                       )
@@ -136,16 +141,17 @@ const Chapters = (props) => {
               <tbody>
                 {props.visibleChapters.map(chapter =>
                   <tr key={chapter.id}>
-                    {props.user.id === chapter.created_by
-                      ? (<td>
-                        <input
-                          type="checkbox"
-                          name={chapter.id}
-                          onClick={toggleChecked} />
-                      </td>
-                      )
-                      : null
-                    }
+                    <td>
+                      {props.user.id === chapter.created_by
+                        ? (
+                          <input
+                            type="checkbox"
+                            name={chapter.id}
+                            onClick={toggleChecked} />
+                        )
+                        : null
+                      }
+                    </td>
                     <td>
                       <a href={`/chapters/${chapter.id}`}>
                         {chapter.title}

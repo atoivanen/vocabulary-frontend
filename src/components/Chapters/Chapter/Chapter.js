@@ -373,14 +373,14 @@ const Chapter = (props) => {
       <Row>
         <Col lg={l} md={s} sm={s} xl={l} xs={s}>
           <div id="chapterContainer" className={marginB}>
-            <h1>{props.chapter.title}</h1>
-            <p>{props.chapter.body}</p>
+            <h1 data-cy="chapter-title">{props.chapter.title}</h1>
+            <p data-cy="chapter-body">{props.chapter.body}</p>
           </div>
         </Col>
         <Col lg={r} md={s} sm={s} xl={r} xs={s}>
           <div id="vocabularyContainer" className={marginB}>
             <div id="stickyWithPadding" className="stickyContainer">
-              <h2>{t('VocabularyTitle')}</h2>
+              <h2 data-cy="vocabulary-title">{t('VocabularyTitle')}</h2>
               <ButtonToolbar className={marginB}>
                 <SelectButton
                   selectAll={selectAllHandler}
@@ -391,6 +391,7 @@ const Chapter = (props) => {
                 <Button
                   variant={variantNormal}
                   className={marginR}
+                  data-cy="practice-words-button"
                   disabled={nothingSelected}
                   onClick={practiceWordsHandler}
                   size="sm">{t('PracticeWordsButton')}</Button>
@@ -429,12 +430,14 @@ const Chapter = (props) => {
             <Button
               variant={variantNormal}
               className={marginR}
+              data-cy="return-to-chapters-button"
               onClick={returnHandler}>{t('ReturnButton')}
             </Button>
             {props.chapter.created_by === props.user.id && !props.chapter.public
               ? (<Button
                 variant={variantNormal}
                 className={marginR}
+                data-cy="publish-chapter-button"
                 onClick={publishChapterHandler}>{t('PublishChapterButton')}
               </Button>
               )
@@ -445,11 +448,13 @@ const Chapter = (props) => {
                 <Button
                   variant={variantNormal}
                   className={marginR}
+                  data-cy="edit-chapter-button"
                   href={`/edit/${props.chapter.id}`}>{t('EditChapterButton')}
                 </Button>
                 <Button
                   variant={variantDanger}
                   className={marginR}
+                  data-cy="remove-chapter-button"
                   onClick={removeChapterHandler}>
                   {t('RemoveButton')}
                 </Button>
@@ -467,12 +472,14 @@ const Chapter = (props) => {
                 <Button
                   variant={variantNormal}
                   className={marginR}
+                  data-cy="add-word-button"
                   onClick={() => setModal(true)}>
                   {t('AddWordFromDictionaryButton')}
                 </Button>
                 <Button
                   variant={variantDanger}
                   className={marginR}
+                  data-cy="remove-words-button"
                   disabled={nothingSelected}
                   onClick={removeWordsHandler}>
                   {t('RemoveSelectedWordsButton')}
