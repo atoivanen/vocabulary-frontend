@@ -103,6 +103,7 @@ const Dictionary = (props) => {
                   <Button
                     className={marginB}
                     variant={variantNormal}
+                    data-cy="add-word-to-dictionary-button"
                     as="input"
                     type="button"
                     value={t('NewWord')}
@@ -112,6 +113,7 @@ const Dictionary = (props) => {
               }
               <Form.Control
                 className={marginB}
+                data-cy="dictionary-search-field"
                 type="text"
                 placeholder={t('SearchPlaceholder')}
                 value={props.search}
@@ -126,7 +128,9 @@ const Dictionary = (props) => {
               }
             </div>
             {props.visibleWords.length === 0
-              ? <p className="text-muted">{emptyDictionary}</p>
+              ? <p className="text-muted" data-cy="empty-dictionary-message">
+                {emptyDictionary}
+              </p>
               : <Words
                 words={props.visibleWords}
                 showDetails={showDetailsHandler}/>

@@ -22,23 +22,30 @@ const Login = (props) => {
 
   const loginHandler = async (event) => {
     event.preventDefault()
-    try {
-      const token = await loginService.login({
-        username, password
-      })
-      const user = { username: username, token: token.token, id: token.id }
-      window.localStorage.setItem(
-        'loggedVocabularyUser', JSON.stringify(user)
-      )
-      props.setUser(user)
-      setUsername('')
-      setPassword('')
-      props.history.push('/chapters')
-    } catch (error) {
+    if (username.length < 1 || password.length < 1) {
       props.displayNotification({
-        message: error.response.data.non_field_errors[0],
+        message: t('WrongCredentials'),
         messageType: 'danger'
       })
+    } else {
+      try {
+        const token = await loginService.login({
+          username, password
+        })
+        const user = { username: username, token: token.token, id: token.id }
+        window.localStorage.setItem(
+          'loggedVocabularyUser', JSON.stringify(user)
+        )
+        props.setUser(user)
+        setUsername('')
+        setPassword('')
+        props.history.push('/chapters')
+      } catch (error) {
+        props.displayNotification({
+          message: t('WrongCredentials'),
+          messageType: 'danger'
+        })
+      }
     }
   }
 

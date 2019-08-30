@@ -281,11 +281,13 @@ const MyVocabulary = (props) => {
                 <Button
                   className={marginR}
                   variant={variantNormal}
+                  data-cy="practice-myvocabulary-word-button"
                   disabled={nothingSelected}
                   onClick={practiceWordsHandler}>{t('PracticeWordsButton')}</Button>
                 <Button
                   className={marginR}
                   variant={variantDanger}
+                  data-cy="remove-myvocabulary-word-button"
                   disabled={nothingSelected}
                   onClick={removeWordsHandler}>{t('RemoveSelectedWordsButton')}
                 </Button>

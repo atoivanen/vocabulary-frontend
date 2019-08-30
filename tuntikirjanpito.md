@@ -28,3 +28,4 @@
 | 26.8. | 5    | Sanaston hakutoiminnon parantelua, sanojen kyselytoiminnon parantelua, poistonappuloihin confirm-viestien lisäämistä. |
 | 27.8. | 6    | Poistonappuloihin confirm-viestien lisäämistä, ulkoasun muokkausta, paluupainike Chapter-komponenttiin. |
 | 28.8. | 6    | Muutoksia ulkoasuun, e2e-testien kirjoittamista. |
+| 29.8. | 4    | Lisää e2e-testejä |

@@ -129,7 +129,7 @@ const WordForm = (props) => {
   }
 
   return (
-    <Modal show={props.modal} onHide={props.close}>
+    <Modal show={props.modal} onHide={props.close} data-cy="add-word-modal">
       <Modal.Header closeButton>
         <Modal.Title>{t('AddWordToVocabulary')}</Modal.Title>
       </Modal.Header>
@@ -152,6 +152,7 @@ const WordForm = (props) => {
             <Form.Label>{t('WordForms')}:</Form.Label>
             <Form.Control
               type="text"
+              data-cy="word-form-field"
               onChange={({ target }) => setToken(target.value)} />
           </Form.Group>
           <Button

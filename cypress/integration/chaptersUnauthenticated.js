@@ -17,7 +17,7 @@ describe('Chapters page for unauthenticated user', function() {
     cy.contains('Bric-à-Brac').should('not.exist')
   })
 
-  it('buttons are not visible', function () {
+  it('buttons are not visible', function() {
     cy.get('[data-cy=new-chapter-button]')
       .should('not.visible')
     cy.get('[data-cy=remove-chapters-button]')

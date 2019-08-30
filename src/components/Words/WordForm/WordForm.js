@@ -158,7 +158,7 @@ const WordForm = (props) => {
   const gender = props.word.gender ? props.word.gender : ''
 
   return (
-    <Modal show={props.modal} onHide={props.close}>
+    <Modal show={props.modal} onHide={props.close} data-cy="dictionary-details-modal">
       <Modal.Header closeButton>
         <Modal.Title>{props.word.lemma}</Modal.Title>
       </Modal.Header>
@@ -171,6 +171,7 @@ const WordForm = (props) => {
             <Form.Control
               type="text"
               name="lemma"
+              data-cy="dictionary-word-lemma"
               value={props.word.lemma}
               readOnly={!props.user.id}
               onChange={(event) => changeValue(event)} />
@@ -180,6 +181,7 @@ const WordForm = (props) => {
             <Form.Control
               type="text"
               name="translation"
+              data-cy="dictionary-word-translation"
               value={props.word.translation}
               readOnly={!props.user.id}
               onChange={(event) => changeValue(event)} />
@@ -224,11 +226,13 @@ const WordForm = (props) => {
               <Button
                 className={marginR}
                 variant={variantNormal}
+                data-cy="dictionary-word-save-button"
                 type="submit">{t('SubmitWordButton')}</Button>
               {props.user.id === props.word.created_by
                 ? <Button
                   className={marginR}
                   variant={variantDanger}
+                  data-cy="dictionary-word-remove-button"
                   onClick={deleteWordHandler}>{t('RemoveButton')}</Button>
                 : null
               }
@@ -241,6 +245,7 @@ const WordForm = (props) => {
                 <Button
                   className={marginR}
                   variant={variantNormal}
+                  data-cy="dictionary-word-previous-button"
                   as="input"
                   name="previous"
                   onClick={props.showNext}
@@ -248,6 +253,7 @@ const WordForm = (props) => {
                 <Button
                   className={marginR}
                   variant={variantNormal}
+                  data-cy="dictionary-word-next-button"
                   as="input"
                   name="next"
                   onClick={props.showNext}
