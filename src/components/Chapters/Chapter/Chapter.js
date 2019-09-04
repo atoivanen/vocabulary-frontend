@@ -47,8 +47,8 @@ const Chapter = (props) => {
 
   const { t } = useTranslation()
 
-  const l = 8
-  const r = 4
+  const l = 7
+  const r = 5
   const s = 6
   const variantNormal = 'outline-primary'
   const variantDanger = 'outline-danger'

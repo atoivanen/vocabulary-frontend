@@ -4,6 +4,7 @@ const emptyWord = {
   pos: 'ADJ',
   gender: '',
   token: '',
+  pronunciation: '',
   source_lang: 'fr',
   target_lang: 'fi'
 }
@@ -25,6 +26,7 @@ export const createWord = (source_lang, target_lang) => {
     pos: 'ADJ',
     gender: '',
     token: '',
+    pronunciation: '',
     source_lang,
     target_lang
   }

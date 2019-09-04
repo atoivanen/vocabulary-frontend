@@ -1,6 +1,7 @@
 {
   "WordLabel": "Word",
   "TranslationLabel": "Translation",
+  "PronunciationLabel": "Pronunciation",
   "POSLabel": "Part-of-speech",
   "AdjectiveOption": "Adjective",
   "AdpositionOption": "Adposition",

@@ -69,7 +69,10 @@ const WordForm = (props) => {
           const updatedWord = {
             ...props.word,
             modified_by: props.user.id,
-            gender: props.word.gender ? props.word.gender : null
+            gender: props.word.gender ? props.word.gender : null,
+            pronunciation: props.word.pronunciation ? props.word.pronunciation : null,
+            source_lang: props.languagePair.source,
+            target_lang: props.languagePair.target
           }
           const returnedWord = await wordService.update(
             props.word.id,
@@ -94,7 +97,10 @@ const WordForm = (props) => {
           const newWord = {
             ...props.word,
             created_by: props.user.id,
-            gender: props.word.gender ? props.word.gender : null
+            gender: props.word.gender ? props.word.gender : null,
+            pronunciation: props.word.pronunciation ? props.word.pronunciation : null,
+            source_lang: props.languagePair.source,
+            target_lang: props.languagePair.target
           }
           const returnedWord = await wordService.create(newWord)
           props.isNotNew()
@@ -156,6 +162,7 @@ const WordForm = (props) => {
 
   const pos = props.word.pos ? props.word.pos : ''
   const gender = props.word.gender ? props.word.gender : ''
+  const pronunciation = props.word.pronunciation ? props.word.pronunciation : ''
 
   return (
     <Modal show={props.modal} onHide={props.close} data-cy="dictionary-details-modal">
@@ -183,6 +190,15 @@ const WordForm = (props) => {
               name="translation"
               data-cy="dictionary-word-translation"
               value={props.word.translation}
+              readOnly={!props.user.id}
+              onChange={(event) => changeValue(event)} />
+          </Form.Group>
+          <Form.Group controlId="formGroupPronunciation">
+            <Form.Label>{t('PronunciationLabel')}:</Form.Label>
+            <Form.Control
+              type="text"
+              name="pronunciation"
+              value={pronunciation}
               readOnly={!props.user.id}
               onChange={(event) => changeValue(event)} />
           </Form.Group>
@@ -276,7 +292,8 @@ const mapStateToProps = (state) => {
     word: state.word,
     new: state.new,
     modal: state.modal,
-    user: state.user
+    user: state.user,
+    languagePair: state.languagePair
   }
 }
 

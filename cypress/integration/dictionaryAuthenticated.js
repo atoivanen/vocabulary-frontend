@@ -1,4 +1,4 @@
-describe('Dictionary page for unauthenticated user', function() {
+describe('Dictionary page for authenticated user', function() {
   const username = 'testi'
   const password = 'testi'
   beforeEach(function() {

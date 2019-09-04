@@ -148,6 +148,13 @@ const WordDetails = (props) => {
               value={props.word.translation} />
           </Form.Group>
           <Form.Group>
+            <Form.Label>{t('PronunciationLabel')}:</Form.Label>
+            <Form.Control
+              type="text"
+              readOnly
+              value={props.word.pronunciation ? props.word.pronunciation : ''} />
+          </Form.Group>
+          <Form.Group>
             <Form.Label>{t('POSLabel')}:</Form.Label>
             <Form.Control type="text" readOnly value={pos} />
           </Form.Group>
