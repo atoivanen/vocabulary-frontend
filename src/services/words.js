@@ -21,11 +21,11 @@ const getAll = async (pageUrl=baseUrl) => {
   }
 }
 
-const getFiltered = async (filter) => {
-  if (!filter) {
+const getFiltered = async (startswith, source, target) => {
+  if (!startswith) {
     return []
   }
-  const url = `${baseUrl}/?startswith=${filter}`
+  const url = `${baseUrl}/?startswith=${startswith}&source=${source}&target=${target}`
   const result = await getAll(url)
   return result
 }

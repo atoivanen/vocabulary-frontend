@@ -44,7 +44,9 @@ const WordForm = (props) => {
       if (filter !== newFilter) {
         setFilter(newFilter)
         try {
-          const words = await wordService.getFiltered(newFilter)
+          const words = await wordService.getFiltered(
+            newFilter, props.languagePair.source, props.languagePair.target
+          )
           props.setDictionary(words)
           setSuggestions(words)
         } catch (error) {
@@ -167,7 +169,8 @@ const WordForm = (props) => {
 const mapStateToProps = (state) => {
   return {
     dictionary: state.dictionary,
-    chapter: state.chapter
+    chapter: state.chapter,
+    languagePair: state.languagePair
   }
 }
 

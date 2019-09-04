@@ -1,5 +1,3 @@
-import chapterService from '../services/chapters'
-
 const chaptersReducer = (state = [], action) => {
   switch (action.type) {
   case 'NEW_CHAPTER':
@@ -52,18 +50,12 @@ export const resetChapters = () => {
   }
 }
 
-export const initializeChapters = () => {
-  return async dispatch => {
-    const chapters = await chapterService.getAll()
-    const initialChapters = chapters.map(chapter => ({
-      ...chapter,
-      selected: false
-    }))
-    dispatch({
-      type: 'INIT_CHAPTERS',
-      data: initialChapters
-    })
+export const initializeChapters = (initialChapters) => {
+  return {
+    type: 'INIT_CHAPTERS',
+    data: initialChapters
   }
 }
+
 
 export default chaptersReducer

@@ -3,18 +3,6 @@ describe('Access for unauthenticated user', function() {
     cy.visit('/')
   })
 
-  it('language can be changed to English', function() {
-    cy.get('[data-cy=english-button]')
-      .click()
-    cy.contains('Welcome')
-  })
-
-  it('language can be changed to Finnish', function() {
-    cy.get('[data-cy=finnish-button]')
-      .click()
-    cy.contains('Tervetuloa')
-  })
-
   it('login page can be accessed', function() {
     cy.get('[data-cy=login-link]')
       .click()

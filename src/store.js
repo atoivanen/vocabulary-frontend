@@ -11,6 +11,7 @@ import userReducer from './reducers/userReducer'
 import chaptersReducer from './reducers/chaptersReducer'
 import chapterReducer from './reducers/chapterReducer'
 import myVocabularyReducer from './reducers/myVocabularyReducer'
+import languagePairReducer from './reducers/languagePairReducer'
 
 const reducer = combineReducers({
   dictionary: dictionaryReducer,
@@ -22,7 +23,8 @@ const reducer = combineReducers({
   chapters: chaptersReducer,
   chapter: chapterReducer,
   user: userReducer,
-  myVocabulary: myVocabularyReducer
+  myVocabulary: myVocabularyReducer,
+  languagePair: languagePairReducer
 })
 
 const store = createStore(reducer, applyMiddleware(thunk))

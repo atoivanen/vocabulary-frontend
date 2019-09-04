@@ -31,7 +31,9 @@ const WordDetails = (props) => {
     pos = t('AdverbOption')
   }  else if (props.word.pos === 'AUX') {
     pos = t('AuxiliaryOption')
-  }  else if (props.word.pos === 'CCONJ') {
+  } else if (props.word.pos === 'CONJ') {
+    pos = t('ConjunctionOption')
+  } else if (props.word.pos === 'CCONJ') {
     pos = t('CConjunctionOption')
   }  else if (props.word.pos === 'DET') {
     pos = t('DeterminerOption')
@@ -39,14 +41,20 @@ const WordDetails = (props) => {
     pos = t('InterjectionOption')
   }  else if (props.word.pos === 'NOUN') {
     pos = t('NounOption')
-  }  else if (props.word.pos === 'PRON') {
+  } else if (props.word.pos === 'NUM') {
+    pos = t('NumeralOption')
+  } else if (props.word.pos === 'PART') {
+    pos = t('ParticleOption')
+  } else if (props.word.pos === 'PRON') {
     pos = t('PronounOption')
-  }  else if (props.word.pos === 'PROPN') {
+  } else if (props.word.pos === 'PROPN') {
     pos = t('PropernounOption')
   }  else if (props.word.pos === 'SCONJ') {
     pos = t('SconjunctionOption')
   }  else if (props.word.pos === 'VERB') {
     pos = t('VerbOption')
+  } else if (props.word.pos === 'X') {
+    pos = t('OtherOption')
   }
 
   let gender

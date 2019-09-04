@@ -1,5 +1,6 @@
 #background {
   width: 100vw;
+  height: 100%;
   position: fixed;
   left: 0;
   top: 30px;
@@ -12,28 +13,14 @@
   left: 0;
   right: 0;
   text-align: center;
-  top: 15vw;
-  font-family: Impact, sans-serif;
+  top: 20vw;
 }
 .text h1 {
-  font-size: 300%;
+  font-size: 150%;
+  font-family: Impact, sans-serif;
 }
-.iconsBox {
-  display: flex;
+#languageSelection {
+  width: 150px;
   margin: auto;
-  width: 28vw;
 }
-.icon {
-  padding: 1vw;
-  margin: 1vw;
-  width: 12vw;
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: white;
-}
-.linkText {
-  color: black;
-  background-color: white;
-  display: inline-block;
-  border-radius: 5px;
-}
+

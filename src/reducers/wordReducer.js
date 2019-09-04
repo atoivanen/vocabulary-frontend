@@ -1,15 +1,12 @@
-const source_lang = 'fr'
-const target_lang = 'fi'
 const emptyWord = {
   lemma: '',
   translation: '',
   pos: 'ADJ',
   gender: '',
   token: '',
-  source_lang,
-  target_lang
+  source_lang: 'fr',
+  target_lang: 'fi'
 }
-
 const wordReducer = (state = emptyWord, action) => {
   switch (action.type) {
   case 'SET_WORD':
@@ -21,10 +18,19 @@ const wordReducer = (state = emptyWord, action) => {
   }
 }
 
-export const createWord = () => {
+export const createWord = (source_lang, target_lang) => {
+  const word = {
+    lemma: '',
+    translation: '',
+    pos: 'ADJ',
+    gender: '',
+    token: '',
+    source_lang,
+    target_lang
+  }
   return {
     type: 'SET_WORD',
-    data: emptyWord
+    data: word
   }
 }
 

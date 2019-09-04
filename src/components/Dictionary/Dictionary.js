@@ -26,7 +26,7 @@ const Dictionary = (props) => {
   const marginB = 'mb-2'
 
   const createWordHandler = () => {
-    props.createWord()
+    props.createWord(props.languagePair.source, props.languagePair.target)
     props.isNew()
     props.openModal()
   }
@@ -78,7 +78,11 @@ const Dictionary = (props) => {
       try {
         setLoading(true)
         setFilter(target.value[0])
-        await props.initializeFilteredWords(target.value[0])
+        await props.initializeFilteredWords(
+          target.value[0],
+          props.languagePair.source,
+          props.languagePair.target
+        )
         setLoading(false)
       } catch (error) {
         console.log(error.response)
@@ -152,7 +156,8 @@ const mapStateToProps = (state) => {
     search: state.search,
     word: state.word,
     new: state.new,
-    user: state.user
+    user: state.user,
+    languagePair: state.languagePair
   }
 }
 

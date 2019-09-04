@@ -1,13 +1,29 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Nav, Navbar, ButtonToolbar, Button } from 'react-bootstrap'
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
+
+import { setLanguagePair } from '../../../reducers/languagePairReducer'
+import { LANGUAGE_PAIRS } from '../../../helpers/constants'
 
 const Toolbar = (props) => {
   const { t } = useTranslation()
 
-  const variantNormal = 'outline-primary'
-  const marginR = 'mr-1'
+  const languagePairs = LANGUAGE_PAIRS
+
+  const selectableLanguagePairs = languagePairs.filter(pair =>
+    pair.id !== props.languagePair.id)
+
+  const selectLanguagePairHandler = (event) => {
+    const id = Number(event.target.name)
+    const selected = languagePairs.find(pair => pair.id === id)
+    props.setLanguagePair(selected)
+    window.localStorage.setItem(
+      'languagePair', JSON.stringify(selected)
+    )
+    props.changeLanguage(selected.target)
+    window.location.reload()
+  }
 
   return (
     <Navbar collapseOnSelect expand="lg" sticky="top" bg="light">
@@ -52,20 +68,16 @@ const Toolbar = (props) => {
               </Fragment>
             )
           }
-          <ButtonToolbar>
-            <Button
-              className={marginR}
-              variant={variantNormal}
-              size="sm"
-              data-cy="finnish-button"
-              onClick={() => props.changeLanguage('fi')}>FI</Button>
-            <Button
-              className={marginR}
-              variant={variantNormal}
-              size="sm"
-              data-cy="english-button"
-              onClick={() => props.changeLanguage('en')}>EN</Button>
-          </ButtonToolbar>
+          <NavDropdown title={props.languagePair.name}>
+            {selectableLanguagePairs.map((pair) =>
+              <NavDropdown.Item
+                key={pair.id}
+                name={pair.id}
+                onClick={selectLanguagePairHandler}>
+                {pair.name}
+              </NavDropdown.Item>
+            )}
+          </NavDropdown>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
@@ -75,9 +87,15 @@ const Toolbar = (props) => {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    languagePair: state.languagePair
   }
 }
 
+const mapDispatchToProps = {
+  setLanguagePair
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Toolbar)

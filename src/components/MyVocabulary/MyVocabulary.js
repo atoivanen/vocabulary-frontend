@@ -46,7 +46,9 @@ const MyVocabulary = (props) => {
     const fetchData = async () => {
       setLoading(true)
       try {
-        await props.initializeMyVocabulary(props.user.id)
+        await props.initializeMyVocabulary(
+          props.user.id, props.languagePair.source, props.languagePair.target
+        )
       } catch (error) {
         console.log(error.response)
       }
@@ -329,7 +331,8 @@ const mapStateToProps = (state) => {
     myVocabulary: state.myVocabulary,
     search: state.search,
     word: state.word,
-    user: state.user
+    user: state.user,
+    languagePair: state.languagePair
   }
 }
 

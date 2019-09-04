@@ -28,4 +28,6 @@
 | 26.8. | 5    | Sanaston hakutoiminnon parantelua, sanojen kyselytoiminnon parantelua, poistonappuloihin confirm-viestien lisäämistä. |
 | 27.8. | 6    | Poistonappuloihin confirm-viestien lisäämistä, ulkoasun muokkausta, paluupainike Chapter-komponenttiin. |
 | 28.8. | 6    | Muutoksia ulkoasuun, e2e-testien kirjoittamista. |
-| 29.8. | 4    | Lisää e2e-testejä |
+| 29.8. | 4    | Lisää e2e-testejä. |
+| 2.9.  | 4    | Italia-suomi Freedict-sanakirjan lataaminen tietokantaan, muutoksia backendiin ja frontendiin, jotta käyttäjä voi valita näytettävän kieliparin. | 
+| 3.9.  | 5    | Lisää muutoksia useiden kieliparien mahdollistamiseksi. Ranska-englanti Freedict-sanakirjan lataaminen tietokantaan. |

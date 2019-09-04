@@ -51,10 +51,12 @@ export const resetMyVocabulary = () => {
   }
 }
 
-export const initializeMyVocabulary = (userId) => {
+export const initializeMyVocabulary = (userId, source, target) => {
   return async dispatch => {
     const userDetails = await userService.getOne(userId)
-    const initialWords = userDetails.learningdata.map(word =>
+    const filteredWords = userDetails.learningdata.filter(word =>
+      word.source_lang === source && word.target_lang === target)
+    const initialWords = filteredWords.map(word =>
       ({ ...word, selected: false })
     )
     dispatch({

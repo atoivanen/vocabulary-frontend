@@ -198,14 +198,18 @@ const WordForm = (props) => {
               <option value="ADP">{t('AdpositionOption')}</option>
               <option value="ADV">{t('AdverbOption')}</option>
               <option value="AUX">{t('AuxiliaryOption')}</option>
+              <option value="CONJ">{t('ConjunctionOption')}</option>
               <option value="CCONJ">{t('CConjunctionOption')}</option>
               <option value="DET">{t('DeterminerOption')}</option>
               <option value="INTJ">{t('InterjectionOption')}</option>
               <option value="NOUN">{t('NounOption')}</option>
+              <option value="NUM">{t('NumeralOption')}</option>
+              <option value="PART">{t('ParticleOption')}</option>
               <option value="PRON">{t('PronounOption')}</option>
               <option value="PROPN">{t('PropernounOption')}</option>
               <option value="SCONJ">{t('SconjunctionOption')}</option>
               <option value="VERB">{t('VerbOption')}</option>
+              <option value="X">{t('OtherOption')}</option>
             </Form.Control>
           </Form.Group>
           <Form.Group controlId="formGroupGender">

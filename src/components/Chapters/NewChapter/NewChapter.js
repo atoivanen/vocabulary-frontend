@@ -14,9 +14,6 @@ const NewChapter = (props) => {
   const [analyzing, setAnalyzing] = useState(false)
   const { t } = useTranslation()
 
-  const source_lang = 'fr'
-  const target_lang = 'fi'
-
   const l = 8
   const s = 12
 
@@ -33,8 +30,8 @@ const NewChapter = (props) => {
     const newChapter = {
       title,
       body: textArea,
-      source_lang,
-      target_lang,
+      source_lang: props.languagePair.source,
+      target_lang: props.languagePair.target,
       created_by: props.user.id,
       public: false
     }
@@ -110,7 +107,8 @@ const NewChapter = (props) => {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    chapter: state.chapter
+    chapter: state.chapter,
+    languagePair: state.languagePair
   }
 }
 

@@ -31,7 +31,14 @@ const Chapters = (props) => {
     const fetchData = async () => {
       setLoading(true)
       try {
-        await props.initializeChapters()
+        const chapters = await chapterService.getFiltered(
+          props.languagePair.source, props.languagePair.target
+        )
+        const initialChapters = chapters.map(chapter => ({
+          ...chapter,
+          selected: false
+        }))
+        props.initializeChapters(initialChapters)
       } catch (error) {
         console.log(error.response)
       }
@@ -182,7 +189,8 @@ const mapStateToProps = (state) => {
   return {
     visibleChapters: chaptersToShow(state.chapters, state.search),
     user: state.user,
-    search: state.search
+    search: state.search,
+    languagePair: state.languagePair
   }
 }
 

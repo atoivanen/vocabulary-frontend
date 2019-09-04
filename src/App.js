@@ -17,6 +17,7 @@ import EditChapter from './components/Chapters/EditChapter/EditChapter'
 import About from './components/About/About'
 
 import { setUser } from './reducers/userReducer'
+import { setLanguagePair } from './reducers/languagePairReducer'
 
 const App = (props) => {
 
@@ -25,6 +26,11 @@ const App = (props) => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       props.setUser(user)
+    }
+    const languagePairJSON = window.localStorage.getItem('languagePair')
+    if (languagePairJSON) {
+      const selectedLanguagePair = JSON.parse(languagePairJSON)
+      props.setLanguagePair(selectedLanguagePair)
     }
   }, [])
 
@@ -37,7 +43,12 @@ const App = (props) => {
       <div>
         <Suspense fallback="loading">
           <Layout changeLanguage={changeLanguageHandler}>
-            <Route exact path="/" component={FrontPage} />
+            <Route
+              exact path="/"
+              render={(props) =>
+                <FrontPage {...props} changeLanguage={changeLanguageHandler} />
+              }
+            />
             <Route exact path="/chapters" component={Chapters} />
             <Route
               exact path="/chapters/:id"
@@ -66,11 +77,13 @@ const App = (props) => {
 const mapStateToProps = (state) => {
   return {
     chapters: state.chapters,
+    languagePair: state.languagePair
   }
 }
 
 const mapDispatchToProps = {
-  setUser
+  setUser,
+  setLanguagePair
 }
 
 export default connect(

@@ -50,9 +50,9 @@ export const setDictionary = (words) => {
   }
 }
 
-export const initializeFilteredWords = (filter) => {
+export const initializeFilteredWords = (startswith, source, target) => {
   return async dispatch => {
-    const words = await wordService.getFiltered(filter)
+    const words = await wordService.getFiltered(startswith, source, target)
     dispatch({
       type: 'INIT_WORDS',
       data: words

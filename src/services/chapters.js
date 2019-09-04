@@ -16,6 +16,13 @@ const getOne = async (id) => {
   return response.data
 }
 
+const getFiltered = async (source, target) => {
+  const url = `${baseUrl}/?source=${source}&target=${target}`
+  const config = getConfig()
+  const response = await axios.get(url, config)
+  return response.data
+}
+
 const create = async (newObject) => {
   const config = getConfig()
   const response = await axios.post(`${baseUrl}/`, newObject, config)
@@ -42,4 +49,4 @@ const removeMany = async (ids) => {
   return responses.map(response => response.data)
 }
 
-export default { getAll, getOne, create, update, remove, removeMany }
+export default { getAll, getOne, getFiltered, create, update, remove, removeMany }
