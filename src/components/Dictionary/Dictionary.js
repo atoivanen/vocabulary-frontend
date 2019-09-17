@@ -131,7 +131,7 @@ const Dictionary = (props) => {
               ) : null
               }
             </div>
-            {props.visibleWords.length === 0
+            {props.visibleWords.length === 0 && props.search.length === 0
               ? <p className="text-muted" data-cy="empty-dictionary-message">
                 {emptyDictionary}
               </p>
