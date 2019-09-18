@@ -266,18 +266,14 @@ const WordForm = (props) => {
                   className={marginR}
                   variant={variantNormal}
                   data-cy="dictionary-word-previous-button"
-                  as="input"
                   name="previous"
-                  onClick={props.showNext}
-                  value={t('PreviousButton')} />
+                  onClick={props.showNext}>{t('PreviousButton')}</Button>
                 <Button
                   className={marginR}
                   variant={variantNormal}
                   data-cy="dictionary-word-next-button"
-                  as="input"
                   name="next"
-                  onClick={props.showNext}
-                  value={t('NextButton')} />
+                  onClick={props.showNext}>{t('NextButton')}</Button>
               </ButtonToolbar>
             ) : null
           }

@@ -196,18 +196,14 @@ const WordDetails = (props) => {
               className={marginR}
               variant={variantNormal}
               data-cy="previous-word-button"
-              as="input"
               name="previous"
-              onClick={props.showNext}
-              value={t('PreviousButton')} />
+              onClick={props.showNext}>{t('PreviousButton')}</Button>
             <Button
               className={marginR}
               variant={variantNormal}
               data-cy="next-word-button"
-              as="input"
               name="next"
-              onClick={props.showNext}
-              value={t('NextButton')} />
+              onClick={props.showNext}>{t('NextButton')}</Button>
           </ButtonToolbar>
         </Form>
       </Modal.Body>

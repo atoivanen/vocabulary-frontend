@@ -108,10 +108,8 @@ const Dictionary = (props) => {
                     className={marginB}
                     variant={variantNormal}
                     data-cy="add-word-to-dictionary-button"
-                    as="input"
                     type="button"
-                    value={t('NewWord')}
-                    onClick={createWordHandler} />
+                    onClick={createWordHandler}>{t('NewWord')}</Button>
                 )
                 : null
               }
