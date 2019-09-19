@@ -31,3 +31,5 @@
 | 29.8. | 4    | Lisää e2e-testejä. |
 | 2.9.  | 4    | Italia-suomi Freedict-sanakirjan lataaminen tietokantaan, muutoksia backendiin ja frontendiin, jotta käyttäjä voi valita näytettävän kieliparin. | 
 | 3.9.  | 5    | Lisää muutoksia useiden kieliparien mahdollistamiseksi. Ranska-englanti Freedict-sanakirjan lataaminen tietokantaan. |
+
+Tunnit yht. 176
