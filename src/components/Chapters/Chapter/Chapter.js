@@ -64,15 +64,31 @@ const Chapter = (props) => {
         console.log(error.response)
       }
       setLoading(false)
+      if (props.user.id) {
+        props.initializeMyVocabulary(
+          props.user.id, props.languagePair.source, props.languagePair.target
+        )
+      }
     }
     fetchData()
   }, [])
 
   useEffect(() => {
-    if (props.user.id) {
-      props.initializeMyVocabulary(props.user.id)
+    const learnedStatus = word => {
+      const myVocabWord = props.myVocabulary.find(w => w.word_id === word.word_id)
+      return myVocabWord ? myVocabWord.learned : false
     }
-  }, [])
+
+    if (props.myVocabulary && props.myVocabulary.length > 0) {
+      props.chapter.words.forEach(w => {
+        const s = learnedStatus(w)
+        if (s) {
+          w.learned = true
+          props.updateChapterWord(w)
+        }
+      })
+    }
+  }, [props.myVocabulary])
 
   const showDetailsHandler = word => {
     props.setWord(word)
@@ -184,7 +200,9 @@ const Chapter = (props) => {
       const updatedWord = { ...props.word }
       updatedWord.learned = true
       props.setWord(updatedWord)
-      props.updateChapterWord(updatedWord)
+      if (!props.myVocabulary || props.myVocabulary.length === 0) {
+        props.updateChapterWord(updatedWord)
+      }
     } else {
       setCheck(xMark)
       setDisabled(true)
@@ -394,7 +412,7 @@ const Chapter = (props) => {
                   data-cy="practice-words-button"
                   disabled={nothingSelected}
                   onClick={practiceWordsHandler}
-                  size="sm">{t('PracticeWordsButton')}</Button>
+                  size="sm">{t('PracticeWordsButton')}</Button>          
               </ButtonToolbar>
               <Search />
             </div>
@@ -501,7 +519,8 @@ const mapStateToProps = (state) => {
     search: state.search,
     word: state.word,
     user: state.user,
-    myVocabulary: state.myVocabulary
+    myVocabulary: state.myVocabulary,
+    languagePair: state.languagePair
   }
 }
 
